@@ -1,0 +1,122 @@
+%-------------------------------------------------------------------------------
+% LATEX TEMPLATE ARTIKEL
+%-------------------------------------------------------------------------------
+% Dit template is voor gebruik door studenten van de de bacheloropleiding 
+% Informatica van de Universiteit van Amsterdam.
+% Voor informatie over schrijfvaardigheden, zie 
+%                               https://practicumav.nl/schrijven/index.html
+%
+%-------------------------------------------------------------------------------
+%	PACKAGES EN DOCUMENT CONFIGURATIE
+%-------------------------------------------------------------------------------
+
+\documentclass{uva-inf-article}
+\usepackage[dutch]{babel}
+
+\usepackage[style=authoryear-comp]{biblatex}
+\addbibresource{references.bib}
+
+%-------------------------------------------------------------------------------
+%	GEGEVENS VOOR IN DE TITEL, HEADER EN FOOTER
+%-------------------------------------------------------------------------------
+
+% Geef je artikel een logische titel die de inhoud dekt.
+\title{Policying Android app permissions with eFLINT}
+
+% Vul de naam van de opdracht in zoals gegeven door de docent en het type 
+% opdracht, bijvoorbeeld 'technisch rapport' of 'essay'.
+\assignment{Projectplan}
+\assignmenttype{}
+
+% Vul de volledige namen van alle auteurs in en de corresponderende UvAnetID's.
+\authors{Jorit Prins}
+\uvanetids{12862789}
+
+% Vul de naam van je tutor, begeleider (mentor), of docent / vakcoördinator in.
+% Vermeld in ieder geval de naam van diegene die het artikel nakijkt!
+\supervisors{Marco Brohet\\ L. Thomas van Binsbergen}
+% \mentor{Marco Brohet}
+\docent{}
+
+% Vul hier de naam van je tutorgroep, werkgroep, of practicumgroep in.
+\group{}
+
+% Vul de naam van de cursus in en de cursuscode, te vinden op o.a. DataNose.
+\course{Afstudeerproject}
+\courseid{}
+
+% Dit is de datum die op het document komt te staan. Standaard is dat vandaag.
+\date{\today}
+
+%-------------------------------------------------------------------------------
+%	VOORPAGINA 
+%-------------------------------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+%-------------------------------------------------------------------------------
+%	INHOUDSOPGAVE EN ABSTRACT
+%-------------------------------------------------------------------------------
+% Niet toevoegen bij een kort artikel, zeg minder dan 10 pagina's!
+
+%TC:ignore
+%\tableofcontents
+%\begin{abstract}
+%\end{abstract}
+%TC:endignore
+
+%-------------------------------------------------------------------------------
+%	INHOUD
+%-------------------------------------------------------------------------------
+% Hanteer bij benadering IMRAD: Introduction, Method, Results, Discussion.
+
+Het projectplan
+Al in de eerste week van het afstudeerproject moet een projectplan worden ingeleverd. Een
+projectplan is een heldere uitwerking van het hele afstudeerproject en beschrijft het plan van
+aanpak. Het projectplan wordt ingeleverd via Canvas nadat het is goedgekeurd door de
+projectbegeleider(s) (beide in het geval van een extern project). Het beslaat gemiddeld vier
+A4tjes en bestaat uit de volgende onderdelen:
+\section{titel}
+Uiteraard mogen je naam, titel van het project en de naam van je begeleider(s) niet
+ontbreken.
+\section{context}
+beschrijf hier het onderdeel van het vakgebied waarbinnen dit onderzoek
+plaatsvindt. Uit dit deel moet duidelijk zijn hoe de onderzoeksvraag, die later wordt
+beschreven, is gepositioneerd binnen de informatica.
+De relevante literatuur: wat is de relevante literatuur behorende bij de
+onderzoeksvraag? Vaak heeft dit de vorm van een beschrijving van de “state-of-the-art”:
+een opsomming van resultaten die eerder door anderen zijn behaald en waar de
+onderzoeksvraag op voortbouwt.
+\section{De onderzoeksvraag}
+beschrijf het probleem waaraan zal worden gewerkt. Vaak heeft
+dit de vorm van een reflectie ten opzichte van de zojuist beschreven “state-of-the-art”.
+Als onderdeel van de onderzoeksvraag wordt tevens beschreven wat het project gaat
+opleveren: het product dat aan het eind zal worden opgeleverd, bv. de resultaten van
+een onderzoek, de sourcecode van ontwikkelde software, documentatie.
+\section{Methoden}: op welke manier wordt het onderzoek uitgevoerd? Welke subtaken kunnen
+worden onderscheiden? Denk aan: uitgebreid literatuuronderzoek, ontwerp en
+implementatie van een programma, opzet van een experiment.
+\section{De planning} beschrijf hoe de beschikbare tijd naar verwachting zal worden besteed.
+Het is vaak lastig om vooraf alle activiteiten te identificeren, laat staan om daarvan op de
+dag nauwkeurig aan te geven wat op welke datum af zal zijn. Over het algemeen is het
+wel mogelijk een aantal fasen (bv. literatuuronderzoek, ontwerp, implementatie,
+experimenten, scriptie schrijven, etc.) te identificeren en daarover een planning op
+weekbasis te maken. Denk ook aan de tussentijdse resultaten, de afhankelijkheden die
+mogelijk bestaan en of er kritische afhankelijkheden zijn waardoor het project niet door
+kan gaan en wat in dat geval het alternatieve plan is. Vaak wordt hiervoor een Gantt- of
+Pert-chart gebruikt.
+Bijgevoegd is een Excel sheet met de planning.
+
+
+% \subsectionauthor[Voornaam Achternaam]{Paragraaf met auteur}
+% \lipsum[2-3]
+
+%-------------------------------------------------------------------------------
+%	REFERENTIES
+%-------------------------------------------------------------------------------
+
+\printbibliography
+
+%-------------------------------------------------------------------------------
+\end{document}
