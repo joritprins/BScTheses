@@ -1,0 +1,111 @@
+Logboek 11/1/22:
+Documenten als handleiding afstudeerproject bachelor informatica.pdf gelezen
+Kleine planning gemaakt voor komende week
+Ruw onderzoek gedaan. Vooral veel oude papers tegengekomen uit ongeveer 2000 toen big data nog niet zo big was. Daarna doorgezocht en nieuwere papers gevonden over webcrawlers. Binnenkort moet ik nog ff verder zoeken naar nieuwe papers en ik heb ook veel papers die ik nog moet lezen
+
+Aantekeningen
+
+
+In this project, we "beef up" MySQL so that it can easily proces piles of raw unstructured text data (i.e., most common data formats: mail, pdf, word, markdown, HTML,...), and a search user interface and result page (SERP), of similar quality as we know from Google, LinkedIn, or Marktplaats. 
+
+
+Potentieel: Op fotos mensen herkennen. De gebruiker vragen wie deze persoon is zodat mensen kunnen zoeken op persoon 
+- Veel data is ongeordend en zonder seperators. Hoe halen we de goede informatie uit teksten. Vol stuk tekst heeft belangrijke informatie als bijvoorbeeld adressen, namen, etc (Automatic segmentation of text into structured records, ook een tool voor gemaakt - Paper)
+	- Namen uit teksten halen en tellen hoe vaak ze in de tekst staat .Wanneer iemand dan zoekt op een naam de naam met de meeste occurences bovenaan
+
+Verder kijken in warehouse construction
+
+https://sci-hub.se/10.1109/2945.675650 | A High Accuracy Volume Renderer for Unstructured Data | renderen van verschillende objecten
+Both structured and unstructured data, as well as structured data representing several different types of tuples, may be
+integrated into a single list for browsing or retrieval. Data may be arranged in the Gray code order of the features and
+metadata, producing optimal ordering for browsing. We provide several metrics for evaluating the performance of systems supporting browsing, given some constraints. Metadata and indexing terms are used for sorting keys and attributes
+for structured data, as well as for semi-structured or unstructured documents, images, media, etc. Economic and information theoretic models are suggested that enable the ordering to adapt to user preferences. Different relational structures
+and unstructured data may be integrated into a single, optimal ordering for browsing or for displaying tables in digital
+libraries, database management systems, or information retrieval systems. Adaptive displays of data are discussed.
+
+-------------------------------------------------------------------------------
+Text in structured records:
+
+https://www.researchgate.net/publication/2550973_Automatic_Segmentation_of_Text_Into_Structured_Records | file:///C:/Users/jorit/Downloads/download.pdf | Automatic segmentation of text into structured records | text string met informatie als naam, plaats, zip, geboortedatum vaak ongestructureerd, door elkaar, geen vaste structuur en zonder seperators.  These properties make the problem of extracting structure from such text different from both the general problem
+of information extraction from natural language documents
+and the popular problem of generating wrappers to extract
+structure from HTML documents.
+Html gebruikt wrappers <> die zeggen wat er in de blokken staat. Deze zijn helaas wel altijd machine generated. 
+
+Postcodes vaak heel erg verschillend in landen, zeker niet westerse landen. Er zijn wel programmas die handgeschreven regels hebben, maar elk land heeft verschillend dus is heel veel werk.
+Given the wide variety of patterns, it is clear that manual rule-based tools will not scale with the expanding globalization of business.
+
+Hebben datamold gemaakt om dmv machine learning een goed model te schrijven
+-------------------------------------------------------------------------------
+Gemixte en gestructuurde data bekijken
+https://sci-hub.se/https://doi.org/10.1016/j.ipm.2005.02.001 | https://sci-hub.se/https://doi.org/10.1016/j.ipm.2005.02.001 | losee
+
+output van een gestructureerde database, dan kan 
+. Our purpose here is to integrate
+these structured and unstructured models to provide integrated output that might contain, for example, factual numeric data about the population and average temperature for a country, along with a picture of the
+capitol building, an audio recording of the countrys national anthem, and a journal article about that
+countrys economy.
+
+Data is gestructureerd: georganiseerd in een normale manier. Alle typerende karaktereigenschappen over de hele data in een particulaire dataset (bijv een tabel met alleen maar namen of een tabel met alleen maar plaatsen)
+Semi-gestructureerd: data wordt geinterpreteerd met een tag, name="bob" , place="amsterdam". missing data kan met een label of helemaal niet
+
+Metadata wordt gebruikt om een onderwerp, feit, relatie of een document te beschrijven. 
+
+Indexing:
+first bit wel of niet historical, tweede iets over tijdperk of voor niet historical social science of non social science. Deze methode is CART. Elke bit zegt dus iets over het item maar is context afhankelijk (afhankelijk van hoever in de tree)
+
+Ordering consistent with the Gray code allows binary data to be placed near similar data
+
+------------------------------------------
+Metadata and the web | safari mehdi https://www.researchgate.net/publication/26405848_Metadata_and_the_Web
+
+The rapid increase in the number and variety of resources on the World Wide Web has made the problem of resource description and discovery central to discussions about the efficiency and evolution of this medium. The inappropriateness of traditional schemas of resource description for web resources has encouraged significant activities recently on defining web-compatible schemas named "metadata". While conceptually old for library and information professionals, metadata has taken more significant and paramount role than ever before and is considered as the golden key for the next evolution of the web in the form of semantic web. This article is intended to be a brief introduction to metadata and tries to present its overview in the web
+
+The goal of metadata is to enhance the use of the data. it supports the effectivenes of the data 	
+
+------------------------------------------------
+https://www.soquelgroup.com/wp-content/uploads/2010/01/dmreview_0203_problem.pdf | the problem with unstructured data | Blumberg
+
+it is well known that one result of
+the Internet’s rapid growth has
+been a huge increase in the amount
+of information generated and
+shared by organizations in almost
+every industry and sector
+ 
+Het probleem van het jaar 2000 is inmiddels mogelijk. We kunnen veel data al opslaan in databases ipv binary large objects (blobs)
+
+---------------------------------------
+https://sci-hub.se/https://doi.org/10.1016/0306-4573(88)90075-1 | online text retrieval via browsing
+
+Browsing refers to information retrieval where the initial serch criteria are generally quite vague. 
+
+----------------------------------------
+https://ciir-publications.cs.umass.edu/getpdf.php?id=86  | Integrating INQUERY with an RDBMS to support text retrieval
+
+RDMBS is good with structured data like int and bool, while IR is good in text retrieval and guesses nad is bad at structured data.  
+Boolean operators on structured data and probabilistic operators on unstructured data. Probabilistic answers are converted into boolean values and later combined wit the results of the non-text component of the query. Final result is ranked on probability (belief) that a record is relevant to the text query. 
+
+Vooral over het zoeken in ongestructureerde data
+
+NOG LEZEN:
+-----------------------------------------
+https://www.vldb.org/conf/1994/P740.PDF | Integrating a structured text retrieval system with an object oriented database system -> data zoeken
+https://sci-hub.se/10.1109/TSE.1987.232847 | An Infornation-Theoretic Analysis of Relational Databases-Part I: Data ependencies and Information Metric
+https://sci-hub.se/10.1109/TSE.1987.232848 | An Information-Theoretic Analysis of Relational Databases-Part II: Information Structures of Database Schemas 
+
+---------------------------------------
+https://www.igi-global.com/pdf.aspx?tid=273889&ptid=253867&ctid=4&oa=true&isxn=9781799858997
+An aproach in big data analytics to improve the velocity of unstructured data using map reduce	
+--------------------------------------
+!!!!!!!!     https://dp.univ-danubius.ro/index.php/EIRP/article/view/207 | 
+Towards Useful Information from Unstructured Data Mining | Danubianu 
+
+zoekterm: https://scholar.google.com/scholar?as_ylo=2018&q=sorting+unstructured+data&hl=nl&as_sdt=0,5
+
+
+
+
+
+OUTPUT: nog ff deze lezen
+Losee, R. M. (1998). Text Retrieval and Filtering: Analytic Models of Performance
