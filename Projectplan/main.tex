@@ -16,12 +16,14 @@
 \usepackage[style=authoryear-comp]{biblatex}
 \addbibresource{references.bib}
 
+\usepackage{pdfpages}
+
 %-------------------------------------------------------------------------------
 %	GEGEVENS VOOR IN DE TITEL, HEADER EN FOOTER
 %-------------------------------------------------------------------------------
 
 % Geef je artikel een logische titel die de inhoud dekt.
-\title{Policying Android app permissions with eFLINT}
+\title{Het maken van een persoonlijke zoekmachine}
 
 % Vul de naam van de opdracht in zoals gegeven door de docent en het type 
 % opdracht, bijvoorbeeld 'technisch rapport' of 'essay'.
@@ -34,7 +36,7 @@
 
 % Vul de naam van je tutor, begeleider (mentor), of docent / vakcoördinator in.
 % Vermeld in ieder geval de naam van diegene die het artikel nakijkt!
-\supervisors{Marco Brohet\\ L. Thomas van Binsbergen}
+\supervisors{Maarten Marx}
 % \mentor{Marco Brohet}
 \docent{}
 
@@ -71,42 +73,37 @@
 %-------------------------------------------------------------------------------
 % Hanteer bij benadering IMRAD: Introduction, Method, Results, Discussion.
 
-Het projectplan
-Al in de eerste week van het afstudeerproject moet een projectplan worden ingeleverd. Een
-projectplan is een heldere uitwerking van het hele afstudeerproject en beschrijft het plan van
-aanpak. Het projectplan wordt ingeleverd via Canvas nadat het is goedgekeurd door de
-projectbegeleider(s) (beide in het geval van een extern project). Het beslaat gemiddeld vier
-A4tjes en bestaat uit de volgende onderdelen:
-\section{titel}
-Uiteraard mogen je naam, titel van het project en de naam van je begeleider(s) niet
-ontbreken.
 \section{context}
-beschrijf hier het onderdeel van het vakgebied waarbinnen dit onderzoek
-plaatsvindt. Uit dit deel moet duidelijk zijn hoe de onderzoeksvraag, die later wordt
-beschreven, is gepositioneerd binnen de informatica.
-De relevante literatuur: wat is de relevante literatuur behorende bij de
-onderzoeksvraag? Vaak heeft dit de vorm van een beschrijving van de “state-of-the-art”:
-een opsomming van resultaten die eerder door anderen zijn behaald en waar de
-onderzoeksvraag op voortbouwt.
+Sinds 1990 zat nog geen procent van de wereldpopulatie op het internet. In het jaar 2000 haalde al de helft van de Amerikaanse populatie informatie van het internet en in het jaar 2016 was dit al 80 procent. In hetzelfde jaar zit 90 procent van de Nederlandse populatie op het internet \parencite{owidinternet}. Met deze groei van internetgebruikers groeit ook de informatie die beschikbaar is op het internet. Deze groei van beschikbare informatie is erg belangrijk en is coherent aan bijvoorbeeld economische groei \parencite{Vu2019}. Het is hierin belangrijk dat de gebruikers relevante informatie krijgen uit deze alsmaar groeiende berg informatie. Zoekmachines zijn hierin cruciaal. Of de zoekmachine 'goed' is, is afhankelijk van verschillende factoren. Zo is het belangrijk om op de \textit{search engine result pages} (SERP) een \textit{surrogate} (relevante informatie over de gevonden resultaten) te laten zien, zodat de gebruiker beter kan bepalen welk resultaat voldoet aan zijn wensen. Deze factoren maken de creatie van een zoekmachine een langdradig en gecompliceerd proces. 
+
+Net als publieke informatie groeien ook onze persoonlijke documenten. Ze hebben verschillende formaten, zijn van verschillende bestandstypes (pdf, mail, word, etc.) en bevatten verschillende informatie. Deze persoonlijke database groeit enorm in grootte. Ook bijvoorbeeld Journalisten hebben vaak een enorme database aan documenten. Het snel en goed kunnen zoeken in deze databases is cruciaal voor hun werk. Ook de vertrouwelijkheid van de documenten is belangrijk om te waarborgen, waardoor ze geen commerciele zoekmachine kunnen gebruiken.  Deze en andere situaties zorgen voor de behoefte van een \textit{open source} privé zoekmachine. 
+
+Omdat in derde wereldlanden technologie lang niet zo goed beschikbaar is, terwijl technologie hier net zo belangrijk is voor economische groei \parencite{Shahidullah2019}, en persoonlijke computers nooit zullen evenaren aan de commerciële rekenkracht van grote bedrijven moet de privé gemaakt zijn voor computers met gelimiteerde RAM en rekenkracht. 
+
 \section{De onderzoeksvraag}
-beschrijf het probleem waaraan zal worden gewerkt. Vaak heeft
-dit de vorm van een reflectie ten opzichte van de zojuist beschreven “state-of-the-art”.
-Als onderdeel van de onderzoeksvraag wordt tevens beschreven wat het project gaat
-opleveren: het product dat aan het eind zal worden opgeleverd, bv. de resultaten van
-een onderzoek, de sourcecode van ontwikkelde software, documentatie.
-\section{Methoden}: op welke manier wordt het onderzoek uitgevoerd? Welke subtaken kunnen
-worden onderscheiden? Denk aan: uitgebreid literatuuronderzoek, ontwerp en
-implementatie van een programma, opzet van een experiment.
-\section{De planning} beschrijf hoe de beschikbare tijd naar verwachting zal worden besteed.
-Het is vaak lastig om vooraf alle activiteiten te identificeren, laat staan om daarvan op de
-dag nauwkeurig aan te geven wat op welke datum af zal zijn. Over het algemeen is het
-wel mogelijk een aantal fasen (bv. literatuuronderzoek, ontwerp, implementatie,
-experimenten, scriptie schrijven, etc.) te identificeren en daarover een planning op
-weekbasis te maken. Denk ook aan de tussentijdse resultaten, de afhankelijkheden die
-mogelijk bestaan en of er kritische afhankelijkheden zijn waardoor het project niet door
-kan gaan en wat in dat geval het alternatieve plan is. Vaak wordt hiervoor een Gantt- of
-Pert-chart gebruikt.
-Bijgevoegd is een Excel sheet met de planning.
+Het doel van dit project is om een \textit{open source} privé zoekmachine te maken die werkt met gelimiteerde rekenkracht en RAM op een grote dataset. De zoekmachine moet eenvoudig zijn (met installatie en gebruik). De onderzoeksvraag is als volgt: \paragraph{}
+
+Is het mogelijk om een open source zoekmachine te maken die
+\begin{itemize}
+    \item gewenste resultaten geeft,
+    \item eenvoudig te installeren is,
+    \item eenvoudig te gebruiken is (vergelijkbaar met publieke zoekmachines, als bijvoorbeeld Google),
+    \item schaalbaar is
+    \item terwijl deze gelimiteerde rekenkracht heeft (als bijvoorbeeld een verouderde persoonlijke desktop)
+\end{itemize}
+
+Het product zal getest worden op een oude laptop door verschillende mensen een opdracht te geven om een specifiek document of informatie in een specifiek document op te zoeken in een database met de gemaakte zoekmachine. 
+
+\section{Methoden}
+Aan het begin zal er literatuuronderzoek gedaan worden om te kijken wat de minimale eisen zijn om een zoekmachine gewenste resultaten te geven om de rekenkracht te beperken. Ook is het belangrijk om prioriteiten te stellen om wat wel, en wat niet te implementeren (denk aan tekst \texit{highlighting} in de \textit{surrogate}. Daarnaast moeten we onderzoeken hoeveel informatie de gebruiker wenst te krijgen om een goed oordeel te vellen of de informatie relevant is of niet. 
+
+Wanneer we dit weten kunnen we beginnen met de implementatie. De zoekmachine moet als invoer verschillende documenten aankunnen (mail, pdf, word, etc.) en deze op kunnen slaan in een database. Vervolgens moet de zoekmachine in deze database zoeken aan de hand van termen. De resultaten van deze \textit{query} moet genoeg informatie bevatten voor de gebruiker om te bepalen of de zoekopdracht relevante informatie geeft. 
+
+Als de zoekmachine af is en getest op bugs kunnen we hem testen. We zullen verschillende groottes aan invoer geven en kijken hoe lang het duurt om informatie en documenten op te halen. Ook zullen we testen of mensen relevante informatie op kunnen halen door ze informatie te laten opzoeken in de database. 
+
+\section{De planning} 
+(zie volgende pagina)
+\includepdf[pages=-,angle=270]{Gantchart_Thesis.pdf}
 
 
 % \subsectionauthor[Voornaam Achternaam]{Paragraaf met auteur}
