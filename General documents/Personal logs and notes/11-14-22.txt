@@ -1,0 +1,150 @@
+==================================================================================
+Towards Practical Secure Neural Network Inference: The Journey So Far and the Road Ahead
+https://eprint.iacr.org/2022/1483.pdf
+
+Big tradeoff = To achieve good accuracy there is the need to full and precise data, but lots of personal information needs to be conceiled resulting in limited access. Modern cryptograhpic methods offer possibilities
+
+Deeplearning often used for classification. ML often consists of two phases: training and interference. In training large amount of data is being fed to find the best parameters for the NN. In the interference phase the already trained NN is applied to a new input. 
+
+In paper: focus in interference phase, low latency (fast) and high accuracy. 
+Problem: the secure neural network inference (SNNI) problem. other names sometimes used in the literature for the same include privacy-preserving inference and oblivious prediction
+===============================  Other names: secure neural network inference, privacy-preserving inference, oblivious prediction =========================
+These approaches are often based on cryptographic techniques, such as homomorphic encryption and secure multi-party computation, although also other methods have been proposed, such as hardware-based trusted execution environments
+
+The proposed approaches achieve different trade-offs in terms of efficiency, security, accuracy, and applicability
+
+=======The accuracy of a trained NN is the ratio of inputs for which the NN’s result is correct. Accuracy is typically measured using a dedicated validation dataset.
+
+-------------------------------
+===Background
+==Fully Homorphic encryption (FHE) schemes typically work with a poynomial ring. Rq= Zq[X]/(f(X)) where f(X) is a monic degree-d irreducible polynomial that mostly is a X^d+1 where d = 2^k for positive integer of k (allows efficient arithemtic using fast fourier transform. Ciphertexts using FHE schemes contain noise which grows during homomorphic operations. Makes decryption (even with key) impossible if the noise grows too large. 
+Solution for unrestricted number of operations: Perform re-encryption procedure homomorphically. This is called bootstrapping. It resets the noise in the ciphertext.
+
+==Oblvious Transfer (ot)
+Receiving party allowed to select one of the sending party's inputs. Sender does not leearn the chioce of the receiver and receiver does not learn the non-selected inputs. 
+Sender has inputs x0, x1, receiver choice bit b. After protocol receiver learns xb and nothing about x1-b and sender learns nothing. 
+
+==Garbled Circuits (GCs) allows two parties garbler (knoeier, kletser) and an evaluator to evaluate any efficiently computable function (expressed with only AND and XOR gates). 
+Garbler creates circuit from XOR and AND gates. each wire in the circuit needs wire lables that represent the values 0 and 1 and are random bit strings. The garbler replaces the truth table for each gate with a garbled truth table. This table contains ciphertexts of the labels of the gate's output wire. 
+
+==Additive secret sharing
+Secret sharing is an approach for distributing a secret value via two or more 'shares' that on their own do not reveil any informatin. Additive secret sharing (A-SS) to share an input x among two parties, one selects random x0, x1 such that x=x0+x1.  One party gets x0, the other gets x1. 
+
+-------------------------------
+Most implementations cover against Honest but Curions adversary model (follow protocol but try to find out information). 2 implementations cover against malicious attacks (deviate from protocol). 
+
+Each type of NN layer requieres specific types of computation. Convolutional Neural Networks should support the following types of layers: fully-connected, convolutional, activation functions like ReLU or sigmoid, max-pooling, and softmax or argmax
+
+=================selection of models (3)
+3.1 roles and participants
+server-client, server-thirdparty-client, server x3-client
+
+3.2 security properties
+3.2.1 adversary model: only honest but curious or also malicious
+3.2.2 secrecy goals: should we also keep the architecture of the neural network secret? (only 2 approaches do)
+3.2.3 if 3.2.2 are satisfied the client does not learn anything about the nn beyond what the result of the inference reveals. With results one can learn some information about NN. Potential solutions could include limiting the number of queries. Most work on SNNI does not address this topic
+
+3.3 supported neural networks
+3.3.1 Layers: Convolutional Neural Networks should support: fully-connected, convolutional, activation functions like ReLU or sigmoid, max-pooling, and softmax or argmax
+3.3.2 Weights: some apporaches constrain the types of numbers that can be worked on in the NN
+
+3.4 connection to training: pretrained, modify, change training
+
+3.5 interactivity
+interactive: client and server communcate with each other anew
+	-roundcomplexity = O(n)
+	-leak information about structure of nn (number and types of layers)
+	-require client's active involvement throughout the process
+	+more flexible
+	+can thus achieve superior efficiency [90]
+non-interactive: communication only happens at beginning and end of protocol
+	+roundcomplexity = O(1)
+Whether an interactive or non-interactive approach is better depends on the specific application context. 
+
+3.6 offline preprocessing
+moving parts of the protocol to an offline phase is beneficial if for example there is a long standing relation among the parties with inference request arising only occasionally (no inference = can be used to perform offline preprocessing)
+If new clients arrive to the system frequently together with hteir inference request, then there is no idle time available for preprocessing. Total duration of computation should be minimized. 
+
+================= solution approaches (4)
+4.1 homomorpic encryption
+client encrypts input using HE -> ciphertext to server, server performs inference on encrypted input and sends encrypted form back to client -> client decrypts
+NN is black box for client and server only sees encrypted data it 
+=satisfies all security properties listed in 3.2.2
+
+4.1.1 handling non linear functions
+Computing linear part in network can be done
+Non-linear parts (e.g. activation function) can be approximated to polynomials. This is expensive (depending on HE scheme: increase in computation time, increase of noise, increased message space size
+This can be (partially) circumvented by simplifying the activation function, but can lead to problems in training (especially for deeper neural networks)
+SOme authors suggested to use HE for linear layers of the network and use some other MPC technique for non-linear layers
+This shows that FHE approaches get faster but cannot be considered practical yet: e.g., SHE manages to achieve over 90% accuracy on CIFAR-10 but each single inference on encrypted input takes almost 40 minutes
+
+4.2 Garbled circuits
+If bitlength of involved number is fixed, all operations in nn can be realized by boolean circuits. NN can be encoded as boolean circuit. 
+Client's input to the protocol is the inference input while servers input is the set of weights and other parameters.
+
+4.3 Additive secret sharing
+Garbled and Homomorphic solutions are non-interacive. Proposde A-SS solutions are interactive. 
+approaches typically maintain the following invariant. Beginning of evaluating ith layer. Two parties hold additive shares of all involved numbers (input but also paramaters NNs). End of evaluating the ith layer the parties hold additive shares of the output which will be used as input to the next layer. At beginning secret shares of the inputs are created and distributed, at the end the shares of the output are sent tot he client, wich combines them to retrieve the output. 
+
+4.3.1 generating beaver triplets for multiplying secret shared numbers
+Two parties require a cryptograpic protocol (HE or OT) to ensure that each party only learns its own shares of the triplet elements
+Three parties, one party can distribute triplets locally but cannot participate in online phase
+
+4.3.2 evaluating non-linear layers
+Use polynomial approximation, and use standard addition and multiplication for secret shared numbers to evaluate the polynomial. 
+Use cryptographic protocol like garbled circuits. 
+
+4.4 mixed protocol approaches
+available techniques all have some disadvantages that liit their appropriateness for certain types of layers. These disadvantages relate to different types of layers, so it makes sense to combine multiple techniques
+This leads to highly efficient approaches for ssni, but are necessarily interactive which leads to some drawbacks. 
+
+4.5 other aspects
+Veel tradeoffs tussen reele nummers: 
+Choosing a number representation involves several decisions: type of representation (floating-point, fix-point, integer), signed/unsigned, bitwidth (i.e., total number of bits, see also Fig. 6), scale (also called precision, the number of bits for the fractional part).
+
+4.6 other approaches
+4.6.1 model splitting: split model in two or more parts that are allocated to different parties. 
+
+ABY https://github.com/encryptogroup/ABY#aby-applications
+ABY2.0[135] https://eprint.iacr.org/2020/1225.pdf 
+ABY3[124]
+Chameleon[154] https://arxiv.org/abs/1801.03239
+Cheetah[83] https://eprint.iacr.org/2022/207.pdf
+CrypTFlow2[149] https://arxiv.org/abs/1909.07814
+Delphi[122]  https://www.usenix.org/system/files/sec20-mishra_0.pdf
+Gazelle[90]
+MiniONN[112]
+MP2ML[17]
+Muse[110] 
+ngraph-HE/HE2[18,19]
+SecureML[125]
+XONN[153]
+
+CrypTFlow [105]  
+CryptoNets [64]  
+Falcon [167] 
+SecureML [125] 
+
+
+
+10 Cheetah [83] https://eprint.iacr.org/2022/207.pdf
+https://github.com/Alibaba-Gemini-Lab/OpenCheetah
+On one terminal run bash scripts/run-server.sh cheetah sqnet. The program will load the pretrained model in the folder pretrained/ which might takes some time when the pretrained model is huge.
+On other terminal run bash scripts/run-client.sh cheetah sqnet. The program will load the prepared input image in the folder pretrained.
+-replace cheetah by SCI_HE to execute the CryptFlow2's counterpart.
+-replace sqnet by resnet50 to run on the ResNet50 model.
+-You can change the SERVER_IP and SERVER_PORT defined in the scripts/common.sh to run the demo remotely. 
+== also implementation of cryptflow2
+
+CrypTFlow[105] https://arxiv.org/abs/1909.07814
+https://github.com/mpc-msri/EzPC
+implementation for docker
+easy setup
+
+Delphi https://www.usenix.org/system/files/sec20-mishra_0.pdf
+https://github.com/mc2-project/delphi
+python, c++, rust 
+proof-of-concept
+example: minionn model 
+
+

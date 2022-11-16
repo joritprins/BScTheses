@@ -1,0 +1,46 @@
+=============================== secure neural network inference, privacy-preserving inference, oblivious prediction =========================
+
+To foster privacy and data governance, a key dimension of trustworthy AI, there is a need for approaches that enable DL while ensuring that security and privacy requirements are met
+[23] Boulemtafes, A., Derhab, A., and Challal, Y. A review of privacy-preserving techniques for deep learning. Neurocomputing 384 (2020), 21–45.
+[174] Zhang, Q., Xin, C., and Wu, H. Privacy-preserving deep learning based on multiparty secure computation: A survey. IEEE Internet Things J. 8, 13 (2021), 10412–10429
+
+Lezen en dan gebruiken in introductie?:
+In the inference phase, security and privacy become a concern if the NN and the input are held by different parties. This is the case in the “Machine Learning as a Service” (MLaaS) scenario 
+[155] Ribeiro, M., Grolinger, K., and Capretz, M. A. M. Mlaas: Machine learning as a service. In ICMLA (2015), IEEE, pp. 896–902.
+
+Previous relevant surveys (different types of ML, different attack possibilities, different phases ML pipeline)
+[23] Boulemtafes, A., Derhab, A., and Challal, Y. A review of privacy-preserving techniques for deep learning. Neurocomputing 384 (2020), 21–45.
+[113] Liu, Q., Li, P., Zhao, W., Cai, W., Yu, S., and Leung, V. C. M. A survey on security threats and defensive techniques of machine learning: A data driven view. IEEE Access 6 (2018), 12103–12117
+[134] Papernot, N., McDaniel, P. D., Sinha, A., and Wellman, M. P. Sok: Security and privacy in machine learning. In EuroS&P (2018), IEEE, pp. 399–414.
+[174] Zhang, Q., Xin, C., and Wu, H. Privacy-preserving deep learning based on multiparty secure computation: A survey. IEEE Internet Things J. 8, 13 (2021), 10412–10429
+
+A survey on (fully) homomorphic encryption schemes can be found in [1], and [120] surveys the engineering aspects of FHE
+[1] Acar, A., Aksu, H., Uluagac, A. S., and Conti, M. A survey on homomorphic encryption schemes: Theory and implementation. ACM Comput. Surv. 51, 4 (2018), 79:1–79:35.
+[120] Martins, P., Sousa, L., and Mariano, A. A survey on fully homomorphic encryption: An engineering perspective. ACM Comput. Surv. 50, 6 (2018), 83:1–83:33.
+
+Fully Homomorphic Encryption
+https://www.youtube.com/watch?v=oNek_BKu6IU&ab_channel=InternationalMathematicalUnion Craig B. Gentry: Homomorphic Encryption
+The paper from gentry: https://www.cs.cmu.edu/~odonnell/hits09/gentry-homomorphic-encryption.pdf
+https://dl.acm.org/doi/pdf/10.1145/3140649.3140655 Privacy preserving machine learning in cloud implementation
+
+Research if for example picture of a cat (after encryption) is still visible for the human eye. 
+
+In order to give an indication about the practicality of these approaches, the popular databases MNIST [57] and CIFAR-10 [104] are often used to verify and benchmark the privacypreserving inference
+
+====A comparison between interactive and non-interactive SNNIs
+Homomorphic Encryption
+This shows that FHE approaches get faster but cannot be considered practical yet: e.g., SHE manages to achieve over 90% accuracy on CIFAR-10 but each single inference on encrypted input takes almost 40 minutes
+
+Garbled circuits
+The structure of the NN is known to both parties. Thus, the last secrecy goal from § 3.2.2 is not met, but Yao’s protocol ensures that the parties do not learn each other’s inputs.
+
+Research parallelism and SIMD processing
+
+Als we het hebben over power kunnen we ook IoT benoemen waar apparaten niet zo snel zijn en niet veel batterij hebben (zie SSNI in IoT and edge computing 7.1
+
+Docker
+
+Titel: The quest for the best SNNI
+A particular application context in which SNNI could play an important role is the Internet of Things (IoT) and the related edge computing paradigm [106,119]. A challenge of this application context is that the resources available especially on the client side are severely constrained. This limits the applicability of interactive approaches that put a significant burden on the client. Devising efficient approaches for this context remains a challenging and important task for future research
+A particular application context in which SNNI could play an important role is the Internet of Things (IoT) and the related edge computing paradigm [106,119]. A challenge of this application context is that the resources available especially on the client side are severely constrained. This limits the applicability of interactive approaches that put a significant burden on the client. Devising efficient approaches for this context remains a challenging and important task for future research
+

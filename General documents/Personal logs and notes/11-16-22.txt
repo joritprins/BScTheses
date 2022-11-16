@@ -1,0 +1,109 @@
+ABY https://github.com/encryptogroup/ABY#aby-applications
+ABY2.0[135] https://eprint.iacr.org/2020/1225.pdf 
+ABY3[124]
+Chameleon[154] https://arxiv.org/abs/1801.03239
+Cheetah[83] https://eprint.iacr.org/2022/207.pdf
+CrypTFlow2[149] https://arxiv.org/abs/1909.07814
+Delphi[122]  https://www.usenix.org/system/files/sec20-mishra_0.pdf
+Gazelle[90]
+MiniONN[112]
+MP2ML[17]
+Muse[110] 
+ngraph-HE/HE2[18,19]
+SecureML[125]
+XONN[153]
+
+CrypTFlow [105]  
+CryptoNets [64]  
+Falcon [167] 
+SecureML [125] 
+
+
+
+10 Cheetah [83] https://eprint.iacr.org/2022/207.pdf
+https://github.com/Alibaba-Gemini-Lab/OpenCheetah
+On one terminal run bash scripts/run-server.sh cheetah sqnet. The program will load the pretrained model in the folder pretrained/ which might takes some time when the pretrained model is huge.
+On other terminal run bash scripts/run-client.sh cheetah sqnet. The program will load the prepared input image in the folder pretrained.
+-replace cheetah by SCI_HE to execute the CryptFlow2's counterpart.
+-replace sqnet by resnet50 to run on the ResNet50 model.
+-You can change the SERVER_IP and SERVER_PORT defined in the scripts/common.sh to run the demo remotely. 
+== also implementation of cryptflow2
+
+CrypTFlow[105] https://arxiv.org/abs/1909.07814
+https://github.com/mpc-msri/EzPC
+implementation for docker
+easy setup
+
+Delphi https://www.usenix.org/system/files/sec20-mishra_0.pdf
+https://github.com/mc2-project/delphi
+python, c++, rust 
+proof-of-concept
+example: minionn model 
+
+
+===================================================================Writing project plan:
+-======================= discuss relevance Machine Learning
+https://neptune.ai/blog/best-machine-learning-as-a-service-platforms-mlaas
+The recent rise in Big Data increased the data exchange on the internet. With more and more computer resources available, researchers quickly started to utilise the possibilities of machine learning (ML) to analyse to analyse this increase of data.  Techniques like neural networks (NN) [hebben veelbelovende resultaten en staan aan de voorgrond/voorsprong van] scientific breaktroughs. Machine learning has a wide varity of applications for classification such as traffic analysis, image recognition, intrusion detection,  spam detection, medical or genomics predictions,  financial predictions and face recognition {{citations}}
+[5] Nathan Dowlin, Ran Gilad-Bachrach, Kim Laine, Kristin Lauter, Michael Naehrig,
+and John Wernsing. 2015. Manual for Using Homomorphic Encryption for Bioinformatics. Technical Report MSR-TR-2015-87.
+[6] Nathan Dowlin, Ran Gilad-Bachrach, Kim Laine, Kristin Lauter Michael Naehrig,
+and John Wernsing. 2016. CryptoNets: Applying Neural Networks to Encrypted
+Data with High Throughput and Accuracy. Technical Report MSR-TR-2016-3
+[11] Naveed Islam, William Puech, Khizar Hayat, and Robert Brouzet. 2011. Application of Homomorphism to Secure Image Sharing. Optics Communications 284, 19
+(Sept. 2011), 4412–4429.
+[72] He, K., Zhang, X., Ren, S., and Sun, J. Delving deep into rectifiers: Surpassing human-level performance on imagenet classification. In ICCV (2015), IEEE Computer Society, pp. 1026–1034.
+=======================  discuss relevance MLaaS
+The use of ML typically consists of two phases: training and inference. In the first phase a NN is trained by feeding an extensive dataset to find the best parameters. NNs used for machine learning have to be maintained, evaluated and the training phase is often a tedious and time exhausting process. In the inference phase an input is applied to the trained NN. Because of the time consuming process of creating a NN machine learning as a service (MLaaS) became popular. In MLaaS, a company offers a pre-trained NN to the clients. Now, the clients only need to worry on the inference phase.
+
+
+
+
+https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9194237
+The exponential growth of big data and deep learning has increased the data exchange
+traffic in society. Machine Learning as a Service, (MLaaS) which leverages deep learning techniques for
+predictive analytics to enhance decision-making, has become a hot commodity
+
+======================= discuss privacy matters MLaaS
+However, MLaaS offers great threats to privacy. To train the model as accurately as possible a NN needs access a large amount to precise data from clients, which may consist of sensitive information. Thus, clients may be reluctant to provide the NNs with their data. Other features, irrelevant to the prediction task, could also be derived from this data [3]. On the inference phase, input from the client to the NN can also be confidential. On the other hand, owners of a NN could be worried that an adversary could steal (parameters of) their (often costly) NN. Furthermore, the result of the NN could also be confidential resulting in the need to retain this information from unauthorized parties. 
+[3] M. Nasr, R. Shokri, and A. Houmansadr, “Comprehensive privacy analysis of deep learning: Passive and active white-box inference attacks against centralized and federated learning,” in 2019 IEEE symposium on security and privacy (SP), pp. 739–753, IEEE, 2019. 
+
+A typical MLaaS situation consist of two parties: the client holding an input \textit{x} and a company holding neural network \textit{f}. The client wants to know the applied input \textit{f(x)} while keeping the sensitive contents of \textit{x} and the result \textit{f(x)} private from the company. The company wants to hold the intelectual property \textit{f} private while still giving the opportunity to the client to use \textit{f}. The secure neural network inference (SNNI) problem entails calculating the applied input \textit{f(x)} while still holding all the above security requirements.
+
+
+
+ 
+
+However, training the models require access to the raw data which is often privacy sensitive and can create potential privacy risks.
+
+To perform predictions, a model owner needs to receive data from clients. The data may consist of sensitive information. Thus, clients are reluctant to provide their data. On the other hand, a model owner will also be worried that an adversary could be disguised as a client to try to steal the model. Furthermore, there is an issue about the privacy of the prediction result and whether will it be safe from access by unauthorized parties.
+
+Developing such approaches is challenging because of an intrinsic conflict: to achieve good accuracy, DL needs full access to a large amount of precise data, whereas security and privacy concerns entail limiting the access to data.
+
+The training process also enables the global DNN model to acquire private features of the data, which are irrelevant to the prediction task [3]. In particular, it has been shown that the outputs of the convolution and fully connected layers leak private information of the training data [4]. Such an unintentional leakage engenders serious attacks like data reconstruction [5], [3] and property inference [6], [7].
+[3] M. Nasr, R. Shokri, and A. Houmansadr, “Comprehensive privacy analysis of deep learning: Passive and active white-box inference attacks against centralized and federated learning,” in 2019 IEEE symposium on security and privacy (SP), pp. 739–753, IEEE, 2019. 
+[4] A. Dosovitskiy and T. Brox, “Inverting visual representations with convolutional networks,” in Proceedings of the IEEE conference on computer vision and pattern recognition, pp. 4829–4837, 2016.
+[5] L. Melis, C. Song, E. De Cristofaro, and V. Shmatikov, “Exploiting unintended feature leakage in collaborative learning,” in 2019 IEEE Symposium on Security and Privacy (SP), pp. 691–706, IEEE, 2019.
+[6] Z. Wang, M. Song, Z. Zhang, Y. Song, Q. Wang, and H. Qi, “Beyond inferring class representatives: User-level privacy leakage from federated learning,” in IEEE INFOCOM 2019-IEEE Conference on Computer Communications, pp. 2512–2520, IEEE, 2019.
+[7] M. Xu and X. Li, “Subject property inference attack in collaborative learning,” in 2020 12th International Conference on Intelligent HumanMachine Systems and Cybernetics, vol. 1, pp. 227–231, IEEE, 2020.
+
+=======================  state no widely / general implementation has been accepted
+    - rapid progress in this area has made it hard to get an overview, luckely cite paper has made an overview with some implementations
+    - more proof of concept
+        - and proof of concepts are not thoroughly tested
+        - varies from efficiency to privacy
+- ?? discuss importance power usage 
+=======================   test one or different implementations
+- to investigate what model research papers that give overview:
+https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9194237
+Quantitative metrics include accuracy and inference time. Accuracy means the percentage of correct predictions made by a PPDL model. The inference time is the time needed
+by the model to perform encryption/decryption, send data from the client to the server, and execute the classification process. We measured the average accuracy and inference time of each method. Then, we set the average value as the relative evaluation. If the accuracy value is higher than average, the accuracy of the proposed method is good. Furthermore, if the run time and data transfer are lower than average, the run time and data transfer of the proposed methods are good.
+
+		acc		inference
+SecureML		93.4 (bad)	4.88 (good)
+MiniONN		98.95 (good)	9.32 (good)
+ABY3		94.00 (bad) 	0.01 (good)
+DeepSecure	98.95 (good)	9.67 (good)
+Chameleon	99.00 (good)	2.24 (good)
+SecureNN		99.15 (good)	0.076 (good)
+CodedPrivateML	95.04 (bad)	110.9 (bad)
