@@ -11,9 +11,12 @@
 %-------------------------------------------------------------------------------
 
 \documentclass{uva-inf-article}
-\usepackage[dutch]{babel}
+\usepackage[english]{babel}
 
-\usepackage[style=authoryear-comp]{biblatex}
+\usepackage[
+    maxbibnames=10,
+    style=authoryear-comp
+]{biblatex}
 \addbibresource{references.bib}
 
 \usepackage{pdfpages}
@@ -27,7 +30,7 @@
 
 % Vul de naam van de opdracht in zoals gegeven door de docent en het type 
 % opdracht, bijvoorbeeld 'technisch rapport' of 'essay'.
-\assignment{Projectplan}
+\assignment{Project proposal}
 \assignmenttype{}
 
 % Vul de volledige namen van alle auteurs in en de corresponderende UvAnetID's.
@@ -44,8 +47,8 @@
 \group{}
 
 % Vul de naam van de cursus in en de cursuscode, te vinden op o.a. DataNose.
-\course{Afstudeerproject}
-\courseid{}
+\course{Afstudeerproject bachelor Informatica}
+\courseid{5062ABI18Y}
 
 % Dit is de datum die op het document komt te staan. Standaard is dat vandaag.
 \date{\today}
@@ -83,20 +86,24 @@ However, MLaaS offers great threats to privacy. To train the model as accurately
 
 A typical MLaaS situation consist of two parties: the client holding an input \textit{x} and a company holding neural network \textit{f}. For this research we will focus on the inferrence part. The client wants to know the applied input \textit{f(x)} while keeping the sensitive contents of \textit{x} and the result \textit{f(x)} private from the company. The company wants to hold the intelectual property \textit{f} private while still giving the opportunity to the client to use \textit{f}. The secure neural network inference (SNNI) problem entails calculating the applied input \textit{f(x)} while still holding all the above security requirements. 
 
-No general implementation of an SNNI has been widely accepted to the authors knowledge. Rapid progress in this area has made it hard to get a good overview of technological advances. Mann et al. \yearcite{Mann22} has summarized several proposed approaches for SNNI. However, these approaches are often proof-of-concept and are not thoroughly tested. Moreover, the performance is often only tested on basic measures like efficiency or privacy and tests are on a basic setup (laptop to local server).
+No general implementation of an SNNI has been widely accepted to the authors knowledge. Rapid progress in this area has made it hard to get a good overview of technological advances. Mann et al. (\citeyear{Mann22}) has summarized several proposed approaches for SNNI. However, these approaches are often proof-of-concept and are not thoroughly tested. Moreover, the performance is often only tested on basic measures like efficiency or privacy.
 
-Metrics like power usage are important in the internet of things (IoT), where clients are constrained to use devices with limited performance. This limits the applicability of certain approaches that put burden on the client, and the server side should be able to handle many requests.  
+Other metrics like energy concumption, that could be of relevance, are not researched. This could be of importance because limitations on the client side, when a device is battery powered for example or in the case of IoT devices with limited power resources and the overall energy consumption should be low. Companies, on the other hand, also want to keep energy consumption as low as possible because of budget limitations.
 
-\section{Research question(s) and Method}
-To contribute to the prior research in this area, this paper will focus on testing one (or more) already existing open source implementations, for example ABY2.0 \parencite{ABY20}, Chameleon \parencite{Chameleon}, Cheetah \parencite{Cheetah}, CrypTFlow2 \parencite{CrypTFlow2} and Delphi \parencite{Delphi} on their power usage. 
+\section{Research question(s)}
+To contribute to the prior research in this area, I will discuss the energy implications of suggested, open source implementations of SNNIs. A few of these implementations are ABY2.0 \parencite{ABY20}, Chameleon \parencite{Chameleon}, Cheetah \parencite{Cheetah}, CrypTFlow2 \parencite{CrypTFlow2} and Delphi \parencite{Delphi}. The research quesetion is:
+\begin{quote} \emph{RQ: What are the energy implications of open source suggestions of SNNIs?} \end{quote} \paragraph{}
 
-To select an existing approach we need to set our constraints: the approach should be available for everyone and there should already be an existing implementation that is open source. To select the approach to test further research lies is in the following research question:
-\begin{quote}\emph{RQ1: what is needed to make a SNNI approach good and realistic (e.g. setup and computing power)?}\end{quote}
-\textit{RQ1} will be answered with an extensive literature research. After this literature research we can also answer the following question:
-\begin{quote}\emp{RQ2: what are sufficient metrics to test a SNNI approach (e.g. power usage)?}\end{quote} and
-\begin{quote}\emp{RQ3: how can we test these metrics on our SNNI}\end{quote}
-We can start selecting our desired implementation once we have answerd \textit{RQ1}. As soon as we have selected our SNNI approach, we can start downloading the SNNI and making it work at our own setup. Once we have got it all working we can start testing the implementation. We test the implementation with the answers found on research question \textit{RQ2}. A small literature search can be done on what databases to use for our testing puroposes, resulting in the following question:
-\begin{quote}\emp{RQ3: what databases should we use for our testing?}\end{quote}
+To help research the implications of the SNNI, I have defined a subset of research questions:
+
+\begin{quote} \emph{RQa: How do we measure the energy consumption of a SNNI?} \end{quote}
+\begin{quote} \emph{RQb: What is the difference between the energy consumption on the client- and  server side and what are the consequences of this difference} \end{quote}
+
+\section{Method}
+To answer these aforementioned questions first I will have to select one implementation of a SNNI to start with. Once the implementation is chosen it needs to work on my own setup. Simultanious to this we will answer question \textit{RQa} with an extensive literature search. Once the implementation is set up and we have answered \textit{RQa} we can start testing the implementation.
+
+With the results of this experiment we can answer the first part of \textit{RQb}. The second part of \textit{RQb} can be answered with a literature search. 
+
 
 \section{Schedule} 
 (will come once research questions are formulated good enough => see email)
@@ -111,6 +118,5 @@ We can start selecting our desired implementation once we have answerd \textit{R
 %-------------------------------------------------------------------------------
 \newpage
 \printbibliography
-
 %-------------------------------------------------------------------------------
 \end{document}
