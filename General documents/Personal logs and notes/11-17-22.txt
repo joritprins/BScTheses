@@ -1,0 +1,41 @@
+ABY https://github.com/encryptogroup/ABY#aby-applications
+ABY2.0[135] https://eprint.iacr.org/2020/1225.pdf 
+ABY3[124]
+Chameleon[154] https://arxiv.org/abs/1801.03239
+Cheetah[83] https://eprint.iacr.org/2022/207.pdf
+CrypTFlow2[149] https://arxiv.org/abs/1909.07814
+Delphi[122]  https://www.usenix.org/system/files/sec20-mishra_0.pdf
+Gazelle[90]
+MiniONN[112]
+MP2ML[17]
+Muse[110] 
+ngraph-HE/HE2[18,19]
+SecureML[125]
+XONN[153]
+
+CrypTFlow [105]  
+CryptoNets [64]  
+Falcon [167] 
+SecureML [125] 
+
+
+
+10 Cheetah [83] https://eprint.iacr.org/2022/207.pdf
+https://github.com/Alibaba-Gemini-Lab/OpenCheetah
+On one terminal run bash scripts/run-server.sh cheetah sqnet. The program will load the pretrained model in the folder pretrained/ which might takes some time when the pretrained model is huge.
+On other terminal run bash scripts/run-client.sh cheetah sqnet. The program will load the prepared input image in the folder pretrained.
+-replace cheetah by SCI_HE to execute the CryptFlow2's counterpart.
+-replace sqnet by resnet50 to run on the ResNet50 model.
+-You can change the SERVER_IP and SERVER_PORT defined in the scripts/common.sh to run the demo remotely. 
+== also implementation of cryptflow2
+
+CrypTFlow[105] https://arxiv.org/abs/1909.07814
+https://github.com/mpc-msri/EzPC
+implementation for docker
+easy setup
+
+Delphi https://www.usenix.org/system/files/sec20-mishra_0.pdf
+https://github.com/mc2-project/delphi
+python, c++, rust 
+proof-of-concept
+example: minionn model 
