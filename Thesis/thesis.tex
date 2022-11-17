@@ -5,7 +5,10 @@
 \graphicspath{{Afbeeldingen/}}
 \usepackage{subfiles}
 
-\usepackage[style=authoryear-comp]{biblatex}
+\usepackage[
+    maxbibnames=10,
+    style=authoryear-comp
+]{biblatex}
 \addbibresource{references.bib}
 
 % Title Page
@@ -23,17 +26,44 @@ Abstract
 
 \tableofcontents
 
-\chapter{Introductie}
-\subfile{Sections/template}
-\subfile{Sections/introductie}
+\chapter{Introduction}
+\section{Introduction}
+\begin{itemize}
+    \item Start with project proposal
+    \item Expand when more information is found for other sections
+\end{itemize}
+\section{Research questions (from project proposal}
+\section{Methods}
+% \subfile{Sections/template}
+% \subfile{Sections/introductie}
 
-\chapter{Theoretische achtergrond}
-\section{First section}
+\chapter{Theoretical background}
+\section{Overview of field and works}
+\begin{itemize}
+    \item (subsection: NN and SNNI) (very) short overview of how NN works and what SNNI are)
+    \item (subsection: General overview) general overview of the works in literature, for example Mann and \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9194237}{Tanuwidjaja} gives an chronological overview of works published
+\end{itemize}
+\section{Chosen implementations}
+\subsection{Chosen implementation1}
+dive deeper in the paper and give a general overview of the implementation
+\subsection{Chosen implementation2}
+if two implementations are compared, ditto.
+\section{answering of RQa}
 
-\chapter{Mijn werk}
+\chapter{My work}
+\begin{itemize}
+    \item Describe the code and how it works
+\end{itemize}
 
-\chapter{Experimenten}
+\chapter{Experiments}
+\section{Explaining testing environment}
+\section{Explaining Variables, e.g. bandwith}
+\section{results}
+\section{Answering of RQb}
 
-\chapter{Conclusie}
+\chapter{Conclusion}
+\section{Conclusion}
+\section{Discussion}
+\section{Ethics}
 
 \end{document}
