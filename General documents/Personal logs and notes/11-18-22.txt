@@ -1,0 +1,102 @@
+ABY https://github.com/encryptogroup/ABY#aby-applications
+ABY2.0[135] https://eprint.iacr.org/2020/1225.pdf 
+ABY3[124]
+Chameleon[154] https://arxiv.org/abs/1801.03239 = 3pc
+Cheetah[83] https://eprint.iacr.org/2022/207.pdf
+CrypTFlow2[149] https://arxiv.org/abs/1909.07814
+Delphi[122]  https://www.usenix.org/system/files/sec20-mishra_0.pdf
+Gazelle[90] https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-juvekar.pdf
+MiniONN[112] https://eprint.iacr.org/2017/452.pdf
+MP2ML[17]  an extension of nGraph, Intel’s DL graph compiler. SImply implementing HE as an hardware unit
+Muse[110] https://www.usenix.org/system/files/sec21-lehmkuhl.pdf
+ngraph-HE/HE2[18,19]
+SecureML[125]
+XONN[153]
+
+CryptoNets [64]  
+Falcon [167] 
+SecureML [125] 
+
+
+> := claims to be better than
+
+================Cheetah > CrypTFlow
+================Cheetah [83] https://eprint.iacr.org/2022/207.pdf
+https://github.com/Alibaba-Gemini-Lab/OpenCheetah
+On one terminal run bash scripts/run-server.sh cheetah sqnet. The program will load the pretrained model in the folder pretrained/ which might takes some time when the pretrained model is huge.
+On other terminal run bash scripts/run-client.sh cheetah sqnet. The program will load the prepared input image in the folder pretrained.
+-replace cheetah by SCI_HE to execute the CryptFlow2's counterpart.
+-replace sqnet by resnet50 to run on the ResNet50 model.
+-You can change the SERVER_IP and SERVER_PORT defined in the scripts/common.sh to run the demo remotely. 
+== also implementation of cryptflow2
+
+Testing on Alibaba Cloud ecs.c7.2xlarge instances with a 2.70 GHz processor and 16 gigabytes of RAM. All our programs are implemented in C++ and compiled by gcc-8.4.0. We ran our benchmarks in two network settings. The bandwidth between the cloud instances were about 384 MBps (LAN) and 44 MBps (WAN), respectively. The round-trip time were about 0.3ms (LAN) and 40ms (WAN), respectively
+
+
+=================CrypTFlow[105] https://arxiv.org/abs/1909.07814
+https://github.com/mpc-msri/EzPC !!!!!!! CrypTFlow2
+implementation for docker
+easy setup with command
+
+Testing = All our large benchmark experiments are in a LAN setting on 3.7GHz machines, each with 4 cores and with 16 GB of RAM running Linux Ubuntu 16.04. The measured bandwidth between each of the machines was at most 377 MBps and the latency was sub-millisecond. Since we wanted to use the same machines to benchmark both our
+semi-honest as well as our malicious secure protocols, we were constrained to use machines that had Intel SGX enabled on them - this led to machines that had considerably lower bandwidth between them (377 MBps) than those normally used by prior works in the area (e.g. [60], [12] used networks with bandwidth of 1.5 GBps). 
+
+
+================= CrypTFflow2  https://eprint.iacr.org/2020/1002.pdf
+Cryptflow2 = cryptflow
+
+
+================= Delphi > Gazelle	
+================= Delphi https://www.usenix.org/system/files/sec20-mishra_0.pdf
+https://github.com/mc2-project/delphi
+python, c++, rust 
+proof-of-concept
+example: minionn model 
+Also easy to setup and build instructions
+
+All cryptographic experiments were carried out on AWS c5.2xlarge instances possessing an Intel Xeon 8000 series machine CPU at 3.0GHz with 16GB of RAM
+
+================== Gazelle > MiniONN, Gazelle > Chameleon
+================== Gazelle https://www.usenix.org/system/files/conference/usenixsecurity18/sec18-juvekar.pdf
+https://github.com/zghodsi/Gazelle
+Docker
+Easy to setup
+
+All benchmarks were generated using c4.xlarge AWS instances which provide a 4-threaded execution environment (on an Intel Xeon E5-2666 v3 2.90GHz CPU) with 7.5GB
+of system memory. Our experiments were conducted using Ubuntu 16.04.2 LTS
+
+=================== MiniONN > SecureML
+=================== MiniONN[112] https://eprint.iacr.org/2017/452.pdf
+https://github.com/SSGAalto/minionn
++ requirements
+Code for server and client
+
+we ran the server-side program on a remote computer (Intel Core i5 CPU with 4 3.30 GHz cores and 16 GB memory) and the client-side program on a local desktop (Intel Core i5 CPU machine with 4 3.20 GHz cores and 8 GB memory). We used the Clocks module in C++ for time measurement and used TCPdump for bandwidth measurement. We measured response latency (including the network delay) and message sizes during the whole procedure, i.e., from the time 𝒞 begins to generate its request to the time it obtains the final predictions. Each experiment was repeated 5 times and we calculated the mean and standard deviation. The standard deviations in all reported results are less than 3%.
+
+==================== SecureML https://eprint.iacr.org/2017/396.pdf
+https://github.com/shreya-28/Secure-ML
+Not really easy to setup
+
+Wan and lan testing
+
+
+==================== Falcon
+https://github.com/snwagh/falcon-public
+3 party
+
+==================== MP2ML
+https://github.com/IntelAI/he-transformer
+Simply a hardware implementation of HE so not sufficient enough for research
+
+==================== MUSE https://www.usenix.org/system/files/sec21-lehmkuhl.pdf
+https://github.com/mc2-project/muse
++ package dependencies
+Code for server and client
+
+New attack and then tests it against different SNNI
+
+==================== ngraph-HE/HE2
+Same as MP2ML
+
+
+
