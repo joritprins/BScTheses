@@ -1,0 +1,80 @@
+================Cheetah > CrypTFlow
+================Cheetah [83] https://eprint.iacr.org/2022/207.pdf
+
+Preprint: 2019 https://www.researchgate.net/publication/337241213_CHEETAH_An_Ultra-Fast_Approximation-Free_and_Privacy-Preserved_Neural_Network_Framework_based_on_Joint_Obscure_Linear_and_Nonlinear_Computations
+print 2021: https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9407118
+
+https://github.com/Alibaba-Gemini-Lab/OpenCheetah
+On one terminal run bash scripts/run-server.sh cheetah sqnet. The program will load the pretrained model in the folder pretrained/ which might takes some time when the pretrained model is huge.
+On other terminal run bash scripts/run-client.sh cheetah sqnet. The program will load the prepared input image in the folder pretrained.
+-replace cheetah by SCI_HE to execute the CryptFlow2's counterpart.
+-replace sqnet by resnet50 to run on the ResNet50 model.
+-You can change the SERVER_IP and SERVER_PORT defined in the scripts/common.sh to run the demo remotely. 
+== also implementation of cryptflow2
+
+Testing on Alibaba Cloud ecs.c7.2xlarge instances with a 2.70 GHz processor and 16 gigabytes of RAM. All our programs are implemented in C++ and compiled by gcc-8.4.0. We ran our benchmarks in two network settings. The bandwidth between the cloud instances were about 384 MBps (LAN) and 44 MBps (WAN), respectively. The round-trip time were about 0.3ms (LAN) and 40ms (WAN), respectively
+
+
+
+==============================================================Why cheetah?
++ last commit made on juli 2 and paper from 2022
++ also implementation of cryptflow2
++ wan and lan tested
++ implementation for server and client
++ better than delphi and CryptFlow2	 
++ some others https://arxiv.org/pdf/2205.03040.pdf have used cheetah as a building block and noticed better performance then aby or delphi ( a semi-honest inference protocol (e.g., Cheetah, DELPHI) into a maliciously ) secure
+
+Testing on Alibaba Cloud ecs.c7.2xlarge instances with a 2.70 GHz processor and 16 gigabytes of RAM. All our programs are implemented in C++ and compiled by gcc-8.4.0. We ran our benchmarks in two network settings. The bandwidth between the cloud instances were about 384 MBps (LAN) and 44 MBps (WAN), respectively. The round-trip time were about 0.3ms (LAN) and 40ms (WAN), respectively
+
+
+
+=============================================================== Citations to cheetah:
+=== https://eprint.iacr.org/2022/1483.pdf || Towards Practical Secure Neural Network Inference: The Journey So Far and the Road Ahead
+In some implementations, the evaluation of specific NN architectures is hard-coded [cheetah], while others have a more flexible domain-specific language [42]
+
+Many of the solution frameworks surveyed in § 4 are based on techniques from the era of 2016-2019. However, as hinted at in § 2, there are exciting new developments in terms of secure computation building blocks, for example, “silent” OT and MPC protocols that introduce a new communication-computation trade-off. Since only very recent developments make use of such building blocks [cheetah] we suggest to revisit the solutions proposed beforehand and re-evaluate whether retrospectively “upgrading” their building blocks can have a significant positive impact on their overall performance.
+
+=== https://eprint.iacr.org/2022/793  [of met .pdf erbij]  .pdf || LLAMA: A Low Latency Math Library for Secure Inference
+In very recent work, Cheetah [19] show an improvement of ≈12× in communication and 4-5× in runtime over CrypTFlow2. We do not directly compare with this work, as it is orthogonal to the focus of this work; however, even in comparison to Cheetah, we note that LLAMA has much lower communication and 	is expected to outperform it
+
+=== https://arxiv.org/pdf/2207.04637 [] .pdf || SIMC 2.0: Improved Secure ML Inference Against Malicious Clients
+There have been many impressive works [cheetah], [19], [17], [16] exploring methods towards the above goals. To speed up HE’s computation performance, existing efforts mainly focus on designing new coding methods to achieve parallelized component-wise homomorphic computation, i.e., performing homomorphic linear computation in an SIMD manner. 
+
+=== https://onlinelibrary.wiley.com/doi/full/10.1002/int.23020 || Privacy-enhancing machine learning framework with private aggregation of teacher ensembles
+Huang et al.21 presented Cheetah, a secure and fast two-party inference system for deep neural networks (DNN), and it achieved smaller computation and communication overheads than DELPHI.
+
+=== https://arxiv.org/pdf/2209.01637 [] .pdf || Joint Linear and Nonlinear Computation across Functions for Efficient Privacy-Preserving Neural Network Inference
+The second one is Cheetah [37] which utilizes the accumulative property of polynomial multiplication and the ciphertex extraction to eliminate rotations and relies on VOLE-style OT to boost the nonlinear computation. While we can also benefit from the optimized OT to compute nonlinear functions, we differentiate our work from Cheetah’s rotation elimination by exploiting the accumulative nature in matrix-vector multiplication where the output can be viewed as the linear combination of all columns in the weight matrix. Furthermore, both COINN and Cheetah are under the compute-and-share logic while we set our work as the first one for share-in-the-middle computation.
+
+We consider the context of cryptographic inference (as shown in Figure 1) where C holds a private input x and S holds the neural network with proprietary model parameters W. After the inference, C learns two pieces of information: the network architecture (such as the number, types and dimensions of involved functions) and the network output(2), while S learns nothing. 
+(2):  Note that this learnt information is commonly assumed in the state-of-the-art frameworks such as MiniONN [12] and Cheetah [37]
+
+Furthermore, we do not defend against attacks, such as the API attacks [39], [40], which are based purely on the inference results and other orthogonal techniques, such as differential privacy [41], [42], can be utilized to provide more privacy guarantee [cheetah].
+
+Given the above four operations, the runtime complexity of Rot is significantly larger than that of ⊕,  and ⊗ [24], [cheetah]
+
+ Here, the ReLU and Conv are analyzed together as they are always adjacent and serve as a repeatable module to form modern neural networks [3], [4]. Among the state-of-the-art frameworks [12], [13], [14], [15],
+[16], [17], [36], [cheetah], the above two parts are independently optimized such that the efficiency-unfriendly Mux and Rot are extensively involved to produce shares of one function, which serve as the input to compute subsequent function
+
+Note that the above pruning does not affect the computation logic for the neural networks but with fewer functions or smaller dimensions in the functions, which serves as a performance bonus to improve the efficiency when we run the privacy-preserving protocol in the mainstream neural networks. Meanwhile, almost all the state-of-the-art frameworks rely on the intact neural networks without considering the pruned versions [12], [13], [16], [17], [36], [37], and we left it as a performance bonus for practical deployment of privacy-preserving MLaaS.
+
+=== https://arxiv.org/pdf/2208.08662 [] .pdf || Private, Efficient, and Accurate: Protecting Models Trained by Multi-party Learning with Differential Privacy
+When the dimension of features becomes higher, the truncation error occurs with higher probability, which is also shown in one previous study [cheetah].
+
+=== https://arxiv.org/pdf/2205.03040 [] .pdf || Fusion: Efficient and Secure Inference Resilient to Malicious Servers
+ Cheetah [21] is also a hybrid secure inference scheme that utilizes two lattice-based homomorphic encryptions [8] (i.e., learning with errors (LWE) and its ring variant (ring-LWE)) to perform secure linear layers (e.g.,
+matrix multiplications in convolution), and makes some optimizations on the millionaire protocol [59] for nonlinear layer (e.g., activation function). They achieve performance optimizations based on the insightful observation that matrix multiplication results can be represented as the coefficients in specific positions of polynomial multiplication, which can be efficiently performed using ring-LWE. For the non-linear layers, they optimize the millionaire protocol by adopting VOLE-style OT and customizing truncation protocols.
+
+It can be observed that Fusion can achieve the best efficiency when using Cheetah [21] as the building block, while when Fusion uses ABY [13] and DELPHI [46], the performance is not as good as that of using others.
+
+=== https://arxiv.org/pdf/2206.02384 [] .pdf || Towards Practical Privacy-Preserving Solution for Outsourced Neural Network Inference
+Several recent works [1]–[8], [26], [27], [35], [36] propose two-party computations schemes that require interactions between the client and server while the computation is being performed, which could cause high communication overheads and latency
+
+=== https://arxiv.org/pdf/2209.06373 [] .pdf || SEEK: model extraction attack against hybrid secure inference protocols
+To perform secure inference for deep neural networks, while utilizing the efficiency of levelled FHE schemes, hybrid solutions based on FHE and MPC emerged
+
+=== https://openreview.net/forum?id=__GGLJ79pV || GU A R DHFL: PRIVACY GUARDIAN FOR HETEROGENEOUS FEDERATED LEARNING
+
+
+
+

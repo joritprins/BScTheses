@@ -10,10 +10,10 @@ MiniONN[112] https://eprint.iacr.org/2017/452.pdf
 MP2ML[17]  an extension of nGraph, Intel’s DL graph compiler. SImply implementing HE as an hardware unit
 Muse[110] https://www.usenix.org/system/files/sec21-lehmkuhl.pdf
 ngraph-HE/HE2[18,19]
-SecureML[125]
-XONN[153]
+SecureML[125] https://eprint.iacr.org/2017/396.pdf
+XONN[153] -
 
-CryptoNets [64]  
+CryptoNets [64]  https://proceedings.mlr.press/v48/gilad-bachrach16.html
 Falcon [167] 
 SecureML [125] 
 
@@ -77,6 +77,12 @@ we ran the server-side program on a remote computer (Intel Core i5 CPU with 4 3.
 https://github.com/shreya-28/Secure-ML
 Not really easy to setup
 
+==================== CryptoNets https://proceedings.mlr.press/v48/gilad-bachrach16.html
+https://github.com/microsoft/CryptoNets
++ requirements and dependencies
+Hardly no options to test different datasets.
+
+
 Wan and lan testing
 
 
@@ -98,5 +104,4 @@ New attack and then tests it against different SNNI
 ==================== ngraph-HE/HE2
 Same as MP2ML
 
-
-
+==================== XONN not open source
