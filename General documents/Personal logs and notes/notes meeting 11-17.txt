@@ -1,0 +1,26 @@
+
+
+one overall question 
+keep it simple and expand when we have time
+
+The choice of clarifiying what SNNI we use is not a reasearch question, but we still need to clarify why we use it. Something like this implementation has the best code that we can use and build upon can be a clarification
+
+what are energy implication of snni (main)
+how do we measure energy (subquestion)
+subquestions: (independend variables)
+measure difference between energy on client side and on server side (subquestion)
+without SNNI testing, plaintext and not encrypted, what is the energy overhead (subquestion)
+discussion = energy consumption on the way, like in a router, we cannot measure. Clarify what the drawbacks are of this method and say the things we cannot measure.
+
+laptop easier, desktop more interesting and realistic but harder to setup.
+
+writing and seting up skeletion at the same time as implementing the setup and researching and reading papers
+
+change e.a. in references to et al. 
+
+
+ power 	|
+	|______ 
+	|______ <= energy
+	time (s)
+energy (

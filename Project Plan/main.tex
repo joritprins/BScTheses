@@ -1,0 +1,126 @@
+%-------------------------------------------------------------------------------
+% LATEX TEMPLATE ARTIKEL
+%-------------------------------------------------------------------------------
+% Dit template is voor gebruik door studenten van de de bacheloropleiding 
+% Informatica van de Universiteit van Amsterdam.
+% Voor informatie over schrijfvaardigheden, zie 
+%                               https://practicumav.nl/schrijven/index.html
+%
+%-------------------------------------------------------------------------------
+%	PACKAGES EN DOCUMENT CONFIGURATIE
+%-------------------------------------------------------------------------------
+
+\documentclass{uva-inf-article}
+\usepackage[english]{babel}
+
+\usepackage[
+    maxbibnames=10,
+    style=authoryear-comp
+]{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{pdfpages}
+
+%-------------------------------------------------------------------------------
+%	GEGEVENS VOOR IN DE TITEL, HEADER EN FOOTER
+%-------------------------------------------------------------------------------
+
+% Geef je artikel een logische titel die de inhoud dekt.
+\title{The Quest to Finding the Best Secure Neural Network Inference}
+
+% Vul de naam van de opdracht in zoals gegeven door de docent en het type 
+% opdracht, bijvoorbeeld 'technisch rapport' of 'essay'.
+\assignment{Project proposal}
+\assignmenttype{}
+
+% Vul de volledige namen van alle auteurs in en de corresponderende UvAnetID's.
+\authors{Jorit Prins}
+\uvanetids{12862789}
+
+% Vul de naam van je tutor, begeleider (mentor), of docent / vakcoördinator in.
+% Vermeld in ieder geval de naam van diegene die het artikel nakijkt!
+\supervisors{Zoltan Mann}
+% \mentor{Marco Brohet}
+\docent{}
+
+% Vul hier de naam van je tutorgroep, werkgroep, of practicumgroep in.
+\group{}
+
+% Vul de naam van de cursus in en de cursuscode, te vinden op o.a. DataNose.
+\course{Afstudeerproject bachelor Informatica}
+\courseid{5062ABI18Y}
+
+% Dit is de datum die op het document komt te staan. Standaard is dat vandaag.
+\date{\today}
+
+%-------------------------------------------------------------------------------
+%	VOORPAGINA 
+%-------------------------------------------------------------------------------
+
+\begin{document}
+\maketitle
+
+%-------------------------------------------------------------------------------
+%	INHOUDSOPGAVE EN ABSTRACT
+%-------------------------------------------------------------------------------
+% Niet toevoegen bij een kort artikel, zeg minder dan 10 pagina's!
+
+%TC:ignore
+%\tableofcontents
+%\begin{abstract}
+%\end{abstract}
+%TC:endignore
+
+%-------------------------------------------------------------------------------
+%	INHOUD
+%-------------------------------------------------------------------------------
+% Hanteer bij benadering IMRAD: Introduction, Method, Results, Discussion.
+
+%[hebben veelbelovende resultaten en staan aan de voorgrond/voorsprong van] 
+\section{Relevance}
+The recent rise in Big Data increased the data exchange on the internet. With more and more computer resources available, researchers quickly started to utilise the possibilities of machine learning (ML) to analyse the data.  Techniques like neural networks (NN) are promising ways to scientific breakthroughs. Machine learning has a wide variety of applications for classification such as traffic analysis, image recognition, intrusion detection,  spam detection, medical or genomics predictions,  financial predictions and face recognition \parencite{Dowlin2017, Islam2011, Bachrach16, Kaiming215}
+
+The use of ML typically consists of two phases: training and inference. In the first phase a NN is trained by feeding an extensive dataset to find the best parameters. NNs used for machine learning have to be maintained, evaluated and the training phase is often a tedious and time exhausting process. In the inference phase an input is applied to the trained NN. Because of the time consuming process of creating a NN, machine learning as a service (MLaaS) became popular. In MLaaS, a company offers a pre-trained NN to the clients. Now, clients only need to worry about the inference phase.
+
+A typical MLaaS situation consist of two parties: the client holding an input \textit{x} and a company holding neural network \textit{f}. For this research we will focus on the inference part. The client wants to know the neural network applied to the input, \textit{f(x)}, while keeping the sensitive contents of \textit{x} and the result \textit{f(x)} private from the company. The company wants to hold the intellectual property \textit{f} private while still giving the opportunity to the client to use \textit{f}. 
+
+However, MLaaS offers great threats to privacy. To train the model as accurately as possible a NN needs access to a large amount of precise data from clients, which may consist of sensitive information. Thus, clients may be reluctant to provide the NNs with their data. Other features, irrelevant to the prediction task, could also be derived from this data \parencite{Nasr2019}. On the inference phase, input from the client to the NN can also be confidential. On the other hand, owners of a NN could be worried that an adversary could steal (parameters of) their (often costly) NN. Furthermore, the result of the NN could also be confidential resulting in the need to retain this information from unauthorized parties. The secure neural network inference (SNNI) problem entails calculating the applied input \textit{f(x)} while still holding all the above security requirements. 
+
+No general implementation of an SNNI has been widely accepted to the authors knowledge. Rapid progress in this area has made it hard to get a good overview of technological advances. Mann et al. (\citeyear{Mann22}) has summarized several proposed approaches for SNNI. However, these approaches are often proof-of-concept and are not thoroughly tested. Moreover, the performance is often only tested on basic measures like efficiency or accuracy.
+
+Other metrics like energy consumption, that could be of relevance, are not researched. This could be of importance because of limitations on the client side. For example when a device is battery powered or in the case of IoT devices that have limited power resources and where the overall energy consumption should be low. Companies, on the other hand, also want to keep energy consumption as low as possible because of budget limitations and thus should not encounter big energy overhead. Another reason to limit the energy consumption is the desire to reduce carbon emission in the fight against climate change.
+
+\section{Research question(s)}
+To contribute to the prior research in this area, I will discuss the energy implications of a suggested, open source implementation of an approach to SNNI. A few of these implementations are ABY2.0 \parencite{ABY20}, Chameleon \parencite{Chameleon}, Cheetah \parencite{Cheetah}, CrypTFlow2 \parencite{CrypTFlow2} and Delphi \parencite{Delphi}. The main research question is of this project is:
+
+\begin{quote} \emph{RQ: What are the energy implications of open source suggestions of SNNIs?} \end{quote} 
+
+\noindent To help research the implications of the SNNI, I have defined a subset of research questions:
+
+\begin{quote} \emph{RQa: How do we best measure the energy consumption of a SNNI?} \end{quote}
+
+\noindent Once we have established a way to measure energy consumption of SNNIs we can start with the experiments of measuring the energy consumption. We will be calculating the overhead of a SNNI. With these results we now want to see if there is a difference between the overhead on the client side and the overhead on the server side. If there is a difference we shortly want to look at the implications of this difference. This implications could for example have impact on the aforementioned IoT devices or carbon emission, thus resulting in research question \textit{RQb}:
+
+\begin{quote} \emph{RQb: If there is a difference between energy overhead on the client side and on the server side: what are the implications of the overhead on the client side and what are implications the overhead the server side?} \end{quote}
+
+\section{Method}
+To answer these aforementioned questions first I will have to select one implementation of a SNNI to start with. Once the implementation is chosen I will need to get it working on my own setup. My setup will probably be a desktop and a laptop (on running server side and the other the client side). Simultaneous to this we will answer question \textit{RQa} with a literature search on how other authors measure energy consumption. There is a possibility that other authors have already researched the energy consumption of an approach to SNNI mentioned in the preceding section, or researched the energy implications of other programs and we can use their methods if proven successful.
+
+Once the implementation is set up and we have answered \textit{RQa} we can start testing the energy consumption of a NN with and without the SNNI. Now we can calculate the overhead of the SNNI. If there is time to set up another implementation I will compare the overhead between these implementations. With the results of this experiment we can answer the first part of \textit{RQb}. The second part of \textit{RQb} can be answered with a small literature search on the implications of energy consumption. 
+
+
+\section{Schedule}
+(On next page)
+\includepdf[pages=-,angle=270]{Gantchart_thesis.pdf}
+
+
+% \subsectionauthor[Voornaam Achternaam]{Paragraaf met auteur}
+% \lipsum[2-3]
+
+%-------------------------------------------------------------------------------
+%	REFERENTIES
+%-------------------------------------------------------------------------------
+\newpage
+\printbibliography
+%-------------------------------------------------------------------------------
+\end{document}

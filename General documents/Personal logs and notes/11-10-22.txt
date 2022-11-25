@@ -1,0 +1,107 @@
+========================================================================================================
+
+Securing Machine Learning in the Cloud: A Systematic Review of Cloud Machine Learning Security 
+https://www.frontiersin.org/articles/10.3389/fdata.2020.587139/full
+
+ML for different domains: facial recognition, image classification and object detection
+Deeplearning is resource intensive 
+
+Convolutional neural network trains on edges and other patterns to find weights and convolutions
+
+In addition, the literature suggests that different types of attacks can be realized on different components of the communication network as well (Usama et al., 2020a), for example, intrusion detection (Han et al., 2020; Usama et al., 2020b), network traffic classification (Usama et al., 2019), and malware detection systems (Chen et al., 2018).
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+https://www.slideshare.net/DavidDao1/causative-adverserial-learning
+Adversarial learning: reverse engineering of machine learning. It aims to design robust and secure learning algorithms
+|training dataset| => training (causative attack) => | model | => test (exploratory attack)  => | test (validation) testresults |
+ 					<= update <=
+=causative attack (poisoning)
+- understanding how the learning algorithm works
+- engineering on features or labels of training sets
+- change the discriminant function
+
+=exploratiory attack (evasion)
+- engineering on features of a test point
+- circumvent the legitimate detection
+- change discriminant result
+
+https://ai.stackexchange.com/questions/16502/what-are-causative-and-exploratory-attacks-in-adversarial-machine-learning
+causative attack: Send data into the network. Upload image to see what it is and then falsely click if it is a right guess. Model will get worse
+exploratory attack: Send data in network to gain information about training data of model, then extract pieces of the data that is build in the model. Then reconstruct dataset and send strange generated inputs. 
+
+=====FURTHER READING: Adversarial Machine Learning (2011) huang : https://people.eecs.berkeley.edu/~tygar/papers/SML2/Adversarial_AISEC.pdf
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Adversarial attacks = https://engineering.purdue.edu/ChanGroup/ECE595/files/chapter3.pdf
+Als je punt x0 verstoort naar punt x het kan zijn dat het model punt x classificeert naar een onjuiste classifier. 
+Adversarial attack is an malicious attempt to perturb a data point x0 ∈ R^d to another point x ∈ R^d such that x belongs to certain target adversarial class. For example if x0 is a feature vector of a cat image, by adversarial attack we meant to create another feature vector x which will be classifier as a dog (or another class specified by the attacker)
+
+Goodfellow et al. liet dit zien door een door het oog onzichtbare noise toe te voegen het punt werd geclassificeerd naar iets anders met hogere zekerheid
+- boundary attack
+
+Exploratory attacks = gain information model by sending lots of data to network. For example by forcing the classifier to misclassify sample by positive instead of negative
+
+Model Extraction attacks = an adversary can collect data through query access to a victim model and train a substitute model with it in order to steal the functionality of the target model. 
+
+Backdooring attacks = Backdoor attacks inject maliciously constructed data into a training set so that, at test time, the trained model misclassifies inputs patched with a backdoor trigger as an adversarially-desired target class.
+However, the purpose of Trojan insertion can be varied, for example, stealing, disruption, misbehaving, or getting intended behavior
+
+Model reuse attacks = Adversary creates malicious model that influences the host model to mmisbehave. 
+
+Data manipulation attacks = manipulate training data to get intended behaviour by the ml/dl model
+
+Cyber Kill Chain = input data to take over the system
+
+Membership Inference attacks = attacker tries to find ot wether an input sample was part of the training set (for example used in dna databases)
+
+Evasion attack = inference attacks in wich adversary attempts to modify the test data for getting the intended outcome. Evasion attacks are attacks at test time, in which the attacker aims to manipulate the input data to produce an error in the machine learning system. Unlike data poisoning, evasion attacks do not alter the behavior of the system, but exploit its blind spots and weaknesses to produce the desired errors.
+
+Model inverison = In model inversion attacks, a malicious user attempts to recover the private dataset used to train a supervised neural network
+
+========================================================================================================
+
+Machine learning models usually are trained on massive amounts of data to learn about the population as a whole for their specific purpose, e.g. classification. However, in some cases the models could memorise specific samples or groups of samples or learn discriminative features that could identify records in the training data. There is a body of adversarial attack methods, e.g. membership inference attacks, reconstruction attacks, that exploit this vulnerability to gain information about the model itself or the dataset it was trained on and in some cases successfully reconstruct them. For more information consider [1] as a simple primer, [2] for a more in depth explanation..
+
+To stop the models from leaking information, privacy preserving measurers need to be considered. One popular method is k-anonymity (simple primer [3], in depth analysis [4]). Another rigorous standard gaining traction in recent years, especially in the field of deep learning, is differential privacy (simple primer [5], in depth explanation and methods [6]). Similar to work done on the analysis of k-anonymity techniques [7] and the differences to synthetic data generation [8], we would like to use the same RAPL-based framework to compare the energy cost and accuracy impact of differential privacy versus k-anonymity. 
+
+[1] https://towardsdatascience.com/privacy-attacks-on-machine-learning-a1a25e474276 
+[2] Rigaki, Maria, and Sebastian Garcia. "A survey of privacy attacks in machine learning." arXiv preprint arXiv:2007.07646 (2020). 
+[3] https://www.immuta.com/blog/k-anonymity-everything-you-need-to-know-2021-guide/
+[4] Wimmer, Hayden, and Loreen Powell. "A comparison of the effects of k-anonymity on
+machine learning algorithms." Proceedings of the Conference for Information Systems Applied
+Research ISSN. Vol. 2167. 2014.
+[5] https://privacytools.seas.harvard.edu/differential-privacy
+[6] Dwork, Cynthia, and Aaron Roth. "The algorithmic foundations of differential privacy."
+Foundations and Trends® in Theoretical Computer Science 9.3–4 (2014): 211-407.
+[7] Oprescu et al. "Energy cost and accuracy impact of k-anonymity." 2022 International
+Conference on ICT for Sustainability (ICT4S).
+[8] Reus, Pepijn de. "Synthetic data versus k-anonymity" BSc. Thesis.
+https://github.com/PepijndeReus/ThesisAI
+
+=======DIFFERENCE TO POISONING ATTACKS AND EVASION ATTACKS : http://www.trustworthymachinelearning.com/trustworthymachinelearning-11.htm
+
+approaches to machine learning as a system
+homomorphic encryption 
+secret sharing
+
+open source programs between client and programs
+these programs add a lot of overhead. Mostly communication between provider and client
+Energy consumption/overhead => research proposal
+
+independent variables = i can change these things (bandwith, latency) => (different scale input. Input is normaal een keer maar kunnnen we een protocol maken die op meerdere inputs werkt) (capacity client/server => vaak op de zelfde computers getest terwijl dat niet het idee is van mlaas, dus testen met meer capaciteit op provider, of testen met meer clients)
+dependend variables = cannot control (time/efficienc (wordt veel gedaan), energy (research proposal), 
+
+
+literature research
+not trivial how to test energy of these things (energy consumption of input/output, both sides, network)
+toy around with existing implementation
+how do these things impact energy consumptions
+how safe is it / how privacy preserving is it
+
+
+
+day before meeting update (email)
+github zoltanmann
+gitlab zoltanmann
+
