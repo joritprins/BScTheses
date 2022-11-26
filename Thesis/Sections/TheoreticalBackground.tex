@@ -1,0 +1,77 @@
+\documentclass[../thesis.tex]{subfiles}
+\graphicspath{{\subfix{../Afbeeldingen/}}}
+
+\begin{document}
+\section{Neural Networks}
+The goal of ML is to imitate the human brain to let a computer "learn" a task without programming task-specific rules. One way to achieve ML is through a NN. A NN is a network that is given an input and evaluates this input to calculate an output without general knowledge of the input. The input of a NN is typically a vector containing numerical data, and the output is a vector that gives insight on the input data. The input vector can represent different types of data. How the output vector should be interpreted is dependent of the task of the NN. For classification tasks, the output vector contains the likelihood of the input being a class. For example in the MNIST benchmark \parencite{Lecun1998} the dataset contains a matrix containing $28 \times 28$ grayscale pictures of the handwritten digits $0, 1, ... 9$. The input vector for the NN is then has length $28 \cdot 28$ and the output vector is of length 10: for each digit the likelihood of the picture being that digit. The classification of the digit on the picture is done by choosing the digit that correlates to the highest likelihood in the output vector. 
+
+A NN consists of one or several neurons. A neuron typically consist of a list of weights $w_0, ..., w_n \in \mathbb{R}$ and a bias $b \in \mathbb{R}$ and a non-linear activation function $f: \mathbb{R} \to \mathbb{R}$. The neuron receives the input vector $x_0, ..., x_n \in \mathbb{R}$ and computes $y = x_0w_0, ... x_nw_n + b$. The output of the neuron is the activation function applied on $y$. Another representation of a neuron is the dot product between the input and the weight vector with $b$ being one of the elements in the weight vector and constant value $1$ being the corresponding element in the input vector. The activation function f often is the sigmoid function $\sigma (y) = 1/(1+e^{-y})$, the $\tanh$ fucntion and the ReLU function $\textrm{ReLU}(y) = \textrm{max}(0,y)$. 
+
+% NN is evaluated on input and gives an output. Typically vectors. NN has input (numerical data) vector and an output vector that typically gives insights on input vector. Input can represent different types of data: MNIST [source] input is 28x28 input of grayscale pictures of handwritten digits 0..9. An MxN grayscale input can be represented as a MdotN matrix and rgb as 3dotMdotN matrix. 
+% How the output can b interpreted is dependend of the task of the NN. When used for classification the output often is displayed as the change of the input being classified of the different possibilities. When difference between cat and dog, the output is of length 2 and the input is classified as the class from the highest number in the output vector. 
+% Deeplearning often used for classification - achieved by the possibility what digit has the highest possibility
+% A NN is often used to "learn" to perform tasks like classification, generally without programming task-specific rules, meaning that you could use the same neural network and train it on another dataset. For classification of cats: they do it without general knowledge of cats, for example: fur tails and whisker.
+
+% NN consist of neuron: containing set of weights w0, wn set of real numbers and bias b set of real numbes. It gets as input list of number x0,...,xn set of real numbers and calculates y = x0w0, ... xnwn + b and then applies non linear activation function f: r -> r to compute output z = f(y). Another representation is dot product between inptu and weight vector with b being an element of the weight vector and constant signal 1 being corresponding element in the input vector. Activation function often signmoid or the ReLU function. 
+
+NNs have sequences of layers containing one or more neurons. The first layer contains the input of the NN and the last layer is the output. Layers in between are one or more 'hidden layers'. The neurons in a layer are conneected to neurons on other layers: the output of a neuron can be connected to the input of other neurons in other layers. The network created is a directed weighted graph. Each link in the graph has a weight, it determines the strength of a neurons connection to another. The neurons can be connected in different ways. In a fully connected NN all nodes in a layer are connected to all the neurons in the next layers. When the output of the neurons in layer $i$ are connected to layer $i+1$ the network is called a feed-forward NN. Networks that also allow connections to previous layers are called recurrent networks. Some of the typically used layers are fully-connected (FC) layers, convolutional (Conv) layers\footnote{Convolutional layers play an important role in convolutional neural networks (CNNs) that are widely used in networks used for image processing tasks}, activation layers and pooling layers. FC and Conv layers apply a linear function on their input and hence are linear layers. Most other layers are non-linear. 
+
+% NNs have seqeuence of layers of neurons. First layer contains input of NN output of last layer of NN is result of NN. Layers inbetween are hidden layers composed of neurons. The hidden layer can contain zero or more layers. the neurons in this layers are connected to neurons on other layers: the output of some neurons are the input of other neurons.  The network created is a directed weighted graph. each link in the network has a weight, it determines the strength of ones node to another. THe neurons in the network can be connected in different ways. In a fully connected Neural network all nodes in a layer are connected to all the neurons in the next layers. In a feedforward neural network The output of layer i is fed into layer i+1. Networks that allow connections to previous layers are calleed recurrent networks. 
+
+% Layers:
+% Fully-connected (FC) layer: Contains a matrix of weights. Computes the output vector by multiplying the input vector with the weight matrix.
+% – Convolutional (Conv) layer: Contains a set of weight matrices called feature maps that are smaller
+% than the input. Computes output numbers by sliding a window of the size of the feature map
+% over the input, and computing the dot product of the feature map with the part of the input in
+% the sliding window. Conv layers play an important role in convolutional neural networks (CNNs),
+% which are widely used in image processing tasks.
+% – Activation layer: Applies the same R → R activation function to each element of the input to
+% compute the elements of the output. Depending on the function, there can be ReLU activation
+% layers, tanh activation layers, etc.
+% – Pooling layer: Computes output numbers by sliding a window of size k over the input, and applying
+% an R
+% k → R pooling function. The most common pooling function is the max function, resulting in
+% a Max-Pool layer.
+
+% FC and conv layers are linear layers because they apply linear function on their input to calculate output. Most of the other layers are non-linear. 
+
+To create a NN one must first determine its architecture: what number and types of layers should it contain, in what order should the layers be and what are the sizes of the layers. Some layers change the size of their input and can thus create a degree of freedom. 
+
+% A NN is created first by determining the architecture: the number and types of layers, their order, and sizes. Some layers (FC, conv, and pooling layers change the size of their input thus creating degree of freedom)
+
+After the creation of the network it has to be trained. During the training the parameters of the layers (for example the weights in the FC layer) are iteratively tuned, typically by calculating the difference between the calculated output (that often is a prediction) and the target output. This is often done by feeding a data set to the NN where the data is already labeled. 
+
+After creating of NN it has to be trained. It During training the parameters of the layers are being iteratively tuned. Typically by calculating the difference between the calculated output (often a prediction) and a target output.  constantly changed to change the output and get it as matching as possible with the expected output. This is done by applying data on the NN where the output is already known (e.g. manually labeled).
+
+After training the network it is use ed for the inference stage where new input is applied to the NN. The accuracy of the NN is tested on new data where the input is also known, typically a dedicated subset of the training data. The accuracy is then defined as the ratio between the 'expected' output of the NN and mislabeled output.
+
+% After training the NN is used for inference stage where the NN will be applied to new input. The NN is tested on a part of the training dataset that will be kept seperated where the output is known from. Using a dedicated validation of the training dataset. Accuracy is the verhouding tussen the input where the output is the expected output. A subset of the training data is kept aside for testing the accuracy of the NN
+
+\subsection{Secure Neural Networks Inference}
+The hidden layers of the NN contain all information of the NN. After the tedious process of training the model one often wants to keep the parameters of the hidden layer secret. This and the aforementioned reasons result in the SNNI problem in the case of MLaaS. Solving this problem is quite challenging. Some approaches have been suggested with cryptographic techniques like homomorphic encryption \parencite{Rivest1978} and secure multi party encryption \parencite{Yao1982, Yao1986}. Other hardware based approaches have also been suggested \parencite{DeepSecure}. All approaches achieve different trade-offs in terms of accuracy, security, efficiency and applicability. 
+
+Several authors have tried to make an overview on privacy preserving ML. Tanuwidjaja et. al. \yearcite{Tanuwidjaja2020} have done a comprehensive survey on MLaaS in general and have given a chronologic overview of the works. Mann et. al. \yearcite{Mann22} have summarized the work on the SNNI part of ML. We will choose one of the implementations of this research for because it the most recent overview on the field of SNNI. It also provides substantial information about the approaches, and we can therefore make an informed choice on the approach we want to test.  
+
+For our research we choose to test the approach of SNNIs called Cheetah \parencite{Cheetah}. This has several reasons. Firstly it is one of the most recent (paper included in the 2022 Proceedings of the 31st USENIX Security Symposium) and it claims to be better than the latest approaches (e.g. Delphi and CryptFlow2). Secondly the proof-of-concept implementation has been tested on a wan and lan network and on two different devices.    
+
+
+\subsection{General overview of literature on SNNI}
+For example: Mann and d
+\href{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9194237}{Tanuwidjaja} gives an chronological overview of works published
+\section{Chosen implementation(s)}
+\subsection{Cheetah}
+Cheetah. Why cheetah?:
++ last commit made on juli 2 and paper from 2022
++ also implementation of cryptflow2
++ wan and lan tested
++ implementation for server and client
++ better than delphi and CryptFlow2	 
++ some others https://arxiv.org/pdf/2205.03040.pdf have used cheetah as a building block and noticed better performance then aby or delphi ( a semi-honest inference protocol (e.g., Cheetah, DELPHI) into a maliciously ) secure
+dive deeper in the paper and give a general overview of the implementation
+
+Because of large computation and communication overhead, those systems have been limited to small datasets (such as MNIST and CIFAR) or simple models (e.g. with a few hundreds of parameters). Recently the system CrypTFlow2 [46] has made considerable improvements, and demonstrate, for the first time, the ability to perform 2PC-NN inference at the scale of ImageNet. Despite their advances, there remains considerable overhead: For instance, using CrypTFlow2, the server and the client might need more than 15 minutes to run and exchange more than 30 gigabytes of messages to perform
+one secure inference on ResNet50.
+\subsection{Chosen implementation2}
+if two implementations are compared, ditto.
+
+\end{document}
