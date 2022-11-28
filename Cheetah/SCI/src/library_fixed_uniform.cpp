@@ -1598,7 +1598,7 @@ void EndComputation() {
   std::cout << "------------------------------------------------------\n";
 
 #ifdef LOG_LAYERWISE
-  std::cout << "Total time in Conv = " << (ConvTimeInMilliSec / 1000.0)
+  std::cout << "TESTESTbTotal time in Conv = " << (ConvTimeInMilliSec / 1000.0)
             << " seconds." << std::endl;
   std::cout << "Total time in MatMul = " << (MatMulTimeInMilliSec / 1000.0)
             << " seconds." << std::endl;
