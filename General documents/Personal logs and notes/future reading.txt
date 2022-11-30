@@ -10,7 +10,7 @@ In the inference phase, security and privacy become a concern if the NN and the 
 
 Previous relevant surveys (different types of ML, different attack possibilities, different phases ML pipeline)
 [23] Boulemtafes, A., Derhab, A., and Challal, Y. A review of privacy-preserving techniques for deep learning. Neurocomputing 384 (2020), 21–45.
-[113] Liu, Q., Li, P., Zhao, W., Cai, W., Yu, S., and Leung, V. C. M. A survey on security threats and defensive techniques of machine learning: A data driven view. IEEE Access 6 (2018), 12103–12117
+[113] Liu, Q., Li, P., Zhao, W., Cai, W., Yu, S., and Leung, V. C. M. A. IEEE Access 6 (2018), 12103–12117
 [134] Papernot, N., McDaniel, P. D., Sinha, A., and Wellman, M. P. Sok: Security and privacy in machine learning. In EuroS&P (2018), IEEE, pp. 399–414.
 [174] Zhang, Q., Xin, C., and Wu, H. Privacy-preserving deep learning based on multiparty secure computation: A survey. IEEE Internet Things J. 8, 13 (2021), 10412–10429
 
