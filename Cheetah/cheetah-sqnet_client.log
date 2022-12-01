@@ -1,0 +1,258 @@
+Using Eigen for Matmul
+Doing BaseOT ...
+using silent ot pack
+using silent ot pack
+using silent ot pack
+using silent ot pack
+After one-time setup, communication
+Thread i = 0, total data sent till now = 1997823
+Thread i = 1, total data sent till now = 1726247
+Thread i = 2, total data sent till now = 1726247
+Thread i = 3, total data sent till now = 1726247
+-----------Syncronizing-----------
+secret_share_mod: 137438953472 bitlength: 37
+backend: Ring-SilentOT-Cheetah
+-----------Syncronized - now starting execution-----------
+HomConv #1 called N=1, H=227, W=227, CI=3, FH=3, FW=3, CO=64, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [1.839] sent [2.85758] MB
+expect 38099225 but got 38099226
+expect -27992124 but got -27992123
+expect 514094380 but got 514094379
+expect -276722626 but got -276722627
+[32mConvolution Output Matches[0m
+Maxpool 1 called N=1, H=56, W=56, C=64, ksizeH=3, ksizeW=3
+Time in sec for current maxpool = 7.335
+Relu #1 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 4.178
+HomConv #2 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=16, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.114] sent [3.80998] MB
+expect 353405716 but got 353405717
+expect 902459316 but got 902459317
+[32mConvolution Output Matches[0m
+Relu #3 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.107
+HomConv #3 called N=1, H=56, W=56, CI=16, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.121] sent [0.952538] MB
+expect -63739013 but got -63739012
+expect 434419523 but got 434419524
+[32mConvolution Output Matches[0m
+Relu #5 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.438
+HomConv #4 called N=1, H=56, W=56, CI=16, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.351] sent [0.952524] MB
+expect -2335711624 but got -2335711623
+expect 1826965162 but got 1826965163
+[32mConvolution Output Matches[0m
+Relu #7 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.435
+HomConv #5 called N=1, H=56, W=56, CI=128, FH=1, FW=1, CO=16, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.192] sent [7.62062] MB
+expect 1070990863 but got 1070990864
+expect 2410175325 but got 2410175326
+expect 820677129 but got 820677128
+[32mConvolution Output Matches[0m
+Relu #9 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.106
+HomConv #6 called N=1, H=56, W=56, CI=16, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.119] sent [0.952465] MB
+expect 140309274 but got 140309275
+expect -645850538 but got -645850537
+[32mConvolution Output Matches[0m
+Relu #11 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 4.122
+HomConv #7 called N=1, H=56, W=56, CI=16, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.339] sent [0.952582] MB
+expect -2098609827 but got -2098609826
+expect -1971214923 but got -1971214922
+[32mConvolution Output Matches[0m
+Relu #13 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.44
+Maxpool 2 called N=1, H=27, W=27, C=128, ksizeH=3, ksizeW=3
+Time in sec for current maxpool = 8.819
+HomConv #8 called N=1, H=27, W=27, CI=128, FH=1, FW=1, CO=32, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.269] sent [1.54769] MB
+expect 3520481444 but got 3520481445
+expect 2900422539 but got 2900422540
+[32mConvolution Output Matches[0m
+Relu #15 on 23328 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.052
+HomConv #9 called N=1, H=27, W=27, CI=32, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.33] sent [0.416741] MB
+expect 3293195986 but got 3293195987
+expect -2951078394 but got -2951078393
+[32mConvolution Output Matches[0m
+Relu #17 on 93312 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.197
+HomConv #10 called N=1, H=27, W=27, CI=32, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.378] sent [0.476272] MB
+expect 1427681214 but got 1427681215
+expect -4049194775 but got -4049194774
+expect -5468511395 but got -5468511396
+[32mConvolution Output Matches[0m
+Relu #19 on 93312 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.2
+HomConv #11 called N=1, H=27, W=27, CI=256, FH=1, FW=1, CO=32, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.509] sent [3.0958] MB
+expect 3373382012 but got 3373382013
+expect 1665490399 but got 1665490400
+[32mConvolution Output Matches[0m
+Relu #21 on 23328 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.046
+HomConv #12 called N=1, H=27, W=27, CI=32, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.317] sent [0.416683] MB
+expect -4218754145 but got -4218754144
+expect 848365291 but got 848365292
+[32mConvolution Output Matches[0m
+Relu #23 on 93312 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.191
+HomConv #13 called N=1, H=27, W=27, CI=32, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.381] sent [0.476276] MB
+expect -1270071118 but got -1270071117
+expect -4698329448 but got -4698329447
+[32mConvolution Output Matches[0m
+Relu #25 on 93312 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.193
+Maxpool 3 called N=1, H=13, W=13, C=256, ksizeH=3, ksizeW=3
+Time in sec for current maxpool = 4.46
+HomConv #14 called N=1, H=13, W=13, CI=256, FH=1, FW=1, CO=48, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.187] sent [0.654889] MB
+expect 2946641482 but got 2946641483
+expect 7120723033 but got 7120723034
+[32mConvolution Output Matches[0m
+Relu #27 on 8112 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.022
+HomConv #15 called N=1, H=13, W=13, CI=48, FH=1, FW=1, CO=192, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.233] sent [0.119087] MB
+expect -1126527940 but got -1126527939
+expect 404266140 but got 404266141
+[32mConvolution Output Matches[0m
+Relu #29 on 32448 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.075
+HomConv #16 called N=1, H=13, W=13, CI=48, FH=3, FW=3, CO=192, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.276] sent [0.178622] MB
+expect 1318403897 but got 1318403898
+expect -3682878635 but got -3682878634
+[32mConvolution Output Matches[0m
+Relu #31 on 32448 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.069
+HomConv #17 called N=1, H=13, W=13, CI=384, FH=1, FW=1, CO=48, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.25] sent [0.95251] MB
+expect 1680552936 but got 1680552937
+expect 1503389890 but got 1503389891
+[32mConvolution Output Matches[0m
+Relu #33 on 8112 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.019
+HomConv #18 called N=1, H=13, W=13, CI=48, FH=1, FW=1, CO=192, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.207] sent [0.11904] MB
+expect -104944391 but got -104944390
+expect -1403830455 but got -1403830454
+[32mConvolution Output Matches[0m
+Relu #35 on 32448 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.068
+HomConv #19 called N=1, H=13, W=13, CI=48, FH=3, FW=3, CO=192, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.295] sent [0.178642] MB
+expect -170697980 but got -170697979
+expect -1992866459 but got -1992866458
+[32mConvolution Output Matches[0m
+Relu #37 on 32448 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.069
+HomConv #20 called N=1, H=13, W=13, CI=384, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.316] sent [0.952621] MB
+expect 298031672 but got 298031673
+expect -799220731 but got -799220730
+[32mConvolution Output Matches[0m
+Relu #39 on 10816 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.025
+HomConv #21 called N=1, H=13, W=13, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.344] sent [0.178533] MB
+expect -199233276 but got -199233275
+expect 10338362 but got 10338363
+[32mConvolution Output Matches[0m
+Relu #41 on 43264 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.085
+HomConv #22 called N=1, H=13, W=13, CI=64, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.44] sent [0.238106] MB
+expect -599442050 but got -599442049
+expect 280743875 but got 280743876
+[32mConvolution Output Matches[0m
+Relu #43 on 43264 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.096
+HomConv #23 called N=1, H=13, W=13, CI=512, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.43] sent [1.3096] MB
+expect -330766193 but got -330766192
+expect 546573652 but got 546573653
+[32mConvolution Output Matches[0m
+Relu #45 on 10816 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.027
+HomConv #24 called N=1, H=13, W=13, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.333] sent [0.178593] MB
+expect -922471564 but got -922471563
+expect -840516435 but got -840516434
+[32mConvolution Output Matches[0m
+Relu #47 on 43264 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.097
+HomConv #25 called N=1, H=13, W=13, CI=64, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.427] sent [0.238174] MB
+expect -1028065934 but got -1028065933
+expect -397793588 but got -397793587
+[32mConvolution Output Matches[0m
+Relu #49 on 43264 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.104
+HomConv #26 called N=1, H=13, W=13, CI=512, FH=1, FW=1, CO=1000, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [6.429] sent [1.30955] MB
+expect -2143662 but got -2143661
+expect 11969757 but got 11969758
+[32mConvolution Output Matches[0m
+Relu #51 on 169000 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.359
+AvgPool 1 called N=1, H=1, W=1, C=1000, ksizeH=13, ksizeW=13
+Time in sec for current avgpool = 0.032
+ArgMax 1 called, s1=1, s2=1000
+Thread i = 0, total data sent till now = 50587802
+Thread i = 1, total data sent till now = 57901618
+Thread i = 2, total data sent till now = 17626845
+Thread i = 3, total data sent till now = 57904305
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+Total time taken = 48783 milliseconds.
+Total data sent = 168.652 MiB.
+Number of rounds = 908
+Total comm (sent+received) = (see SERVER OUTPUT)
+------------------------------------------------------
+Total time in Conv = 15.426 seconds.
+Total time in MatMul = 0 seconds.
+Total time in BatchNorm = 0 seconds.
+Total time in Truncation = 0.095 seconds.
+Total time in Relu = 11.82 seconds.
+Total time in MaxPool = 20.614 seconds.
+Total time in AvgPool = 0.032 seconds.
+Total time in ArgMax = 0.009 seconds.
+Total time in MatAdd = 0 seconds.
+Total time in MatAddBroadCast = 0 seconds.
+Total time in MulCir = 0 seconds.
+Total time in ScalarMul = 0 seconds.
+Total time in Sigmoid = 0 seconds.
+Total time in Tanh = 0 seconds.
+Total time in Sqrt = 0 seconds.
+Total time in NormaliseL2 = 0 seconds.
+------------------------------------------------------
+Conv data sent = 31.1357 MiB.
+MatMul data sent = 0 MiB.
+BatchNorm data sent = 0 MiB.
+Truncation data sent = 2.42572 MiB.
+Relu data sent = 57.1657 MiB.
+Maxpool data sent = 77.2877 MiB.
+Avgpool data sent = 0.597395 MiB.
+ArgMax data sent = 0.0393038 MiB.
+MatAdd data sent = 0 MiB.
+MatAddBroadCast data sent = 0 MiB.
+MulCir data sent = 0 MiB.
+Sigmoid data sent = 0 MiB.
+Tanh data sent = 0 MiB.
+Sqrt data sent = 0 MiB.
+NormaliseL2 data sent = 0 MiB.
+------------------------------------------------------
+top-10 values from SqueezeNet
+[31.7443848,30.9343262,30.3239746,28.5615234,28.1740723,27.8930664,27.7214355,27.6176758,27.5141602,27.2536621,]
+predicted label = 248
