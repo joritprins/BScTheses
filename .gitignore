@@ -1,4 +1,13 @@
-Cheetah/
+Cheetah/build/*
+Cheetah/credits/*
+Cheetah/data/*
+Cheetah/deps/*
+Cheetah/include/*
+Cheetah/networks/*
+Cheetah/patch/*
+Cheetah/pretrained/*
+Cheetah/SCI/*
+Cheetah/*
 
 ### C++ ###
 # Prerequisites
