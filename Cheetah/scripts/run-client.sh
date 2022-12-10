@@ -17,6 +17,8 @@ else
   # create a data/ to store the Ferret output
   mkdir -p data
   echo -e "Runing ${GREEN}build/bin/$2-$1${NC}, which might take a while...."
-  cat pretrained/$2_input_scale12_pred*.inp | build/bin/$2-$1 r=2 k=$FXP_SCALE ell=$SS_BITLEN nt=$NUM_THREADS ip=$SERVER_IP p=$SERVER_PORT 1>$1-$2_client.log
+  build/bin/$2-$1 r=2 k=$FXP_SCALE ell=$SS_BITLEN nt=$NUM_THREADS ip=$SERVER_IP p=$SERVER_PORT 1>$1-$2_client.log < pretrained/$2_input_scale12_pred*.inp & PID=$!
+  echo "${PID}" > data/client
+  wait $PID
   echo -e "Computation done, check out the log file ${GREEN}$1-$2_client.log${NC}"
 fi

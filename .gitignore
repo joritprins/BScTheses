@@ -8,6 +8,7 @@ Cheetah/patch/*
 Cheetah/pretrained/*
 Cheetah/SCI/*
 Cheetah/sqnet_demo/*
+Scaphandre/*
 
 ### C++ ###
 # Prerequisites
