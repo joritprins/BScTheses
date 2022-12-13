@@ -1,0 +1,5 @@
+- Read everything again and fixed some minor errors and some sentences
+- Finished historical background on SNNI
+- Finished design choices 
+- Started explaining how Cheetah works
+- Got Cheetah working on my pc
