@@ -1,0 +1,11 @@
+\begin{tabular}{llll}
+\hline
+Benchmark        & System         & E2E Time              & Commu.                 \\ \hline
+                 & DELPHI         & $\approx$ 110s        & $\approx$ 3.6GB        \\
+MiniONN          & Cheetah        & 3.55s                 & 0.03GB                 \\ \cline{3-4} 
+                 &                & $\approx$ 30x         & $\approx$ 117x         \\ \hline
+                 & DELPHI         & $\approx$ 200s        & $\approx$ 6.5GB        \\
+ResNet32         & Cheetah        & 15.95s                & 0.11GB                 \\ \cline{3-4} 
+                 &                & $\approx$ 12x         & $\approx$ 58x          \\ \hline
+\multicolumn{4}{l}{1GB = $2^{30}$ bytes; E2E Time = End2End Time}
+\end{tabular}
