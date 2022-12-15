@@ -172,6 +172,11 @@ void AdjustScaleShr(uint64_t *A, uint64_t *B, int32_t I, int32_t J, int32_t bwA,
             << std::endl;
   MatAddCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " AdjustScaleShr" << std::endl;
+#endif
+
 }
 
 void MatAdd(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I, int32_t J,
@@ -230,6 +235,11 @@ void MatAdd(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I, int32_t J,
     MatAddCommSent += curComm;
   }
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " MatAdd" << std::endl;
+#endif
+
 }
 
 void MatAddBroadCast(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I,
@@ -284,6 +294,10 @@ void MatAddBroadCast(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I,
   FIND_ALL_IO_TILL_NOW(curComm);
   MatAddBroadCastCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " MatAddBroadCast" << std::endl;
+#endif
 }
 
 void AddOrSubCir(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I, int32_t J,
@@ -327,6 +341,11 @@ void AddOrSubCir(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I, int32_t J,
   FIND_ALL_IO_TILL_NOW(curComm);
   MatAddCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " AddOrSubCir" << std::endl;
+#endif
+
 }
 
 void ScalarMul(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I, int32_t J,
@@ -368,6 +387,10 @@ void ScalarMul(uint64_t *A, uint64_t *B, uint64_t *C, int32_t I, int32_t J,
   std::cout << "Time in sec for current ScalarMul = " << (temp / 1000.0)
             << std::endl;
   ScalarMulCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " ScalarMul" << std::endl;
 #endif
 }
 
@@ -433,6 +456,10 @@ void MulCir(int64_t I, int64_t J, int64_t shrA, int64_t shrB, int64_t demote,
   std::cout << "Time in sec for current MulCir = " << (temp / 1000.0)
             << std::endl;
   MulCirCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " MulCir" << std::endl;
 #endif
 
 #ifdef VERIFY_LAYERWISE
@@ -563,6 +590,10 @@ void MatMul(int64_t I, int64_t K, int64_t J, int64_t shrA, int64_t shrB,
   std::cout << "Time in sec for current MatMul = " << (temp / 1000.0)
             << std::endl;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " MatMul" << std::endl;
+#endif
 }
 
 void MatMul(int64_t I, int64_t K, int64_t J, int64_t shrA, int64_t shrB,
@@ -684,6 +715,10 @@ void Sigmoid(int64_t I, int64_t J, int64_t scale_in, int64_t scale_out,
   SigmoidCommSent += curComm;
 #endif
 
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " Sigmoid" << std::endl;
+#endif
+
 #ifdef VERIFY_LAYERWISE
   int64_t *recA = new int64_t[I * J];
   int64_t *recB = new int64_t[I * J];
@@ -757,6 +792,10 @@ void TanH(int64_t I, int64_t J, int64_t scale_in, int64_t scale_out,
   TanhCommSent += curComm;
 #endif
 
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " TanH" << std::endl;
+#endif
+
 #ifdef VERIFY_LAYERWISE
   int64_t *recA = new int64_t[I * J];
   int64_t *recB = new int64_t[I * J];
@@ -828,6 +867,10 @@ void Sqrt(int64_t I, int64_t J, int64_t scale_in, int64_t scale_out,
   SqrtCommSent += curComm;
 #endif
 
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " Sqrt" << std::endl;
+#endif
+
 #ifdef VERIFY_LAYERWISE
   int64_t *recA = new int64_t[I * J];
   int64_t *recB = new int64_t[I * J];
@@ -891,6 +934,10 @@ void ArgMax(uint64_t *A, int32_t I, int32_t J, int32_t bwA, int32_t bw_index,
   FIND_ALL_IO_TILL_NOW(curComm);
   ArgMaxCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " ArgMax" << std::endl;
+#endif
 }
 
 void MaxPool2D(uint64_t *A, int32_t I, int32_t J, int32_t bwA, int32_t bwB,
@@ -920,6 +967,10 @@ void MaxPool2D(uint64_t *A, int32_t I, int32_t J, int32_t bwA, int32_t bwB,
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   MaxpoolCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " MaxPool" << std::endl;
 #endif
 }
 
@@ -1084,6 +1135,10 @@ void Convolution(int32_t N, int32_t H, int32_t W, int32_t CIN, int32_t HF,
             << std::endl;
 #endif
 
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " Conv" << std::endl;
+#endif
+
 #ifdef VERIFY_LAYERWISE
   int64_t *recA = new int64_t[N * H * W * CIN];
   int64_t *recB = new int64_t[G * HF * WF * CINF * COUTF];
@@ -1159,6 +1214,10 @@ void ReLU(uint64_t *A, uint64_t *B, int32_t I, int32_t J, int32_t bwA,
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   ReluCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " ReLU" << std::endl;
 #endif
 }
 
@@ -1238,6 +1297,10 @@ void BNorm(uint64_t *A, uint64_t *BNW, uint64_t *BNB, uint64_t *B, int32_t I,
   FIND_ALL_IO_TILL_NOW(curComm);
   BatchNormCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " BatchNorm" << std::endl;
+#endif
 }
 
 void NormaliseL2(uint64_t *A, uint64_t *B, int32_t I, int32_t J, int32_t bwA,
@@ -1298,6 +1361,10 @@ void NormaliseL2(uint64_t *A, uint64_t *B, int32_t I, int32_t J, int32_t bwA,
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   NormaliseL2CommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " NormaliseL2" << std::endl;
 #endif
 }
 

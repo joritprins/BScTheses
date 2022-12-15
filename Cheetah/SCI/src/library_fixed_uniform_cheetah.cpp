@@ -10,6 +10,7 @@
 
 #define VERIFY_LAYERWISE
 #define LOG _LAYERWISE
+#define LOG_TIMES
 //#undef VERIFY_LAYERWISE // undefine this to turn OFF the verifcation
 //#undef LOG_LAYERWISE // undefine this to turn OFF the log
 
@@ -133,6 +134,10 @@ void MatMul2D(int32_t d0, int32_t d1, int32_t d2, const intType *mat_A,
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   MatMulCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " matmul" << std::endl;
 #endif
 
 #ifdef VERIFY_LAYERWISE
@@ -304,6 +309,10 @@ void Conv2DWrapper(signedIntType N, signedIntType H, signedIntType W,
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   ConvCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " conv" << std::endl;
 #endif
 
 #ifdef VERIFY_LAYERWISE
@@ -481,6 +490,11 @@ void BatchNorm(int32_t B, int32_t H, int32_t W, int32_t C,
   std::cout << "Time in sec for current BN = [" << (temp / 1000.0) << "] sent ["
             << (curComm / 1024. / 1024.) << "] MB" << std::endl;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " BN" << std::endl;
+#endif
+
 }
 
 void ElemWiseActModelVectorMult(int32_t size, intType *inArr,

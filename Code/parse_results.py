@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import json
-import datetime
 import argparse
 parser = argparse.ArgumentParser()
 
@@ -11,10 +10,12 @@ default_server = open('Cheetah/data/server', 'r').read()
 parser.add_argument("-c", "--client_pid", help="PID of the client process", type=int, default=default_client)
 parser.add_argument("-s", "--server_pid", help="PID of the server process", type=int, default=default_server)
 parser.add_argument("-f", "--file", help="JSON file to read the data from", default='Code/log.json')
+parser.add_argument("-o", "--output_file", help="File to write the raw data in", default='output')
 parser.add_argument("-n", "--name", help="Name for the plot", default='Power usage')
 args = parser.parse_args()
 
 print("Running parser on file: {} with server_pid: {} and client_pid: {}".format(args.file, args.server_pid, args.client_pid))
+print("Command to run: sudo python3 Code/parse_results.py -c {} -s {} -f {} -o {} -n {}".format(args.client_pid, args.server_pid, args.file, args.output_file, args.name))
 
 json_string = open(args.file, 'r').read().replace('\n', '')
 arr = np.array(json.loads(json_string))
@@ -34,37 +35,69 @@ filtered_server = [
 x_y_client = np.array(list(zip(*filtered_client)))
 x_y_server = np.array(list(zip(*filtered_server)))
 
+if False:
+    plt.figure(figsize=(10,10))
+    plt.plot(x_y_client[0],x_y_client[1], label="Client (mean: {}W".format(round(np.mean(x_y_client[1]), 2)))
+    plt.plot(x_y_server[0],x_y_server[1], label="Server (mean: {}W".format(round(np.mean(x_y_server[1]), 2)), c='r')
+    plt.scatter(x_y_client[0],x_y_client[1])
+    plt.scatter(x_y_server[0],x_y_server[1], c='r')
+    plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
+    plt.xlabel("Time (s)")
+    plt.ylabel("Power (W)")
+    plt.title("Power consumption")
+    plt.legend()
+    plt.savefig("Code/Results/{}".format(args.name))
+    plt.show()
 
-plt.figure(figsize=(10,10))
-plt.plot(x_y_client[0],x_y_client[1], label="Client (mean: {}W".format(round(np.mean(x_y_client[1]), 2)))
-plt.plot(x_y_server[0],x_y_server[1], label="Server (mean: {}W".format(round(np.mean(x_y_server[1]), 2)), c='r')
-plt.scatter(x_y_client[0],x_y_client[1])
-plt.scatter(x_y_server[0],x_y_server[1], c='r')
-plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
-plt.xlabel("Time (s)")
-plt.ylabel("Power (W)")
-plt.title("Power consumption")
-plt.legend()
-plt.savefig(args.name)
-# plt.show()
+if False:
+    from scipy.signal import savgol_filter
+    yhat_client = savgol_filter(x_y_client[1], 10, 3)
+    yhat_server = savgol_filter(x_y_server[1], 10, 3)
+    plt.figure(figsize=(10,10))
+    plt.plot(x_y_client[0],yhat_client, label="Client (mean: {}W".format(round(np.mean(yhat_client), 2)))
+    plt.plot(x_y_server[0],yhat_server, label="Server (mean: {}W".format(round(np.mean(yhat_server), 2)), c='r')
+    plt.scatter(x_y_client[0],x_y_client[1])
+    plt.scatter(x_y_server[0],x_y_server[1], c='r')
+    plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
+    plt.xlabel("Time (s)")
+    plt.ylabel("Power (W)")
+    plt.title("Power consumption flattened")
+    plt.legend()
+    plt.savefig("Code/Results/{}_flattened.png".format(args.name))
+    plt.show()
+
+client_log =  open("Cheetah/cheetah-sqnet_client.log", 'r')
+# for line in client_log:
+#     if line.startswith("~"):
+#         print(line, end="")
+# client_log_filtered = [line for line in client_log if line.startswith("~")]
+client_log_filtered = [line.replace('\n','').replace('~ ', '').split(' ') for line in client_log if line.startswith("~")]
+# client_log_filtered = [s.replace('\n', '') for s in client_log_filtered]
+print(client_log_filtered)
+# print(log)
+if False:
+    from scipy.signal import savgol_filter
+    yhat_client = savgol_filter(x_y_client[1], 10, 3)
+    yhat_server = savgol_filter(x_y_server[1], 10, 3)
+    plt.figure(figsize=(10,10))
+    plt.plot(x_y_client[0],yhat_client, label="Client (mean: {}W".format(round(np.mean(yhat_client), 2)))
+    plt.plot(x_y_server[0],yhat_server, label="Server (mean: {}W".format(round(np.mean(yhat_server), 2)), c='r')
+    plt.scatter(x_y_client[0],x_y_client[1])
+    plt.scatter(x_y_server[0],x_y_server[1], c='r')
+    plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
+    plt.xlabel("Time (s)")
+    plt.ylabel("Power (W)")
+    plt.title("Power consumption flattened")
+    plt.legend()
+    # plt.savefig("Code/Results/{}_test.png".format(args.name))
+    plt.show()
 
 
-
-
-
-# [consumer for consumer in measurement['consumers'] for measurement in np_arr if consumer['pid'] ]
-# for measurement in np_arr:
-#     for consumer in measurement['consumers']:
-#         print(consumer)
-# print(filtered)
-# start = filtered[0]['timestamp']
-# print(datetime.time(start))
-# for time in filtered:
-    # print(datetime.time.fromtimestamp(time['timestamp'] - start))
-# 32587
-# f = open("Code/log.json", 'r')
-# for line in f:
-    # print(line, "\n\n\n")
-# arr = np.array(f.read())[1:-1]
-# print(arr)
+# print(x_y_client)
+# f1 = open("Code/Results/client_{}".format(args.output_file), 'ab')
+# np.savetxt(f1, x_y_client)
+# # np.savetxt(f1, x_y_client[1])
+# f2 = open("Code/Results/server_{}".format(args.output_file), 'ab')
+# np.savetxt(f2, x_y_server)
+# # np.savetxt(f2, x_y_server[1])
 

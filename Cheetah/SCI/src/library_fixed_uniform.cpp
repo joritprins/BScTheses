@@ -28,6 +28,7 @@ SOFTWARE.
 
 #define LOG_LAYERWISE
 #define VERIFY_LAYERWISE
+#define LOG_TIMES
 #undef VERIFY_LAYERWISE // undefine this to turn OFF the verifcation
 // #undef LOG_LAYERWISE // undefine this to turn OFF the log
 
@@ -199,6 +200,11 @@ void MatMul2D(int32_t s1, int32_t s2, int32_t s3, const intType *A,
   FIND_ALL_IO_TILL_NOW(curComm);
   MatMulCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " matmul" << std::endl;
+#endif
+
 
 #ifdef VERIFY_LAYERWISE
 #ifdef SCI_HE
@@ -393,6 +399,10 @@ void Conv2DWrapper(signedIntType N, signedIntType H, signedIntType W,
   ConvCommSent += curComm;
 #endif
 
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " conv" << std::endl;
+#endif
+
 #ifdef VERIFY_LAYERWISE
 #ifdef SCI_HE
   for (int i = 0; i < N; i++) {
@@ -535,6 +545,10 @@ void Conv2DGroupWrapper(signedIntType N, signedIntType H, signedIntType W,
   FIND_ALL_IO_TILL_NOW(curComm);
   ConvCommSent += curComm;
 #endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " conv" << std::endl;
+#endif
 }
 
 #if !USE_CHEETAH
@@ -629,6 +643,10 @@ void ElemWiseActModelVectorMult(int32_t size, intType *inArr,
   std::cout << "Time in sec for current BN = [" << (temp / 1000.0)
             << "] sent [" << (curComm / 1024. / 1024.) << "] MB"
             << std::endl;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " BN" << std::endl;
 #endif
 
 #ifdef VERIFY_LAYERWISE
@@ -790,6 +808,10 @@ void Relu(int32_t size, intType *inArr, intType *outArr, int sf, bool doTruncati
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   ReluCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " relu" << std::endl;
 #endif
 
   if (doTruncation) {
@@ -1028,6 +1050,10 @@ void MaxPool(int32_t N, int32_t H, int32_t W, int32_t C, int32_t ksizeH,
   MaxpoolCommSent += curComm;
 #endif
 
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " maxpool" << std::endl;
+#endif
+
 #ifdef VERIFY_LAYERWISE
 #ifdef SCI_HE
   for (int i = 0; i < N; i++) {
@@ -1209,6 +1235,10 @@ void AvgPool(int32_t N, int32_t H, int32_t W, int32_t C, int32_t ksizeH,
   uint64_t curComm;
   FIND_ALL_IO_TILL_NOW(curComm);
   AvgpoolCommSent += curComm;
+#endif
+
+#ifdef LOG_TIMES
+  std::cout << "~ " << (temp/1000.0) << " avgpool" << std::endl;
 #endif
 
 #ifdef VERIFY_LAYERWISE
