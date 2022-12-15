@@ -1,10 +1,16 @@
 \documentclass[twoside]{Style/uva-inf-bachelor-thesis}
-\usepackage[dutch]{babel}
+\usepackage[english]{babel}
 
-%Package for the images and the subfiles of sections
+% Package for the images and the subfiles of sections
 \usepackage{graphicx}
 \graphicspath{{Afbeeldingen/}}
 \usepackage{subfiles}
+
+% For drawing images and graphs
+\usepackage{tikz}
+
+% For  resizing tables
+\usepackage{adjustbox}
 
 % References
 \usepackage[
@@ -15,6 +21,7 @@
 
 % Used for different math equations
 \usepackage{amssymb}
+\usepackage{amsmath}
 
 % Title Page
 \title{Title}
@@ -41,11 +48,9 @@ Abstract
 \section{testing code}
 
 \chapter{Experiments}
-\section{RQa, how do we measure the energy consumption}
-\section{Design of experiments}
-\section{Explaining testing environment}
-\section{Results}
-\section{RQb, what are the differences on server and client side and what are the implications}
+\subfile{Sections/Experiments}
+\subfile{Sections/Results}
+
 
 \chapter{Conclusion}
 \section{Conclusion}
