@@ -1,6 +1,8 @@
 \documentclass[../thesis.tex]{subfiles}
 \graphicspath{{../Images/}}
 
+% Documents that contain labels for references in this chapter
+\myexternaldocument{Sections/Introduction}
 \begin{document}
 \section{Neural Networks}
 The goal of ML is to imitate the human brain to let a computer 'learn' a task without programming task-specific rules. One way to achieve ML is through a NN. A NN is a network that is given an input and evaluates this input to calculate an output without general knowledge of the input. The input of a NN is typically a vector containing numerical data, and the output is a vector that gives insight on the input data. The input vector can represent different types of data. How the output vector should be interpreted is dependent of the task of the NN. For classification tasks, the output vector contains the likelihood of the input being a class. For example in the MNIST benchmark \parencite{lecun1998}, the dataset contains a matrix containing $28 \times 28$ grayscale pictures of the handwritten digits $0, 1, ... 9$. The input vector for the NN is then has length $28 \cdot 28$ and the output vector is of length 10: for each digit the likelihood of the picture being that digit. The classification of the digit on the picture is done by choosing the digit that correlates to the highest likelihood in the output vector. 
@@ -51,7 +53,7 @@ After training the network it is useed for the inference phase where new input i
 \section{Secure Neural Networks Inference}
 The hidden layers contain all the information of the NN. After the tedious process of training the model one often wants to keep the parameters of the hidden layer secret. Besides, the model can reveal information about the training data \parencite{qayyum2020} which in turn can also contain privacy sensitive information. This and the aforementioned reasons result in the SNNI problem in the case of MLaaS. Solving this problem is quite challenging. Some approaches have been suggested with cryptographic techniques like homomorphic encryption \parencite{rivest1978} and secure multi party encryption \parencite{yao1982, yao1986}. Other hardware based approaches have also been suggested \parencite{deepsecure}. All approaches achieve different trade-offs in terms of accuracy, security, efficiency and applicability. 
 
-Several authors have tried to make an overview on privacy preserving ML. Tanuwidjaja et. al. (\yearcite{tanuwidjaja2020}) have done a comprehensive survey on MLaaS in general and have given a chronological overview of the works. Mann et. al. (\yearcite{mann22}) have summarized the work on the inference part of ML. The approach that I will test has been chosen from this paper, since it is the most recent overview on the field of SNNI. It also provides substantial information about the approaches, and I could therefore make an informed choice on the approach to test.  
+Several authors have tried to make an overview on privacy preserving ML. Tanuwidjaja et. al. (\citeyear{tanuwidjaja2020}) have done a comprehensive survey on MLaaS in general and have given a chronological overview of the works. Mann et. al. (\citeyear{mann22}) have summarized the work on the inference part of ML. The approach that I will test has been chosen from this paper, since it is the most recent overview on the field of SNNI. It also provides substantial information about the approaches, and I could therefore make an informed choice on the approach to test.  
 
 
  
