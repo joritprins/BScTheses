@@ -5,6 +5,7 @@
 \section{Neural Networks}
 The goal of ML is to imitate the human brain to let a computer 'learn' a task without programming task-specific rules. One way to achieve ML is through a NN. A NN is a network that is given an input and evaluates this input to calculate an output without general knowledge of the input. The input of a NN is typically a vector containing numerical data, and the output is a vector that gives insight on the input data. The input vector can represent different types of data. How the output vector should be interpreted is dependent of the task of the NN. For classification tasks, the output vector contains the likelihood of the input being a class. For example in the MNIST benchmark \parencite{lecun1998}, the dataset contains a matrix containing $28 \times 28$ grayscale pictures of the handwritten digits $0, 1, ... 9$. The input vector for the NN is then has length $28 \cdot 28$ and the output vector is of length 10: for each digit the likelihood of the picture being that digit. The classification of the digit on the picture is done by choosing the digit that correlates to the highest likelihood in the output vector. 
 
+
 A NN consists of one or several neurons. A neuron typically consist of a list of weights $w_0, ..., w_n \in \mathbb{R}$ and a bias $b \in \mathbb{R}$ and a non-linear activation function $f: \mathbb{R} \to \mathbb{R}$. The neuron receives the input vector $x_0, ..., x_n \in \mathbb{R}$ and computes $y = x_0w_0, ... x_nw_n + b$. The output of the neuron is the activation function applied on $y$. Another representation of a neuron is the dot product between the input and the weight vector with $b$ being one of the elements in the weight vector and constant value $1$ being the corresponding element in the input vector. The activation function f often is the sigmoid function $\sigma (y) = 1/(1+e^{-y})$, the $\tanh$ fucntion or the ReLU function $\textrm{ReLU}(y) = \textrm{max}(0,y)$. 
 
 % NN is evaluated on input and gives an output. Typically vectors. NN has input (numerical data) vector and an output vector that typically gives insights on input vector. Input can represent different types of data: MNIST [source] input is 28x28 input of grayscale pictures of handwritten digits 0..9. An MxN grayscale input can be represented as a MdotN matrix and rgb as 3dotMdotN matrix. 
@@ -52,6 +53,7 @@ The hidden layers contain all the information of the NN. After the tedious proce
 
 Several authors have tried to make an overview on privacy preserving ML. Tanuwidjaja et. al. (\yearcite{tanuwidjaja2020}) have done a comprehensive survey on MLaaS in general and have given a chronological overview of the works. Mann et. al. (\yearcite{mann22}) have summarized the work on the inference part of ML. The approach that I will test has been chosen from this paper, since it is the most recent overview on the field of SNNI. It also provides substantial information about the approaches, and I could therefore make an informed choice on the approach to test.  
 
+
  
 
 
@@ -72,6 +74,7 @@ They did this by improving CrypTFlow2 using smart techniques.
 Due to spatial property of the convolution and matrix-vector multiplicaation it is inevitable for the prior he-based and simd protocols to rotate the operands many times. Because it is expensive(?). THus the authors of Cheetah designed their linear layers (conv, bn, fc) via polynomial arithmetic circuits which maps the values of the input to the proper coefficients of the output polynomial(s). 
 \begin{quote}
     \emph{"By careful design of the coefficient mappings, we not only eliminate the expensive rotations but are also are able to accept secret shares from $Z_{2^l}$ for free"} \parencite[p. 810]{cheetah}
+
 \end{quote}
 
 This also helps to reduce the cost of other homomorphic operations (e.g. encryption and decryption). It can also use large lattice dimension and also smaller. 
@@ -85,6 +88,7 @@ This also helps to reduce the cost of other homomorphic operations (e.g. encrypt
 
 % \subsection{lattice based homomorphic encryption}
 % HE that is based on learning with errors (LWE) and its ring variant (ring-LWE). 
+
 
 
 
