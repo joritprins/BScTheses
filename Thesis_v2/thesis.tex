@@ -1,11 +1,6 @@
 \documentclass[twoside]{Style/uva-inf-bachelor-thesis}
 \usepackage[english]{babel}
 
-% Package for the images and the subfiles of sections
-\usepackage{graphicx}
-\graphicspath{{Afbeeldingen/}}
-\usepackage{subfiles}
-
 % For drawing images and graphs
 \usepackage{tikz}
 
@@ -22,6 +17,13 @@
 % Used for different math equations
 \usepackage{amssymb}
 \usepackage{amsmath}
+
+% Package for the images and the subfiles of sections
+\usepackage{graphicx}
+% \usepackage{xr}
+\usepackage{subfiles}
+% \externaldocument[M-]{main}
+\graphicspath{Images/}
 
 % Title Page
 \title{Title}
@@ -40,22 +42,6 @@ Abstract
 
 \chapter{Introduction}
 \subfile{Sections/Introduction}
-
-\chapter{Theoretical background}
-\subfile{Sections/TheoreticalBackground}
-
-\chapter{My work}
-\section{testing code}
-
-\chapter{Experiments}
-\subfile{Sections/Experiments}
-\subfile{Sections/Results}
-
-
-\chapter{Conclusion}
-\section{Conclusion}
-\section{Discussion}
-\section{Ethics}
 
 
 \printbibliography
