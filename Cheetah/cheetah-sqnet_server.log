@@ -14,6 +14,6 @@ secret_share_mod: 137438953472 bitlength: 37
 backend: Ring-SilentOT-Cheetah
 -----------Syncronized - now starting execution-----------
 HomConv #1 called N=1, H=227, W=227, CI=3, FH=3, FW=3, CO=64, S=2, Padding VALID (0 0 0 0)
-Time in sec for current conv = [5.041] sent [49.8402] MB
-~ 5.041 conv
+Time in sec for current conv = [4.484] sent [49.8421] MB
+~ 4.484 conv
 Maxpool 1 called N=1, H=56, W=56, C=64, ksizeH=3, ksizeW=3

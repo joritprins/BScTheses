@@ -1,7 +1,10 @@
+# Insert path for functions.py file
+import sys
+sys.path.insert(0, '{}/..'.format(sys.path[0]))
+
 import numpy as np
 import matplotlib.pyplot as plt
 import json
-import os
 
 json_string = open('Code/_log.json', 'r').read().replace('\n', '')
 arr = np.array(json.loads(json_string))
@@ -10,27 +13,8 @@ start = arr[0]['host']['timestamp']
 client_pid = 61937
 server_pid = 61939
 
-
-def filter_results(arr, pid: int):
-    """
-    Function that filters the data from one process from an array of power measurements
-    
-    @arr: array containing power measurements 
-    @pid: pid of the process that needs to be filtered out
-    """
-    return [
-        (round(consumer['timestamp']-start, 3), consumer['consumption']/1000000) 
-            for measurement in arr 
-                for consumer in measurement['consumers'] 
-                    if consumer['pid'] == pid]
-
-def wh_to_w(arr):
-    """
-    Function that converts the wh from the data to w
-    
-    @arr: array containing power measurements 
-    """
-    return [(m[0], m[1]/m[0]) if i == 0 else (m[0], m[1]/(m[0]-arr[i-1][0])) for i, m in enumerate(arr) ]
+from functions import filter_results
+from functions import wh_to_w
 
 filtered_client = filter_results(arr, client_pid)
 filtered_server = filter_results(arr, server_pid)

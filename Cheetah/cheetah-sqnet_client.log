@@ -5,7 +5,7 @@ using silent ot pack
 using silent ot pack
 using silent ot pack
 After one-time setup, communication
-Thread i = 0, total data sent till now = 1997757
+Thread i = 0, total data sent till now = 1997820
 Thread i = 1, total data sent till now = 1726247
 Thread i = 2, total data sent till now = 1726247
 Thread i = 3, total data sent till now = 1726247
@@ -14,11 +14,11 @@ secret_share_mod: 137438953472 bitlength: 37
 backend: Ring-SilentOT-Cheetah
 -----------Syncronized - now starting execution-----------
 HomConv #1 called N=1, H=227, W=227, CI=3, FH=3, FW=3, CO=64, S=2, Padding VALID (0 0 0 0)
-Time in sec for current conv = [5.616] sent [2.85765] MB
-~ 5.616 conv
-expect 67456042 but got 67456043
-expect -31157629 but got -31157628
-expect -193300594 but got -193300595
-expect 209117011 but got 209117010
+Time in sec for current conv = [5.038] sent [2.85748] MB
+~ 5.038 conv
+expect 101494613 but got 101494614
+expect -2187163621 but got -2187163620
+expect 76107974 but got 76107973
+expect -47287309 but got -47287310
 [32mConvolution Output Matches[0m
 Maxpool 1 called N=1, H=56, W=56, C=64, ksizeH=3, ksizeW=3

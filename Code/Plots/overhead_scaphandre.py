@@ -1,10 +1,17 @@
+# Insert path for functions.py file
+import sys
+sys.path.insert(0, '{}/..'.format(sys.path[0]))
+
 import numpy as np
 import matplotlib.pyplot as plt
 import json
 import os
 
-json_string = open('Code/_log.json', 'r').read().replace('\n', '')
+# Load power measurements and convert to array
+json_string = open('Code/Plots/_log.json', 'r').read().replace('\n', '')
 arr = np.array(json.loads(json_string))
+
+# Find scaphandre PID
 scaphandre_pid = 0
 for measurement in arr:
     for consumer in measurement['consumers']:
@@ -17,11 +24,9 @@ if scaphandre_pid == 0:
 
 start = arr[0]['host']['timestamp']
 
-filtered = [
-        (round(consumer['timestamp']-start, 3), round(consumer['consumption']*100/measurement['host']['consumption'])) 
-            for measurement in arr 
-                for consumer in measurement['consumers'] 
-                    if consumer['pid'] == scaphandre_pid]
+# Filter scaphandre data
+from functions import filter_results
+filtered = filter_results(arr, scaphandre_pid, start)
 
 x_y = np.array(list(zip(*filtered)))
 

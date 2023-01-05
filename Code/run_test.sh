@@ -16,6 +16,15 @@ else
     OUTPUT_NAME="${SNNI}_${Data}_output"
 fi
 
+if [ $# -eq 2 ]; then
+    OUTPUT_NAME=$1
+    NR=$2
+else
+    NR=0
+fi
+
+trap cleanup SIGINT
+
 function cleanup(){
     printf "${RED}\rCleaning up\n${ENDCOLOR}"
     if [[ ! -z "$PID_SCAPHANDRE" ]] && ps -p $PID_SCAPHANDRE > /dev/null 2>&1; then 
@@ -84,8 +93,6 @@ function cleanup(){
     exit 1
 }
 
-trap cleanup SIGINT
-
 modprobe intel_rapl_common # or intel_rapl for kernels < 5
 
 # Clear last results
@@ -139,7 +146,8 @@ kill $PID_SCAPHANDRE
 # echo "name:"$output_name
 printf "${GREEN}Scaphandre finished: %d:%d:%d${ENDCOLOR}\n" $[$(date +%-H)] $[$(date +%-M)] $[$(date +%-S)]
 
-printf "\nServer pid: ${PID_SERVER}\nClient pid: ${PID_CLIENT}\nScaphandre pid: ${PID_SCAPHANDRE}\nRun-Client pid: ${PID_RUN_CLIENT}\nRun Server pid: ${PID_RUN_SERVER}\n\nEND\n\n" >> Code/Logs/pids
+printf "\nServer pid: ${PID_SERVER}\nClient pid: ${PID_CLIENT}\nScaphandre pid: ${PID_SCAPHANDRE}\nRun-Client pid: ${PID_RUN_CLIENT}\nRun Server pid: ${PID_RUN_SERVER}\n\nEND\n\n"
+echo '"'${NR}'":{"client":'${PID_RUN_CLIENT}',"server":'${PID_RUN_SERVER}',"scaphandre":'${PID_SCAPHANDRE}'}END' >> Code/Logs/pids
 # python3 Code/parse_results.py -c $PID_RUN_CLIENT -s $PID_RUN_SERVER -f $JSON_PATH -n "cheetah-sqnet.png" -o $output_name
 # export $PID_RUN_SERVER
 exit 1

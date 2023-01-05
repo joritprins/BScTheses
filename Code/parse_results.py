@@ -17,64 +17,19 @@ args = parser.parse_args()
 print("Running parser on file: {} with server_pid: {} and client_pid: {}".format(args.file, args.server_pid, args.client_pid))
 print("Command to run: sudo python3 Code/parse_results.py -c {} -s {} -f {} -o {} -n {}".format(args.client_pid, args.server_pid, args.file, args.output_file, args.name))
 
+# Open file containing power consumption information and convert to array
 json_string = open(args.file, 'r').read().replace('\n', '')
 arr = np.array(json.loads(json_string))
 
 start = arr[0]['host']['timestamp']
 
-
-def filter_results(arr, pid: int):
-    """
-    Function that filters the data from one process from an array of power measurements
-    
-    @arr: array containing power measurements 
-    @pid: pid of the process that needs to be filtered out
-    """
-    return [
-        (round(consumer['timestamp']-start, 3), consumer['consumption']/1000000) 
-            for measurement in arr 
-                for consumer in measurement['consumers'] 
-                    if consumer['pid'] == pid]
-
-filtered_client = filter_results(arr, args.client_pid)
-filtered_server = filter_results(arr, args.server_pid)
+from functions import filter_results 
+filtered_client = filter_results(arr, args.client_pid, start=start)
+filtered_server = filter_results(arr, args.server_pid, start=start)
 
 x_y_client = np.array(list(zip(*filtered_client)))
 x_y_server = np.array(list(zip(*filtered_server)))
 
-def aggregate_results(arr, step):
-    """
-    Aggregates the results
-    
-    arr : 2d array containing timestamps and given wattages: [[t0, t1, ..., tn][w0, w1, ..., wn]]
-    step: step of returning array
-    
-    returns array in the form of [[0, 1*step, ..., m*step][w0^, w1^, ...,, wm^]] 
-        where m*step < tn
-    """
-    last_time, last_pwr, i = arr[0][0], arr[0][1], 0 
-    pwr1 = (  (step*last_pwr) / last_time  )
-    
-    x_y_aggr = [(0,0)]
-    
-    for t in np.arange(0, arr[0][-1], step):
-        if t > arr[i][0]:
-            new_time, new_pwr = arr[i+1][0] - arr[i][0], arr[i+1][1]
-            pwr2 = (  (step*new_pwr) / (new_time)  )
-    
-            frac = ( t - arr[i][0] ) / step
-            x_y_aggr.append(  (t, frac * new_pwr + (1-frac) * last_pwr)   )
-    
-            i+=1
-            last_time, last_pwr, pwr1 = new_time, new_pwr, pwr2
-        else:
-            x_y_aggr.append(  (t, pwr1)  )
-    
-    return np.array(list(zip(*x_y_aggr)))
-
-def wh_to_w(arr):
-    return [(measurement[0], measurement[1]/measurement[0]) if i == 0 else (measurement[0], measurement[1]/(measurement[0]-arr[i-1][0])) for i, measurement in enumerate(arr) ]
-    
 # Print client beside of server in scatter and plot
 if False:
     plt.figure(figsize=(10,5))
@@ -109,6 +64,7 @@ if False:
     plt.show()
 
 if True:
+    from functions import wh_to_w
     watts = np.array(list(zip(*wh_to_w(filtered_client))))
     plt.figure(figsize=(10,5))
     plt.plot(watts[0],watts[1], color='red', label="Power usage client in terms of W")
