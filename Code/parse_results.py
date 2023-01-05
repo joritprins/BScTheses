@@ -55,11 +55,9 @@ def aggregate_results(arr, step):
     last_time, last_pwr, i = arr[0][0], arr[0][1], 0 
     pwr1 = (  (step*last_pwr) / last_time  )
     
-    x_y_aggr = []
+    x_y_aggr = [(0,0)]
     
-    print(x_y_client[0][-1])
-    
-    for t in np.arange(0, x_y_client[0][-1], step):
+    for t in np.arange(0, arr[0][-1], step):
         if t > arr[i][0]:
             new_time, new_pwr = arr[i+1][0] - arr[i][0], arr[i+1][1]
             pwr2 = (  (step*new_pwr) / (new_time)  )
@@ -74,24 +72,27 @@ def aggregate_results(arr, step):
     
     return np.array(list(zip(*x_y_aggr)))
 
+def wh_to_w(arr):
+    return [(measurement[0], measurement[1]/measurement[0]) if i == 0 else (measurement[0], measurement[1]/(measurement[0]-arr[i-1][0])) for i, measurement in enumerate(arr) ]
+    
 # Print client beside of server in scatter and plot
 if False:
-    plt.figure(figsize=(20,10))
+    plt.figure(figsize=(10,5))
     plt.plot(x_y_client[0],x_y_client[1], label="Client (mean: {}W".format(round(np.mean(x_y_client[1]), 2)))
     plt.plot(x_y_server[0],x_y_server[1], label="Server (mean: {}W".format(round(np.mean(x_y_server[1]), 2)), c='r')
     plt.scatter(x_y_client[0],x_y_client[1])
     plt.scatter(x_y_server[0],x_y_server[1], c='r')
     plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
     plt.xlabel("Time (s)")
-    plt.ylabel("Power (W)")
+    plt.ylabel("Power (Wh)")
     plt.title("Power consumption")
     plt.legend()
     # plt.savefig("Code/Results/{}".format(args.name))
     plt.show()
 
 # Print client beside of server in bar
-if True:
-    plt.figure(figsize=(20,10))
+if False:
+    plt.figure(figsize=(10,5))
     print(x_y_client[0])
     print(np.diff(x_y_client[0]))
     plt.bar(x_y_client[0][1:], height=x_y_client[1][1:], width=np.diff(x_y_client[0]) * -1, align='edge', edgecolor='black')
@@ -101,7 +102,30 @@ if True:
     # plt.scatter(x_y_server[0],x_y_server[1], c='r')
     # plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
     plt.xlabel("Time (s)")
-    plt.ylabel("Power (W)")
+    plt.ylabel("Power (Wh)")
+    plt.title("Power consumption")
+    plt.legend()
+    # plt.savefig("Code/Results/{}".format(args.name))
+    plt.show()
+
+if True:
+    watts = np.array(list(zip(*wh_to_w(filtered_client))))
+    plt.figure(figsize=(10,5))
+    plt.plot(watts[0],watts[1], color='red', label="Power usage client in terms of W")
+    plt.plot(x_y_client[0],x_y_client[1], color='blue', label="Power usage client in terms of Wh")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Power")
+    plt.title("Power consumption")
+    plt.legend()
+    # plt.savefig("Code/Results/{}".format(args.name))
+    plt.show()
+
+    watts = np.array(list(zip(*wh_to_w(filtered_client))))
+    plt.figure(figsize=(10,5))
+    plt.plot(watts[0],watts[1], color='red', label="Power usage client in terms of W")
+    plt.plot(x_y_client[0],x_y_client[1], color='blue', label="Power usage client in terms of Wh")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Power")
     plt.title("Power consumption")
     plt.legend()
     # plt.savefig("Code/Results/{}".format(args.name))
@@ -110,7 +134,7 @@ if True:
 # Print aggregated with normal
 if False:
     x_y_client_aggr = aggregate_results(filtered_client, 0.1)
-    plt.figure(figsize=(20,10))
+    plt.figure(figsize=(10,5))
     plt.plot(x_y_client[0], x_y_client[1], label="client")
     plt.scatter(x_y_client_aggr[0], x_y_client_aggr[1], label="aggr", c='red')
     plt.plot(x_y_client_aggr[0], x_y_client_aggr[1], label="aggr", c='red')
@@ -128,7 +152,7 @@ if False:
     plt.scatter(x_y_server[0],x_y_server[1], c='r')
     plt.ylim(0, max(np.max(x_y_client[1]), np.max(x_y_server[1])))
     plt.xlabel("Time (s)")
-    plt.ylabel("Power (W)")
+    plt.ylabel("Power (Wh)")
     plt.title("Power consumption flattened")
     plt.legend()
     plt.savefig("Code/Results/{}_flattened.png".format(args.name))
