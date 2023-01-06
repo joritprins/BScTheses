@@ -11,15 +11,15 @@ function cleanup(){
     exit 1
 }
 
-SNNI=cheetah
-# SNNI=SCI_HE
+# SNNI=cheetah
+SNNI=SCI_HE
 Data=sqnet
 # Data=resnet50
 End=5
 
 rm -rf Code/Logs/*
 
-for i in {0..3}; do 
+for i in {0..10}; do 
     echo "Starting $i"
     bash Code/run_test.sh "${SNNI}_${Data}_$i" $i & PID=$!
     wait $PID
