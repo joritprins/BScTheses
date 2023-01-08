@@ -2,25 +2,34 @@
 
 trap cleanup SIGINT
 
+R="\e[31m"
+G="\e[32m"
+ENDCOLOR="\e[0m"
+Y='\033[33m'
+
 function cleanup(){
-    RED="\e[31m"
-    GREEN="\e[32m"
-    ENDCOLOR="\e[0m"
-    printf "${RED}\rCleaning up\n${ENDCOLOR}"
+    printf "${R}\rCleaning up\n${E}"
     kill -2 $PID
     exit 1
 }
 
-# SNNI=cheetah
-SNNI=SCI_HE
-Data=sqnet
-# Data=resnet50
-End=5
+END=50
 
-rm -rf Code/Logs/*
+if test -f Code/Logs/* && [ -n "$(ls -A Code/Logs/)" ]; then 
+    cp Code/Logs/* Code/LogsOld;
+    rm -rf Code/Logs/*
+fi
 
-for i in {0..10}; do 
-    echo "Starting $i"
-    bash Code/run_test.sh "${SNNI}_${Data}_$i" $i & PID=$!
-    wait $PID
+for SNNI in "SCI_HE" "cheetah"; do
+    printf "${Y}\rStarting tests for $SNNI\n${ENDCOLOR}"
+    for Data in "sqnet" "resnet50"; do
+        printf "${Y}\rStarting tests with $Data\n${ENDCOLOR}"
+        for i in $(seq 1 $END); do 
+            printf "${Y}\rRun $i ($SNNI, $Data)\n${ENDCOLOR}"
+            bash Code/run_test.sh $SNNI $Data $i & PID=$!
+            wait $PID
+        done
+        printf "${G}\rFinished tests for $Data\n${ENDCOLOR}"
+    done
+    printf "${G}\rFinished tests for $SNNI\n${ENDCOLOR}"
 done

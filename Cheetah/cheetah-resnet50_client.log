@@ -1,0 +1,766 @@
+Using Eigen for Matmul
+Doing BaseOT ...
+using silent ot pack
+using silent ot pack
+using silent ot pack
+using silent ot pack
+After one-time setup, communication
+Thread i = 0, total data sent till now = 831015
+Thread i = 1, total data sent till now = 1726247
+Thread i = 2, total data sent till now = 1726247
+Thread i = 3, total data sent till now = 1726247
+-----------Syncronizing-----------
+secret_share_mod: 137438953472 bitlength: 37
+backend: Ring-SilentOT-Cheetah
+-----------Syncronized - now starting execution-----------
+HomConv #1 called N=1, H=230, W=230, CI=3, FH=7, FW=7, CO=64, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [1.359] sent [2.85762] MB
+~ 1.359 conv
+expect -3589944492 but got -3589944491
+expect 16286669069 but got 16286669070
+expect -634996464 but got -634996465
+expect 107916773 but got 107916772
+[32mConvolution Output Matches[0m
+Maxpool 1 called N=1, H=56, W=56, C=64, ksizeH=3, ksizeW=3
+Time in sec for current maxpool = 6.304
+~ 6.304 maxpool
+Truncate #1 on 200704 points by 12 bits
+HomBN #1 on shape [64, 56, 56]
+Time in sec for current BN = [0.131] sent [3.81005] MB
+~ 0.131 BN
+Relu #1 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.435
+~ 0.435 relu
+HomConv #2 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.648] sent [3.81007] MB
+~ 0.648 conv
+expect -89520460 but got -89520459
+expect -44572463 but got -44572462
+expect -33340361 but got -33340362
+expect -12335318 but got -12335319
+[32mConvolution Output Matches[0m
+HomConv #3 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.204] sent [3.81044] MB
+~ 0.204 conv
+expect -106012362 but got -106012361
+expect 19492505 but got 19492506
+expect -57843303 but got -57843304
+expect -38635780 but got -38635781
+[32mConvolution Output Matches[0m
+Relu #3 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.433
+~ 0.433 relu
+HomConv #4 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.749] sent [3.80993] MB
+~ 0.749 conv
+expect -12052771 but got -12052770
+expect -27663090 but got -27663089
+expect 19018679 but got 19018678
+expect 1465280 but got 1465279
+[32mConvolution Output Matches[0m
+Relu #5 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.432
+~ 0.432 relu
+HomConv #5 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.622] sent [3.80989] MB
+~ 0.622 conv
+expect -13744726 but got -13744725
+expect -6663116 but got -6663115
+expect -1451948 but got -1451949
+expect 1484304 but got 1484303
+[32mConvolution Output Matches[0m
+Truncate #2 on 802816 points by 12 bits
+HomBN #2 on shape [256, 56, 56]
+Time in sec for current BN = [0.529] sent [15.2405] MB
+~ 0.529 BN
+Relu #7 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 4.967
+~ 4.967 relu
+HomConv #6 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.636] sent [15.2399] MB
+~ 0.636 conv
+expect -66657701 but got -66657700
+expect -4479058 but got -4479057
+expect -70667830 but got -70667831
+expect -1929924 but got -1929925
+[32mConvolution Output Matches[0m
+Relu #9 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.426
+~ 0.426 relu
+HomConv #7 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.778] sent [3.81009] MB
+~ 0.778 conv
+expect 25718131 but got 25718132
+expect -22122050 but got -22122049
+expect 12496921 but got 12496920
+[32mConvolution Output Matches[0m
+Relu #11 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.438
+~ 0.438 relu
+HomConv #8 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.655] sent [3.81] MB
+~ 0.655 conv
+expect -1498717 but got -1498716
+expect -21171147 but got -21171146
+expect -23394928 but got -23394929
+expect -7584742 but got -7584743
+[32mConvolution Output Matches[0m
+Truncate #3 on 802816 points by 12 bits
+HomBN #3 on shape [256, 56, 56]
+Time in sec for current BN = [0.484] sent [15.2405] MB
+~ 0.484 BN
+Relu #13 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 8.207
+~ 8.207 relu
+HomConv #9 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.645] sent [15.2399] MB
+~ 0.645 conv
+expect -14043602 but got -14043601
+expect 23981491 but got 23981492
+expect -11233629 but got -11233630
+expect 40359831 but got 40359830
+[32mConvolution Output Matches[0m
+Relu #15 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.725
+~ 3.725 relu
+HomConv #10 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.762] sent [3.81015] MB
+~ 0.762 conv
+expect 6787657 but got 6787658
+expect 24002664 but got 24002665
+expect 3630254 but got 3630253
+expect -27656710 but got -27656711
+[32mConvolution Output Matches[0m
+Relu #17 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.425
+~ 0.425 relu
+HomConv #11 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.621] sent [3.80997] MB
+~ 0.621 conv
+expect -2241718 but got -2241717
+expect -1646390 but got -1646389
+expect -1219683 but got -1219684
+expect 1468534 but got 1468533
+[32mConvolution Output Matches[0m
+Truncate #4 on 802816 points by 12 bits
+HomBN #4 on shape [256, 56, 56]
+Time in sec for current BN = [0.519] sent [15.2403] MB
+~ 0.519 BN
+Relu #19 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 5.029
+~ 5.029 relu
+HomConv #12 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=512, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.515] sent [3.0956] MB
+~ 4.515 conv
+expect -9934214 but got -9934213
+expect 7206443 but got 7206444
+[32mConvolution Output Matches[0m
+HomConv #13 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [1.051] sent [15.2398] MB
+~ 1.051 conv
+expect -5131954 but got -5131953
+expect 15177115 but got 15177116
+expect -22983167 but got -22983168
+[32mConvolution Output Matches[0m
+Relu #21 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.834
+~ 0.834 relu
+HomConv #14 called N=1, H=58, W=58, CI=128, FH=3, FW=3, CO=128, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.825] sent [7.62018] MB
+~ 2.825 conv
+expect -11617229 but got -11617228
+expect 2608618 but got 2608619
+expect 9218319 but got 9218318
+expect -964479 but got -964480
+[32mConvolution Output Matches[0m
+Relu #23 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.454
+~ 3.454 relu
+HomConv #15 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.292] sent [1.54782] MB
+~ 2.292 conv
+expect -12035453 but got -12035452
+expect 3672369 but got 3672370
+[32mConvolution Output Matches[0m
+Truncate #5 on 401408 points by 12 bits
+HomBN #1 via element-wise mult on 401408 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #25 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 7.294
+~ 7.294 relu
+HomConv #16 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.172] sent [6.13152] MB
+~ 2.172 conv
+expect 9737365 but got 9737366
+expect -4911002 but got -4911001
+[32mConvolution Output Matches[0m
+Relu #27 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.209
+~ 0.209 relu
+HomConv #17 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.754] sent [1.90515] MB
+~ 0.754 conv
+expect 13989305 but got 13989306
+expect -14870864 but got -14870863
+expect -21130410 but got -21130411
+[32mConvolution Output Matches[0m
+Truncate #6 on 100352 points by 12 bits
+HomBN #2 via element-wise mult on 100352 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #29 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.211
+~ 0.211 relu
+HomConv #18 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.375] sent [1.54777] MB
+~ 2.375 conv
+expect 1035250 but got 1035251
+expect 2271616 but got 2271617
+expect 783921 but got 783920
+[32mConvolution Output Matches[0m
+Truncate #7 on 401408 points by 12 bits
+HomBN #3 via element-wise mult on 401408 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #31 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.871
+~ 0.871 relu
+HomConv #19 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.251] sent [6.13159] MB
+~ 2.251 conv
+expect -16246914 but got -16246913
+expect 10834735 but got 10834736
+[32mConvolution Output Matches[0m
+Relu #33 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.22
+~ 0.22 relu
+HomConv #20 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.96] sent [1.90509] MB
+~ 0.96 conv
+expect -6158518 but got -6158517
+expect -2453620 but got -2453619
+expect -32119428 but got -32119429
+[32mConvolution Output Matches[0m
+Relu #35 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.215
+~ 0.215 relu
+HomConv #21 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.393] sent [1.54796] MB
+~ 2.393 conv
+expect -1521010 but got -1521009
+expect 2674318 but got 2674319
+[32mConvolution Output Matches[0m
+Truncate #8 on 401408 points by 12 bits
+HomBN #4 via element-wise mult on 401408 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #37 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.847
+~ 0.847 relu
+HomConv #22 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.252] sent [6.13142] MB
+~ 2.252 conv
+expect -28963095 but got -28963094
+expect -18138899 but got -18138898
+[32mConvolution Output Matches[0m
+Relu #39 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.546
+~ 3.546 relu
+HomConv #23 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.683] sent [1.90528] MB
+~ 0.683 conv
+expect 22713030 but got 22713031
+expect 8586797 but got 8586798
+[32mConvolution Output Matches[0m
+Relu #41 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.214
+~ 0.214 relu
+HomConv #24 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.39] sent [1.5477] MB
+~ 2.39 conv
+expect -3637569 but got -3637568
+expect -1410146 but got -1410145
+expect 524966 but got 524965
+[32mConvolution Output Matches[0m
+Truncate #9 on 401408 points by 12 bits
+HomBN #5 via element-wise mult on 401408 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #43 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 4.1
+~ 4.1 relu
+HomConv #25 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=1024, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.669] sent [1.5479] MB
+~ 4.669 conv
+expect 761060 but got 761061
+expect -10697060 but got -10697059
+[32mConvolution Output Matches[0m
+HomConv #26 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.341] sent [6.13217] MB
+~ 4.341 conv
+expect -26670037 but got -26670036
+expect -31898231 but got -31898230
+expect -5938019 but got -5938020
+[32mConvolution Output Matches[0m
+Relu #45 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.445
+~ 0.445 relu
+HomConv #27 called N=1, H=30, W=30, CI=256, FH=3, FW=3, CO=256, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.847] sent [3.81011] MB
+~ 2.847 conv
+expect -3700613 but got -3700612
+expect 3081462 but got 3081463
+[32mConvolution Output Matches[0m
+Relu #47 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.113
+~ 0.113 relu
+HomConv #28 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.57] sent [0.773962] MB
+~ 2.57 conv
+expect 569698 but got 569699
+expect -1807876 but got -1807875
+[32mConvolution Output Matches[0m
+Truncate #10 on 200704 points by 12 bits
+HomBN #6 via element-wise mult on 200704 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #49 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.648
+~ 3.648 relu
+HomConv #29 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.287] sent [3.09571] MB
+~ 2.287 conv
+expect 16903618 but got 16903619
+expect -434899 but got -434898
+[32mConvolution Output Matches[0m
+Relu #51 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.114
+~ 0.114 relu
+HomConv #30 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.808] sent [0.952496] MB
+~ 0.808 conv
+expect -11691403 but got -11691402
+expect -36260724 but got -36260723
+[32mConvolution Output Matches[0m
+Relu #53 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.113
+~ 0.113 relu
+HomConv #31 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.55] sent [0.773762] MB
+~ 2.55 conv
+expect 4144331 but got 4144332
+expect 2044757 but got 2044758
+expect -2418716 but got -2418717
+[32mConvolution Output Matches[0m
+Truncate #11 on 200704 points by 12 bits
+HomBN #7 via element-wise mult on 200704 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #55 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.397
+~ 0.397 relu
+HomConv #32 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.421] sent [3.09581] MB
+~ 2.421 conv
+expect -10785964 but got -10785963
+expect 10569250 but got 10569251
+expect -50384 but got -50385
+[32mConvolution Output Matches[0m
+Relu #57 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.121
+~ 0.121 relu
+HomConv #33 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.818] sent [0.952606] MB
+~ 0.818 conv
+expect -14532200 but got -14532199
+expect -1111865 but got -1111864
+[32mConvolution Output Matches[0m
+Relu #59 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.112
+~ 0.112 relu
+HomConv #34 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.463] sent [0.773808] MB
+~ 2.463 conv
+expect 145437 but got 145438
+expect 72645 but got 72646
+[32mConvolution Output Matches[0m
+Truncate #12 on 200704 points by 12 bits
+HomBN #8 via element-wise mult on 200704 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #61 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.445
+~ 0.445 relu
+HomConv #35 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.216] sent [3.09572] MB
+~ 2.216 conv
+expect -38285598 but got -38285597
+expect -3046563 but got -3046562
+expect -6922539 but got -6922540
+[32mConvolution Output Matches[0m
+Relu #63 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.112
+~ 0.112 relu
+HomConv #36 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.821] sent [0.952596] MB
+~ 0.821 conv
+expect 1343448 but got 1343449
+expect 14633075 but got 14633076
+[32mConvolution Output Matches[0m
+Relu #65 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.115
+~ 0.115 relu
+HomConv #37 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.64] sent [0.773938] MB
+~ 2.64 conv
+expect 542023 but got 542024
+expect 2072678 but got 2072679
+[32mConvolution Output Matches[0m
+Truncate #13 on 200704 points by 12 bits
+HomBN #9 via element-wise mult on 200704 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #67 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.701
+~ 3.701 relu
+HomConv #38 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.228] sent [3.09562] MB
+~ 2.228 conv
+expect -9899538 but got -9899537
+expect -18703360 but got -18703359
+[32mConvolution Output Matches[0m
+Relu #69 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.105
+~ 0.105 relu
+HomConv #39 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.8] sent [0.952477] MB
+~ 0.8 conv
+expect -12641118 but got -12641117
+expect -4961899 but got -4961898
+[32mConvolution Output Matches[0m
+Relu #71 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.108
+~ 0.108 relu
+HomConv #40 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.57] sent [0.773835] MB
+~ 2.57 conv
+expect 1455106 but got 1455107
+expect -142843 but got -142842
+[32mConvolution Output Matches[0m
+Truncate #14 on 200704 points by 12 bits
+HomBN #10 via element-wise mult on 200704 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #73 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.665
+~ 3.665 relu
+HomConv #41 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.281] sent [3.0956] MB
+~ 2.281 conv
+expect -16342836 but got -16342835
+expect -37218523 but got -37218522
+[32mConvolution Output Matches[0m
+Relu #75 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.11
+~ 0.11 relu
+HomConv #42 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.765] sent [0.952451] MB
+~ 0.765 conv
+expect -103825 but got -103824
+expect 24819747 but got 24819748
+[32mConvolution Output Matches[0m
+Relu #77 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.116
+~ 0.116 relu
+HomConv #43 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.577] sent [0.773954] MB
+~ 2.577 conv
+expect 354306 but got 354307
+expect -554498 but got -554497
+[32mConvolution Output Matches[0m
+Truncate #15 on 200704 points by 12 bits
+HomBN #11 via element-wise mult on 200704 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #79 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.462
+~ 0.462 relu
+HomConv #44 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=2048, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [5.144] sent [0.774197] MB
+~ 5.144 conv
+expect 710974 but got 710975
+expect -449144 but got -449143
+[32mConvolution Output Matches[0m
+HomConv #45 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.43] sent [3.09559] MB
+~ 4.43 conv
+expect 2056821 but got 2056822
+expect 4673701 but got 4673702
+[32mConvolution Output Matches[0m
+Relu #81 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.21
+~ 0.21 relu
+HomConv #46 called N=1, H=16, W=16, CI=512, FH=3, FW=3, CO=512, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.985] sent [1.90521] MB
+~ 2.985 conv
+expect -20764650 but got -20764649
+expect -9128539 but got -9128538
+[32mConvolution Output Matches[0m
+Relu #83 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.061
+~ 0.061 relu
+HomConv #47 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [3.303] sent [0.416722] MB
+~ 3.303 conv
+expect -1727692 but got -1727691
+expect -1207439 but got -1207438
+expect -654772 but got -654773
+[32mConvolution Output Matches[0m
+Truncate #16 on 100352 points by 12 bits
+HomBN #12 via element-wise mult on 100352 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #85 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.222
+~ 0.222 relu
+HomConv #48 called N=1, H=7, W=7, CI=2048, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.307] sent [1.48827] MB
+~ 2.307 conv
+expect 8109831 but got 8109832
+expect -17720870 but got -17720869
+[32mConvolution Output Matches[0m
+Relu #87 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.054
+~ 0.054 relu
+HomConv #49 called N=1, H=7, W=7, CI=512, FH=3, FW=3, CO=512, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [1.223] sent [0.654922] MB
+~ 1.223 conv
+expect -3287288 but got -3287287
+expect -17295092 but got -17295091
+[32mConvolution Output Matches[0m
+Relu #89 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.059
+~ 0.059 relu
+HomConv #50 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [3.093] sent [0.416809] MB
+~ 3.093 conv
+expect -1972426 but got -1972425
+expect 491050 but got 491051
+expect -6843304 but got -6843305
+[32mConvolution Output Matches[0m
+Truncate #17 on 100352 points by 12 bits
+HomBN #13 via element-wise mult on 100352 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #91 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.473
+~ 3.473 relu
+HomConv #51 called N=1, H=7, W=7, CI=2048, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.314] sent [1.48833] MB
+~ 2.314 conv
+expect -12036615 but got -12036614
+expect -21822296 but got -21822295
+[32mConvolution Output Matches[0m
+Relu #93 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.057
+~ 0.057 relu
+HomConv #52 called N=1, H=7, W=7, CI=512, FH=3, FW=3, CO=512, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [1.281] sent [0.655071] MB
+~ 1.281 conv
+expect -36603659 but got -36603658
+expect -30727934 but got -30727933
+[32mConvolution Output Matches[0m
+Relu #95 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.055
+~ 0.055 relu
+HomConv #53 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [3.094] sent [0.416724] MB
+~ 3.094 conv
+expect -7781393 but got -7781392
+expect -5958160 but got -5958159
+expect -7603962 but got -7603963
+[32mConvolution Output Matches[0m
+Truncate #18 on 100352 points by 12 bits
+HomBN #14 via element-wise mult on 100352 points
+[32mElemWiseSecretVectorMult Output Matches[0m
+Relu #97 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.21
+~ 0.21 relu
+AvgPool 1 called N=1, H=1, W=1, C=2048, ksizeH=7, ksizeW=7
+Time in sec for current avgpool = 0.029
+~ 0.029 avgpool
+Time in sec for current matmul = 0.179
+~ 0.179 matmul
+-5487835 => -5487836
+-19052204 => -19052205
+9122669 => 9122668
+-20008284 => -20008285
+-5695376 => -5695377
+-28522733 => -28522734
+-33565424 => -33565425
+-29370373 => -29370374
+-27339592 => -27339593
+17764196 => 17764195
+54031268 => 54031267
+5020944 => 5020943
+-37408308 => -37408309
+10457545 => 10457544
+-26940750 => -26940751
+10895666 => 10895665
+6791933 => 6791932
+-21688594 => -21688595
+12923576 => 12923575
+51166593 => 51166592
+22435796 => 22435795
+61318781 => 61318780
+-11418388 => -11418389
+1450935 => 1450934
+-4683329 => -4683330
+-4480031 => -4480032
+8657550 => 8657549
+106460587 => 106460586
+82258958 => 82258957
+75144976 => 75144975
+83783543 => 83783542
+32254119 => 32254118
+-9144815 => -9144816
+-11487993 => -11487994
+-173276 => -173277
+8093191 => 8093190
+-17545145 => -17545146
+-27897287 => -27897288
+-16977953 => -16977954
+-9851567 => -9851568
+17861574 => 17861573
+-26975442 => -26975443
+-9854835 => -9854836
+-21120097 => -21120098
+-6677295 => -6677296
+-31736001 => -31736002
+-11172444 => -11172445
+13303651 => 13303650
+27571022 => 27571021
+-23579357 => -23579358
+-47354743 => -47354744
+-23442993 => -23442994
+-9189117 => -9189118
+-36164519 => -36164520
+-21607082 => -21607083
+2536198 => 2536197
+16703892 => 16703891
+16306922 => 16306921
+19521562 => 19521561
+12679020 => 12679019
+-20369568 => -20369569
+-23850634 => -23850635
+-14110688 => -14110689
+-2157704 => -2157705
+10165439 => 10165438
+-44108116 => -44108117
+-9899071 => -9899072
+3824936 => 3824935
+22950419 => 22950418
+-14739107 => -14739108
+-9474710 => -9474711
+-12499028 => -12499029
+-5537344 => -5537345
+52810211 => 52810210
+-4923194 => -4923195
+8681870 => 8681869
+-19256740 => -19256741
+-6345907 => -6345908
+3832942 => 3832941
+-27088109 => -27088110
+-20918028 => -20918029
+617158 => 617157
+-18104614 => -18104615
+-1024941 => -1024942
+44076870 => 44076869
+-11938678 => -11938679
+5479212 => 5479211
+-19131912 => -19131913
+26631001 => 26631000
+16192275 => 16192274
+13748810 => 13748809
+8635214 => 8635213
+-1218032 => -1218033
+11666982 => 11666981
+66820114 => 66820113
+18710025 => 18710024
+-1304107 => -1304108
+9505384 => 9505383
+-1681402 => -1681403
+-17815354 => -17815355
+-8363667 => -8363668
+-20073408 => -20073409
+-22312675 => -22312676
+-8427620 => -8427621
+35889715 => 35889714
+-10938669 => -10938670
+6546230 => 6546229
+6346784 => 6346783
+5645886 => 5645885
+18920310 => 18920309
+34373914 => 34373913
+-6379612 => -6379613
+-24240697 => -24240698
+2471994 => 2471993
+-7212918 => -7212919
+-25993520 => -25993521
+16895683 => 16895682
+3258779 => 3258778
+-18085043 => -18085044
+-23650459 => -23650460
+8254941 => 8254940
+-18564376 => -18564377
+-14803919 => -14803920
+-1988599 => -1988600
+-3507465 => -3507466
+-7773206 => -7773207
+10529665 => 10529664
+7814980 => 7814979
+-23430189 => -23430190
+11369932 => 11369931
+-29733706 => -29733707
+-27679372 => -27679373
+-5708607 => -5708608
+1918835 => 1918834
+-15650753 => -15650754
+[32mMatMul Output Matches[0m
+ArgMax 1 called, s1=1, s2=1001
+Thread i = 0, total data sent till now = 426853543
+Thread i = 1, total data sent till now = 201876823
+Thread i = 2, total data sent till now = 51414076
+Thread i = 3, total data sent till now = 201876823
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+Total time taken = 241356 milliseconds.
+Total data sent = 835.43 MiB.
+Number of rounds = 1388
+Total comm (sent+received) = (see SERVER OUTPUT)
+------------------------------------------------------
+Total time in Conv = 106.438 seconds.
+Total time in MatMul = 0.179 seconds.
+Total time in BatchNorm = 4.894 seconds.
+Total time in Truncation = 49.565 seconds.
+Total time in Relu = 64.935 seconds.
+Total time in MaxPool = 6.304 seconds.
+Total time in AvgPool = 0.029 seconds.
+Total time in ArgMax = 0.008 seconds.
+Total time in MatAdd = 0 seconds.
+Total time in MatAddBroadCast = 0 seconds.
+Total time in MulCir = 0 seconds.
+Total time in ScalarMul = 0 seconds.
+Total time in Sigmoid = 0 seconds.
+Total time in Tanh = 0 seconds.
+Total time in Sqrt = 0 seconds.
+Total time in NormaliseL2 = 0 seconds.
+------------------------------------------------------
+Conv data sent = 167.761 MiB.
+MatMul data sent = 1.19057 MiB.
+BatchNorm data sent = 189.91 MiB.
+Truncation data sent = 172.698 MiB.
+Relu data sent = 258.67 MiB.
+Maxpool data sent = 44.5175 MiB.
+Avgpool data sent = 0.644144 MiB.
+ArgMax data sent = 0.0393038 MiB.
+MatAdd data sent = 0 MiB.
+MatAddBroadCast data sent = 0 MiB.
+MulCir data sent = 0 MiB.
+Sigmoid data sent = 0 MiB.
+Tanh data sent = 0 MiB.
+Sqrt data sent = 0 MiB.
+NormaliseL2 data sent = 0 MiB.
+------------------------------------------------------
+top-10 values from ResNet50
+[13.0656087,11.7062997,10.7426326,10.4344755,9.8534871,9.2988851,8.8935845,8.2433911,7.6978478,7.5006328,]
+predicted label=249
