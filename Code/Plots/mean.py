@@ -58,11 +58,11 @@ plt.xlabel("Time (s)")
 plt.ylabel("Power consumption (Wh)")
 plt.title("Power usage of client while running sqnet")
 plt.plot(xcs, cheetah_sqnet_client, 
-            label="Cheetah, mean: {}Wh, total: {}".format(
+            label="Cheetah, mean: {}Wh, total: {}W".format(
                 round(np.mean(cheetah_sqnet_client), 1), 
                 round(np.sum(cheetah_sqnet_client)*56/3600, 1)))
 plt.plot(xss, SCI_HE_sqnet_client, 
-            label="SCI_HE, mean: {}Wh, total: {}".format(
+            label="SCI_HE, mean: {}Wh, total: {}W".format(
                 round(np.mean(SCI_HE_sqnet_client), 1), 
                 round(np.sum(SCI_HE_sqnet_client)*83/3600, 1)))
 plt.legend()
