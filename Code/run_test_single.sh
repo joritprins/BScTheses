@@ -37,32 +37,32 @@ function cleanup(){
         fi
     fi
     
-    if [[ ! -z "$PID_CLIENT" ]]; then
-        if ps -p $PID_CLIENT > /dev/null 2>&1; then 
-            if kill $PID_CLIENT; then 
-                printf "${GREEN}Killed client script\n${ENDCOLOR}"
+    if [[ ! -z "$PID_SCRIPT" ]]; then
+        if ps -p $PID_SCRIPT > /dev/null 2>&1; then 
+            if kill $PID_SCRIPT; then 
+                printf "${GREEN}Killed script\n${ENDCOLOR}"
             else 
-                printf "${RED}Error killing client script, pid:${PID_CLIENT}\n${ENDCOLOR}";
+                printf "${RED}Error killing script, pid:${PID_CLIENT}\n${ENDCOLOR}";
             fi
         else
-            printf "No PID_CLIENT running\n"
+            printf "No script running\n"
         fi
     else
-        printf "PID_CLIENT not set\n"
+        printf "PID_SCRIPT not set\n"
     fi
 
-    if [[ ! -z "$PID_RUN_SERVER" ]]; then
-        if ps -p $PID_RUN_SERVER > /dev/null 2>&1; then 
-            if kill $PID_RUN_SERVER; then 
-                printf "${GREEN}Killed server process\n${ENDCOLOR}"
+    if [[ ! -z "$PID_RUN" ]]; then
+        if ps -p $PID_RUN > /dev/null 2>&1; then 
+            if kill $PID_RUN; then 
+                printf "${GREEN}Killed running process\n${ENDCOLOR}"
             else 
-                printf "${RED}Error killing server process, pid:${PID_RUN_SERVER}\n${ENDCOLOR}"
+                printf "${RED}Error killing running process, pid:${PID_RUN_SERVER}\n${ENDCOLOR}"
             fi
         else
-            printf "No PID_RUN_SERVER running\n"
+            printf "No PID_RUN running\n"
         fi
     else
-        printf "PID_RUN_SERVER not set\n"
+        printf "PID_RUN not set\n"
     fi
 
     exit 1
@@ -73,13 +73,15 @@ modprobe intel_rapl_common # or intel_rapl for kernels < 5
 # Clear last results
 
 # Create folder for results (if it does not exist) and empty (if it does exist)
-JSON_FOLDER=Code/Logs/${SNNI}_${NN}/
-JSON_PATH=${JSON_FOLDER}${TYPE}_${NR}.json # output saved in /cheetah_sqnet/client_0.json
-if [[ -d ${JSON_FOLDER} ]]; then
+JSON_FOLDER=Code/Logs/${SNNI}_${NN}
+JSON_PATH=${JSON_FOLDER}/${TYPE}_${NR}.json # output saved in /cheetah_sqnet/client_0.json
+if [[ -d ${JSON_FOLDER}/ ]]; then
+    echo "Folder does exists, testing for existing files"
     if test -f $JSON_PATH; then rm $JSON_PATH; fi
-    if test -f ${JSON_FOLDER}${TYPE}_pids; then rm ${JSON_FOLDER}${TYPE}_pids; fi
+    if test -f ${JSON_FOLDER}/${TYPE}_pids; then rm ${JSON_FOLDER}/${TYPE}_pids; fi
 else
-    mkdir $JSON_FOLDER
+    echo "Folder does not exists, creating new one"
+    mkdir -p $JSON_FOLDER
 fi
 
 
@@ -119,7 +121,7 @@ printf "${GREEN}Scaphandre finished: %d:%d:%d${ENDCOLOR}\n" $[$(date +%-H)] $[$(
 cd ..
 
 printf "\n${TYPE} script pid: ${PID_SCRIPT}\nScaphandre pid: ${PID_SCAPHANDRE}\nRun-${TYPE} pid: ${PID_RUN}\n\nEND\n\n"
-echo '"'${NR}'":{"'${TYPE}'":'${PID_RUN}',"scaphandre":'${PID_SCAPHANDRE}'}END' >> ${JSON_FOLDER}${TYPE}_pids
+echo '"'${NR}'":{"'${TYPE}'":'${PID_RUN}',"scaphandre":'${PID_SCAPHANDRE}'}END' >> ${JSON_FOLDER}/${TYPE}_pids
 exit 1
 
 
