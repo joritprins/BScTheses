@@ -1,13 +1,20 @@
-Cheetah/build/*
-Cheetah/credits/*
-Cheetah/data/*
-Cheetah/deps/*
-Cheetah/include/*
-Cheetah/networks/*
-Cheetah/patch/*
-Cheetah/pretrained/*
-Cheetah/SCI/*
-Cheetah/sqnet_demo/*
+Cheetah/build/
+Cheetah/credits/
+Cheetah/data/
+Cheetah/deps/
+Cheetah/include/
+Cheetah/networks/
+Cheetah/patch/
+Cheetah/pretrained/
+Cheetah/SCI
+Cheetah/sqnet_demo/
+Cheetah/.gitignore
+Cheetah/.gitmodules
+Cheetah/CHANGES.md
+Cheetah/CMakeLists.txt
+Cheetah/QA.md
+Cheetah/README.md
+
 Scaphandre/*
 
 ### C++ ###
