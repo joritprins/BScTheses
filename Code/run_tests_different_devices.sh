@@ -13,7 +13,7 @@ function cleanup(){
     exit 1
 }
 
-if [ $# -eq 1 ]; then
+if [ $# -eq 2 ]; then
     TYPE=$1
     END=$2
 else
@@ -21,12 +21,12 @@ else
     END=10
 fi
 
-if test -f Code/Logs/* && [ -n "$(ls -A Code/Logs/)" ]; then 
-    cp Code/Logs/* Code/LogsOld;
-    rm -rf Code/Logs/*
-fi
+# if test -f Code/Logs/* && [ -n "$(ls -A Code/Logs/)" ]; then 
+#     cp Code/Logs/* Code/LogsOld;
+#     rm -rf Code/Logs/*
+# fi
 
-for SNNI in "SCI_HE" "cheetah"; do
+for SNNI in "cheetah" "SCI_HE"; do
     printf "${Y}\rStarting tests for $SNNI\n${ENDCOLOR}"
     for Data in "sqnet" "resnet50"; do
         printf "${Y}\rStarting tests with $Data\n${ENDCOLOR}"
