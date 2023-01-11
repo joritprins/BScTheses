@@ -13,15 +13,15 @@ results = []
 plt.figure(figsize=(10,5))
 
 # Open file containing all PID's and save it as string
-PID_string = open('Code/Plots/Cheetah_sqnet_10/pids', 'r').read().split("END")
+PID_string = open('Code/Plots/Results/cheetah_sqnet_50/pids', 'r').read().split("END")
 # Convert string to python dictionary
 PID_dict = json.loads("{{{}}}".format(",".join(PID_string[:-1])))
 
 interp_client = []; interp_server =[]
 
-runs = 4
-for i in range(0,runs):
-    json_string = open('Code/Plots/Cheetah_sqnet_10/cheetah_sqnet_{}.json'.format(i), 'r').read().replace('\n', '')
+runs = 50
+for i in range(1,runs+1):
+    json_string = open('Code/Plots/Results/cheetah_sqnet_50/cheetah_sqnet_{}.json'.format(i), 'r').read().replace('\n', '')
     arr = np.array(json.loads(json_string))    
     start = arr[0]['host']['timestamp']
 
@@ -36,11 +36,11 @@ for i in range(0,runs):
     x_ = np.arange(0, x_y_server[0][-1], x_y_server[0][-1]/1000)
     interp_server.append(np.interp(x_, x_y_server[0], x_y_server[1]))
 
-plt.ylim(0, max(np.max(interp_client), np.max(interp_server)))
+# plt.ylim(0, max(np.max(interp_client), np.max(interp_server)))
 plt.xlabel("Time (s)")
 plt.ylabel("Power consumption (Wh)")
 plt.title("Power usage after {} runs".format(runs))
-x_ = np.arange(0, 100, 0.1)
+x_ = np.arange(0, 90, 0.1)
 plt.plot(x_, np.mean(interp_client, 0), label="Client")
 plt.plot(x_, np.mean(interp_server, 0), label="Server")
 plt.legend()
