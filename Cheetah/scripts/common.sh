@@ -45,8 +45,10 @@ mkdir -p $BUILD_DIR
 mkdir -p $DEPS_DIR
 
 # change the ip if running remotely
-SERVER_IP=127.0.0.1
-SERVER_PORT=12345
+# SERVER_IP=127.0.0.1
+# SERVER_PORT=12345
+SERVER_IP=192.168.0.111
+SERVER_PORT=12121
 
 # fixed-point scale
 FXP_SCALE=12
