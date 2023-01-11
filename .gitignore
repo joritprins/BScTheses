@@ -14,6 +14,7 @@ Cheetah/CHANGES.md
 Cheetah/CMakeLists.txt
 Cheetah/QA.md
 Cheetah/README.md
+Cheetah/*.log
 
 Scaphandre/*
 
