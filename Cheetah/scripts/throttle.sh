@@ -4,7 +4,7 @@
 ######
 
 ## replace DEV=lo with your card (e.g., eth0)
-DEV=lo 
+DEV=eno1 
 if [ "$1" == "del" ]
 then
 	sudo tc qdisc del dev $DEV root
@@ -14,9 +14,9 @@ if [ "$1" == "lan" ]
 then
 sudo tc qdisc del dev $DEV root
 ## about 3Gbps
-sudo tc qdisc add dev $DEV root handle 1: tbf rate 3000mbit burst 100000 limit 10000
+sudo tc qdisc add dev $DEV root handle 1: tbf rate $2mbit burst 100000 limit 10000
 ## about 0.3ms ping latency
-sudo tc qdisc add dev $DEV parent 1:1 handle 10: netem delay 0.15msec
+# sudo tc qdisc add dev $DEV parent 1:1 handle 10: netem delay 0.15msec
 fi
 if [ "$1" == "wan" ]
 then

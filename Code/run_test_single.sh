@@ -11,11 +11,12 @@ NN="sqnet"
 # NN = resnet50
 
 #TODO: error checking
-if [ $# -eq 4 ]; then
+if [ $# -eq 5 ]; then
     SNNI=$1
     NN=$2
     NR=$3
     TYPE=$4
+    BW=$5
 else
     SNNI="cheetah"
     # SNNI = SCI_HE
@@ -23,6 +24,7 @@ else
     # NN = resnet50
     NR=0
     TYPE=server
+    BW=0
 fi
 
 trap cleanup SIGINT
@@ -73,7 +75,11 @@ modprobe intel_rapl_common # or intel_rapl for kernels < 5
 # Clear last results
 
 # Create folder for results (if it does not exist) and empty (if it does exist)
-JSON_FOLDER=Code/Logs/${SNNI}_${NN}
+if [ $BW == 0 ]; then
+    JSON_FOLDER=Code/Logs/${SNNI}_${NN};
+else 
+    JSON_FOLDER=Code/Logs/${BW}_${SNNI}_${NN};
+fi;
 JSON_PATH=${JSON_FOLDER}/${TYPE}_${NR}.json # output saved in /cheetah_sqnet/client_0.json
 if [[ -d ${JSON_FOLDER}/ ]]; then
     echo "Folder does exists, testing for existing files"
@@ -84,7 +90,7 @@ else
     mkdir -p $JSON_FOLDER
 fi
 
-
+exit 1
 # Start scaphandre and save its pid to PID_SCAPHANDRE
 ./Scaphandre/target/debug/scaphandre json -n 1 -s 0 -f $JSON_PATH & PID_SCAPHANDRE=$!
 # Wait till scaphandre started and outputs results
@@ -98,7 +104,7 @@ printf "${GREEN}Started scaphandre: %d:%d:%d${ENDCOLOR}\n" $[$(date +%-H)] $[$(d
 cd Cheetah
 if test -f data/${TYPE}; then rm data/${TYPE}; fi
 
-if . scripts/run-${TYPE}.sh $1 $2 & PID_SCRIPT=$!; then   
+if bash scripts/run-${TYPE}.sh $1 $2 & PID_SCRIPT=$!; then   
     # wait $PID_SERVER
     printf "${GREEN}Started ${TYPE}\n${ENDCOLOR}"
 else

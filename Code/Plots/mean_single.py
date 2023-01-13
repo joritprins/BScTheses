@@ -78,13 +78,17 @@ def plot(dir: str, runs: int, end: int):
     plt.ylabel("Power consumption (W)")
     data = dir.split('/')[-1].split('_')
     plt.title("Power usage of {} with {} (mean of {} runs)".format(data[0], data[1], runs))
-    plt.plot(x_, np.mean(interp_client, 0), label="Client, mean: {}W".format(round(np.mean(np.mean(interp_client, 0)), 3)))
-    plt.plot(x_, np.mean(interp_server, 0), label="Server, mean: {}W".format(round(np.mean(np.mean(interp_server, 0)), 3)))
+    plt.plot(x_, np.mean(interp_client, 0), label="Client, mean: {}W, total: {}Wh".format(
+                            round(np.mean(np.mean(interp_client, 0)), 3),
+                            round(np.mean(np.mean(interp_client, 0)) * (end /3600), 3)))
+    plt.plot(x_, np.mean(interp_server, 0), label="Server, mean: {}W, total: {}Wh".format(
+                            round(np.mean(np.mean(interp_server, 0)), 3),
+                            round(np.mean(np.mean(interp_server, 0)) * (end /3600), 3)))
     plt.legend()
     plt.savefig("Code/Plots/Means/{}_{}_{}.png".format(os.path.basename(__file__).partition(".py")[0], data[1], data[0]))
     return (x_, np.mean(interp_client, 0), np.mean(interp_server, 0))
 
-xcr, csc, css = plot('Code/Plots/Results/laptop_desktop/cheetah_sqnet', runs=10, end=110)
+xcr, csc, css = plot('Code/Plots/Results/laptop_desktop/cheetah_sqnet', runs=10, end=115)
 exit()
 # Plot means of client side
 plt.figure(figsize=(10,5))
