@@ -90,7 +90,6 @@ else
     mkdir -p $JSON_FOLDER
 fi
 
-exit 1
 # Start scaphandre and save its pid to PID_SCAPHANDRE
 ./Scaphandre/target/debug/scaphandre json -n 1 -s 0 -f $JSON_PATH & PID_SCAPHANDRE=$!
 # Wait till scaphandre started and outputs results

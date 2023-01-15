@@ -21,8 +21,8 @@ else
     END=10
 fi
 
-sudo rm -rf Code/Logs
-sudo mkdir Code/Logs
+# sudo rm -rf Code/Logs
+# sudo mkdir Code/Logs
 
 
 printf "$G#####################################################\n
@@ -30,28 +30,43 @@ printf "$G#####################################################\n
 #####################################################\n$ENDCOLOR"
 
 sudo bash Cheetah/scripts/throttle.sh lan 10000
-for SNNI in "cheetah" "SCI_HE"; do
-    printf "${Y}############ Testing for $SNNI ############\n${ENDCOLOR}"
-    for NN in "sqnet" "resnet50"; do
-        printf "${Y}############ Testing for $NN\n${ENDCOLOR}"
+# for SNNI in "cheetah" "SCI_HE"; do
+#     printf "${Y}############ Testing for $SNNI ############\n${ENDCOLOR}"
+#     for NN in "sqnet" "resnet50"; do
+#         printf "${Y}############ Testing for $NN\n${ENDCOLOR}"
 
-        for BW in "50" "100" "150" "200" "300" "400" "500"; do
-            if [ $TYPE == server ]; then
-                printf "Server, changing bandwith to $BW\n";
-                sudo bash Cheetah/scripts/throttle.sh lan $BW;
-            fi
+#         for BW in "50" "100" "150" "200" "300" "400" "500"; do
+#             if [ $TYPE == server ]; then
+#                 printf "Server, changing bandwith to $BW\n";
+#                 sudo bash Cheetah/scripts/throttle.sh lan $BW;
+#             fi
 
-            for i in $(seq 1 $END); do 
-                printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-                bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
-                wait $PID
-            done
-        done
-        printf "${G}\r############ Finished tests for $NN\n${ENDCOLOR}"
+#             for i in $(seq 1 $END); do 
+#                 printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
+#                 bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
+#                 wait $PID
+#             done
+#         done
+#         printf "${G}\r############ Finished tests for $NN\n${ENDCOLOR}"
+#     done
+#     printf "${G}\r############ Finished tests for $SNNI\n${ENDCOLOR}"
+# done
+# sudo bash Cheetah/scripts/throttle.sh del
+
+NN=resnet50
+SNNI=SCI_HE
+for BW in "50" "100" "200" "400" "500"; do
+    if [ $TYPE == server ]; then
+        printf "Server, changing bandwith to $BW\n";
+        sudo bash Cheetah/scripts/throttle.sh lan $BW;
+    fi
+
+    for i in $(seq 1 $END); do 
+        printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
+        bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
+        wait $PID
     done
-    printf "${G}\r############ Finished tests for $SNNI\n${ENDCOLOR}"
 done
-sudo bash Cheetah/scripts/throttle.sh del
 
 printf "$G#####################################################\n
 ############ STARTING CHANGING CLIENT BW ############\n
@@ -63,7 +78,7 @@ for SNNI in "cheetah" "SCI_HE"; do
     for NN in "sqnet" "resnet50"; do
         printf "${Y}############ Testing for $NN\n${ENDCOLOR}"
 
-        for BW in "50" "100" "150" "200" "300" "400" "500"; do
+        for BW in "50" "100" "200" "400" "500"; do
             if [ $TYPE == client ]; then
                 printf "Server, changing bandwith to $BW\n";
                 sudo bash Cheetah/scripts/throttle.sh lan $BW;
@@ -91,7 +106,7 @@ for SNNI in "cheetah" "SCI_HE"; do
     for NN in "sqnet" "resnet50"; do
         printf "${Y}############ Testing for $NN\n${ENDCOLOR}"
 
-        for BW in "50" "100" "150" "200" "300" "400" "500"; do
+        for BW in "50" "100" "200" "400" "500"; do
             if [ $TYPE == client ]; then
                 printf "changing bandwith to $BW\n";
                 sudo bash Cheetah/scripts/throttle.sh lan $BW;
