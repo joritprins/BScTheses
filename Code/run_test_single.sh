@@ -76,9 +76,9 @@ modprobe intel_rapl_common # or intel_rapl for kernels < 5
 
 # Create folder for results (if it does not exist) and empty (if it does exist)
 if [ $BW == 0 ]; then
-    JSON_FOLDER=Code/Logs/${SNNI}_${NN};
+    JSON_FOLDER=Code/Logs/${SNNI}-${NN};
 else 
-    JSON_FOLDER=Code/Logs/${BW}_${SNNI}_${NN};
+    JSON_FOLDER=Code/Logs/${BW}-${SNNI}-${NN};
 fi;
 JSON_PATH=${JSON_FOLDER}/${TYPE}_${NR}.json # output saved in /cheetah_sqnet/client_0.json
 if [[ -d ${JSON_FOLDER}/ ]]; then

@@ -1,134 +1,202 @@
-# Insert path for functions.py file
 import sys
-sys.path.insert(0, '{}/..'.format(sys.path[0]))
-
 import numpy as np
 import matplotlib.pyplot as plt
 import json
 import os
+
+# Insert path for functions.py file
+sys.path.insert(0, '{}/..'.format(sys.path[0]))
 from functions import filter_results
 
-# def plot(dir: str, file_names: str, runs: int, end: int):
-    # x_ = np.arange(0, end, 0.1)
-    
-    # interp_client = []; interp_server = []; arr = []
-    # for i in range(1,runs+1):
-    #     json_string = open('{}/{}_{}.json'.format(dir, file_names, i), 'r').read().replace('\n', '')
-    #     arr = np.array(json.loads(json_string))
-    
-    #     start = arr[0]['host']['timestamp']
-    #     filtered_client = filter_results(arr, PID_dict[str(i)]['client'], start=start)
-    #     filtered_server = filter_results(arr, PID_dict[str(i)]['server'], start=start)
-        
-    #     x_y_client = np.array(list(zip(*filtered_client)))
-    #     x_y_server = np.array(list(zip(*filtered_server)))
-    
-    #     interp_client.append(np.interp(x_, x_y_client[0], x_y_client[1], left=0, right=0))
-    #     interp_server.append(np.interp(x_, x_y_server[0], x_y_server[1], left=0, right=0))
-    
-    # plt.figure(figsize=(10,5))
-    # plt.ylim(0, max(round(np.max(interp_client)), round(np.max(interp_server))))
-    # plt.xlim(0, end)
-    # plt.xlabel("Time (s)")
-    # plt.ylabel("Power consumption (W)")
-    # data = file_names.split('_')
-    # plt.title("Power usage of {} with {} (mean of {} runs)".format(data[0], data[1], runs))
-    # plt.plot(x_, np.mean(interp_client, 0), label="Client, mean: {}W".format(round(np.mean(np.mean(interp_client, 0)), 3)))
-    # plt.plot(x_, np.mean(interp_server, 0), label="Server, mean: {}W".format(round(np.mean(np.mean(interp_server, 0)), 3)))
-    # plt.legend()
-    # plt.savefig("Code/Plots/Means/{}_{}.png".format(os.path.basename(__file__).partition(".py")[0], file_names))
-    # return (x_, np.mean(interp_client, 0), np.mean(interp_server, 0))
 
-def plot(dir: str, runs: int, end: int):
-    x_ = np.arange(0, end, 0.1)
-    
-    interp_client = []; interp_server = []
-    for i in range(1,runs+1):
-        pid_client = 0; pid_server = 0
-        json_string = open('{}/client_{}.json'.format(dir, i), 'r').read().replace('\n', '')
-        arr_client = np.array(json.loads(json_string))
-        for measurement in arr_client:
-            for consumer in measurement['consumers']:
-                if consumer['exe'] == 'sqnet-cheetah':
-                    pid_client = consumer['pid']
-        
-        json_string = open('{}/server_{}.json'.format(dir, i), 'r').read().replace('\n', '')
-        arr_server = np.array(json.loads(json_string))
-        for measurement in arr_server:
-            for consumer in measurement['consumers']:
-                if consumer['exe'] == 'sqnet-cheetah':
-                    pid_server = consumer['pid']
+def read_files(dir: str, name: str, exe: str):
+    json_string = open('{}/{}.json'.format(dir, name),'r').read().replace('\n', '')
+    arr = np.array(json.loads(json_string))
 
-        start_c = arr_client[0]['host']['timestamp']
-        start_s = arr_server[0]['host']['timestamp']
+    # Loop over results to find pid
+    pid = 0
+    for measurement in arr:
+        for consumer in measurement['consumers']:
+            if consumer['exe'] == exe:
+                pid = consumer['pid']
+                break  # No point in continuing
+    if pid == 0:
+        print("No PID found!")
+        return ([], 0, 0, 0)
+
+    start = arr[0]['host']['timestamp']
+    end = arr[-1]['host']['timestamp']
+    return (arr, pid, end, start)
+
+
+def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
+    x_y_client = []
+    x_y_server = []
+    data = []
+    longest_run = 0
+
+    # Loop over runs
+    for i in range(1, runs+1):
+        arr_client, pid_client, end_c, start_c = read_files(
+            dir, 'client_{}'.format(i), exe)
+        arr_server, pid_server, end_s, start_s = read_files(
+            dir, 'server_{}'.format(i), exe)
+
         start = start_c if start_c < start_s else start_s
+        end = end_c if end_c > end_s else end_s
         filtered_client = filter_results(arr_client, pid_client, start=start)
         filtered_server = filter_results(arr_server, pid_server, start=start)
-        
-        x_y_client = np.array(list(zip(*filtered_client)))
-        x_y_server = np.array(list(zip(*filtered_server)))
-    
-        interp_client.append(np.interp(x_, x_y_client[0], x_y_client[1], left=0, right=0))
-        interp_server.append(np.interp(x_, x_y_server[0], x_y_server[1], left=0, right=0))
-    
-    plt.figure(figsize=(10,5))
-    plt.ylim(0, max(round(np.max(interp_client)), round(np.max(interp_server))))
-    plt.xlim(0, end)
-    plt.xlabel("Time (s)")
-    plt.ylabel("Power consumption (W)")
-    data = dir.split('/')[-1].split('_')
-    plt.title("Power usage of {} with {} (mean of {} runs)".format(data[0], data[1], runs))
-    plt.plot(x_, np.mean(interp_client, 0), label="Client, mean: {}W, total: {}Wh".format(
-                            round(np.mean(np.mean(interp_client, 0)), 3),
-                            round(np.mean(np.mean(interp_client, 0)) * (end /3600), 3)))
-    plt.plot(x_, np.mean(interp_server, 0), label="Server, mean: {}W, total: {}Wh".format(
-                            round(np.mean(np.mean(interp_server, 0)), 3),
-                            round(np.mean(np.mean(interp_server, 0)) * (end /3600), 3)))
-    plt.legend()
-    plt.savefig("Code/Plots/Means/{}_{}_{}.png".format(os.path.basename(__file__).partition(".py")[0], data[1], data[0]))
-    return (x_, np.mean(interp_client, 0), np.mean(interp_server, 0))
 
-xcr, csc, css = plot('Code/Plots/Results/laptop_desktop/cheetah_sqnet', runs=10, end=115)
-exit()
-# Plot means of client side
-plt.figure(figsize=(10,5))
-# plt.ylim(0, max(
-#                 max((np.max(cheetah_resnet50_client), np.max(cheetah_sqnet_client))),
-#                 # max((np.max(SCI_HE_resnet50_client), np.max(SCI_HE_sqnet_client)))))
-#                 np.max(SCI_HE_sqnet_server)))
-# plt.xlim(0, 55)
-plt.xlabel("Time (s)")
-plt.ylabel("Power consumption (Wh)")
-plt.title("Power usage of client while running sqnet")
-plt.plot(xcs, cheetah_sqnet_client, 
-            label="Cheetah, mean: {}Wh, total: {}W".format(
-                round(np.mean(cheetah_sqnet_client), 1), 
-                round(np.sum(cheetah_sqnet_client)*56/3600, 1)))
-plt.plot(xss, SCI_HE_sqnet_client, 
-            label="SCI_HE, mean: {}Wh, total: {}W".format(
-                round(np.mean(SCI_HE_sqnet_client), 1), 
-                round(np.sum(SCI_HE_sqnet_client)*83/3600, 1)))
-plt.legend()
-plt.savefig("Code/Plots/Means/{}_client_resnet.png".format(os.path.basename(__file__).partition(".py")[0]))
+        x_y_client.append(np.array(list(zip(*filtered_client))))
+        x_y_server.append(np.array(list(zip(*filtered_server))))
+        runtime = end-start
+        if runtime > longest_run: longest_run = runtime
 
-exit()
+        data.append((end_c - start_c, np.average(x_y_client[-1][1], weights=np.diff(np.insert(x_y_client[-1][0], 0, 0))), 
+                     end_s - start_s, np.average(x_y_server[-1][1], weights=np.diff(np.insert(x_y_server[-1][0], 0, 0))),
+                     end - start))
 
-# Plot means of server side
-plt.figure(figsize=(10,5))
-plt.ylim(0, max(
-                max((np.max(cheetah_resnet50_server), np.max(cheetah_sqnet_server))),
-                # max((np.max(SCI_HE_resnet50_server), np.max(SCI_HE_sqnet_server)))))
-                np.max(SCI_HE_sqnet_server)))
-plt.xlim(0, 55)
-plt.xlabel("Time (s)")
-plt.ylabel("Power consumption (Wh)")
-plt.title("Power usage of server")
-plt.plot(x_, cheetah_resnet50_server, label="Cheetah resnet50")
-plt.plot(x_, cheetah_sqnet_server, label="Cheetah sqnet")
-plt.plot(x_, SCI_HE_sqnet_server, label="SCI_HE resnet50")
-# plt.plot(x_, SCI_HE_resnet50_server, label="SCI_HE sqnet")
-plt.legend()
-plt.savefig("Code/Plots/Means/{}_server.png".format(os.path.basename(__file__).partition(".py")[0]))
+    x_ = np.arange(0, longest_run, 0.1)
+
+    interp_client = [np.interp(x_, x_y[0], x_y[1], left=0, right=0)
+                     for x_y in x_y_client]
+    interp_server = [np.interp(x_, x_y[0], x_y[1], left=0, right=0)
+                     for x_y in x_y_server]
+
+    if plot == True:
+        plt.figure(figsize=(10, 5))
+        plt.xlabel("Time (s)")
+        plt.ylabel("Power consumption (W)")
+        data = dir.split('/')[-1].split('-')
+        plt.title("Power usage while changing {}'s bandwith to {}Mbits with {} and {} (mean of {} runs)".format(
+            data[0], data[1], data[2], data[3], runs))
+        plt.plot(x_, np.mean(interp_client, 0), label="Client, mean: {}W, total: {}Wh".format(
+            round(np.mean(np.mean(interp_client, 0)), 3),
+            round(np.mean(np.mean(interp_client, 0)) * (longest_run / 3600), 3)))
+        plt.plot(x_, np.mean(interp_server, 0), label="Server, mean: {}W, total: {}Wh".format(
+            round(np.mean(np.mean(interp_server, 0)), 3),
+            round(np.mean(np.mean(interp_server, 0)) * (longest_run / 3600), 3)))
+        plt.ylim(bottom=0)
+        plt.xlim(-3, longest_run + 3)
+        plt.legend()
+        plt.savefig("Code/Plots/Means/{}_{}.png".format(
+            os.path.basename(__file__).partition(".py")[0], dir.split('/')[-1]))
+    return (x_, np.mean(interp_client, 0), np.mean(interp_server, 0), data)
 
 
+# naming = [x|c|s] [c|s] [int] [c|s][s|r]
+# x = x of client and server, c = y values client, s = y values server
+# c = changing max bandwith of client, s = changing max bandwith of server
+# int = integer of max bandwith
+# c = cheetah, s = sci_he
+# r = resnet, s = sqnet50
+plot = False
+xs50cs, cs50cs, ss50cs, ds50cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-50-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs100cs, cs100cs, ss100cs, ds100cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-100-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs150cs, cs150cs, ss150cs, ds150cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-150-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs200cs, cs200cs, ss200cs, ds200cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-200-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs300cs, cs300cs, ss300cs, ds300cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-300-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs400cs, cs400cs, ss400cs, ds400cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-400-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs500cs, cs500cs, ss500cs, ds500cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-500-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
 
+xs50ss, cs50ss, ss50ss, ds50ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-50-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs100ss, cs100ss, ss100ss, ds100ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-100-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs150ss, cs150ss, ss150ss, ds150ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-150-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs200ss, cs200ss, ss200ss, ds200ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-200-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs300ss, cs300ss, ss300ss, ds300ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-300-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs400ss, cs400ss, ss400ss, ds400ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-400-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs500ss, cs500ss, ss500ss, ds500ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-500-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+
+
+def f_(arr):
+    f = min(arr, key = lambda x: x[4])
+    wh = f[1] * (f[0] / 3600) + f[3] * (f[2] / 3600)
+    return (f[4], f[1], f[3], wh)
+def fastest(bw, snni, arr):
+    f = f_(arr)
+    print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
+        bw, snni, f[0], f[1], f[2], f[3]))
+
+print("Information about fastest runs with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
+    "Bandwith", "SNNI", "Fastest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)"))
+fastest(50,  "Cheetah", ds50cs )
+fastest(100, "Cheetah", ds100cs)
+fastest(150, "Cheetah", ds150cs)
+fastest(200, "Cheetah", ds200cs)
+fastest(300, "Cheetah", ds300cs)
+fastest(400, "Cheetah", ds400cs)
+fastest(500, "Cheetah", ds500cs)
+fastest(50,  "SCI_HE",  ds50ss )
+fastest(100, "SCI_HE",  ds100ss)
+fastest(150, "SCI_HE",  ds150ss)
+fastest(200, "SCI_HE",  ds200ss)
+fastest(300, "SCI_HE",  ds300ss)
+fastest(400, "SCI_HE",  ds400ss)
+fastest(500, "SCI_HE",  ds500ss)
+
+
+def d_(arr):
+    f = min(arr, key = lambda x: x[4])[4]
+    s = max(arr, key = lambda x: x[4])[4]
+    m = sum([i for _, _, _, _, i in arr])/len(arr)
+    return (m, f, s)
+def avg_time(bw, snni, arr):
+    d = d_(arr)
+    print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
+        bw, snni, d[0], d[1], d[2]))
+
+print("More information about time with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
+    "Bandwith", "SNNI", "Avg runtime (s)", "Min runtime (s)", "Max runtime (s)"))
+avg_time(50,  "Cheetah", ds50cs )
+avg_time(100, "Cheetah", ds100cs)
+avg_time(150, "Cheetah", ds150cs)
+avg_time(200, "Cheetah", ds200cs)
+avg_time(300, "Cheetah", ds300cs)
+avg_time(400, "Cheetah", ds400cs)
+avg_time(500, "Cheetah", ds500cs)
+avg_time(50,  "SCI_HE",  ds50ss )
+avg_time(100, "SCI_HE",  ds100ss)
+avg_time(150, "SCI_HE",  ds150ss)
+avg_time(200, "SCI_HE",  ds200ss)
+avg_time(300, "SCI_HE",  ds300ss)
+avg_time(400, "SCI_HE",  ds400ss)
+avg_time(500, "SCI_HE",  ds500ss)
+
+def pwr(bw, snni, arr):
+    d = d_(arr)
+    print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
+        bw, snni, d[0], d[1], d[2]))
+
+print("Information about power with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
+    "Bandwith", "SNNI", "Avg runtime (s)", "Min runtime (s)", "Max runtime (s)"))
+avg_time(50,  "Cheetah", ds50cs )
+avg_time(100, "Cheetah", ds100cs)
+avg_time(150, "Cheetah", ds150cs)
+avg_time(200, "Cheetah", ds200cs)
+avg_time(300, "Cheetah", ds300cs)
+avg_time(400, "Cheetah", ds400cs)
+avg_time(500, "Cheetah", ds500cs)
+avg_time(50,  "SCI_HE",  ds50ss )
+avg_time(100, "SCI_HE",  ds100ss)
+avg_time(150, "SCI_HE",  ds150ss)
+avg_time(200, "SCI_HE",  ds200ss)
+avg_time(300, "SCI_HE",  ds300ss)
+avg_time(400, "SCI_HE",  ds400ss)
+avg_time(500, "SCI_HE",  ds500ss)

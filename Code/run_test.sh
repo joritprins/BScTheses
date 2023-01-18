@@ -12,10 +12,10 @@ Data="sqnet"
 
 #TODO: error checking
 if [ $# -eq 3 ]; then
-    OUTPUT_NAME="$1_$2_$3"
+    OUTPUT_NAME="$1-$2-$3"
     NR=3
 else
-    OUTPUT_NAME="${SNNI}_${Data}_output"
+    OUTPUT_NAME="${SNNI}-${Data}-output"
     NR=0
 fi
 
