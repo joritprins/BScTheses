@@ -10,7 +10,8 @@
 % References
 \usepackage[
     maxbibnames=10,
-    style=authoryear-comp
+    style=authoryear-comp,
+    urldate=comp
 ]{biblatex}
 \addbibresource{references.bib}
 
@@ -20,10 +21,17 @@
 
 % Package for the images and the subfiles of sections
 \usepackage{graphicx}
+\graphicspath{Images/}
+\usepackage{floatrow}% Table float box with bottom caption, box width adjusted to content
+\usepackage{multirow}
+\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+
+\usepackage{caption}
+\usepackage{subcaption}
 
 %----Helper code for dealing with external references----
 % (by cyberSingularity at http://tex.stackexchange.com/a/69832/226)
-
+% https://www.overleaf.com/learn/how-to/Cross_referencing_with_the_xr_package_in_Overleaf
 \usepackage{xr}
 \makeatletter
 
@@ -45,7 +53,7 @@
 \usepackage{subfiles}
 
 % Title Page
-\title{Title}
+\title{Energy efficient SNNI, a comparison between Cheetah and CryptFlow2 | Moving to energy efficient SNNI, a comparison between Cheetah and CryptFlow2 | Progressing to energy efficient SNNI, a comparison between Cheetah and Cryptflow2}
 \author{Jorit Prins}
 \supervisors{Zoltan Mann}
 \signedby{Signees}
@@ -54,29 +62,38 @@
 \maketitle
 
 \begin{abstract}
-Abstract
+\color{red}\noident Draft\color{red}
+\begin{itemize}
+    \item MLaaS can offer privacy threats for both client and server
+    \item SNNI is a solution
+    \item No widely accepted approach found
+    \item Proof-of-concepts only tested on efficiency and accuracy and not on power/energy consumption, while this is still important
+    \item \textit{write about findings of research}
+\end{itemize}
+\color{red}End of draft\color{red}
+
 \end{abstract}
 
 \tableofcontents
 
-\chapter{Introduction}
+\chapter{Introduction}\label{chap:introduction}
 \subfile{Sections/Introduction}
 
-\chapter{Theoretical background}
+\chapter{Theoretical background}\label{chap:theoreticalbackground}
 \subfile{Sections/TheoreticalBackground}
 
-\chapter{My work}
+\chapter{My work}\label{chap:mywork}
 \section{testing code}
 
-\chapter{Experiments}
-% \subfile{Sections/Experiments}
+\chapter{Experiments}\label{chap:experiments}
+\subfile{Sections/Experiments}
 % \subfile{Sections/Results}
 
 
-\chapter{Conclusion}
-% \section{Conclusion}
-% \section{Discussion}
-% \section{Ethics}
+\chapter{Conclusion}\label{chap:conclusion}
+\section{Conclusion}
+\section{Discussion}
+\section{Ethics}
 
 
 \printbibliography
