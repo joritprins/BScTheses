@@ -55,6 +55,8 @@ printf "$G#####################################################\n
 # sudo bash Cheetah/scripts/throttle.sh del
 
 sudo bash Cheetah/scripts/throttle.sh lan 10000
+SNNI=SCI_HE
+NN=sqnet
 BW=3
 if [ $TYPE == server ]; then
     printf "Server, changing bandwith to $BW\n";
