@@ -213,6 +213,9 @@ tmp.append(pwr(50, "SCI_HE",  ds50ss))
 tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
 print(tmp)
 
+# np.asarray(tmp).tofile('Code/Plots/Means/server.csv', sep=', ')
+np.savetxt('Code/Plots/Means/server2.csv', tmp, fmt='%.3f')
+
 print("====== Changing clients's bandwidth ========")
 print("Information about fastest runs with neural network sqnet")
 print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
@@ -264,6 +267,9 @@ tmp.append(pwr(50, "Cheetah", dc50cs))
 tmp.append(pwr(50, "SCI_HE",  dc50ss))
 tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
 print(tmp)
+
+# np.asarray(tmp).tofile('Code/Plots/Means/server.csv', sep=', ')
+np.savetxt('Code/Plots/Means/client2.csv', tmp, fmt='%.3f')
 
 
 
