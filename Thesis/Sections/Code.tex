@@ -179,7 +179,51 @@ Scaphandre requires the Linux module intel\_rapl\_common. This module can be loa
 
 Once Scaphandre has been started, we can launch the (slightly altered) scripts from the Cheetah project to start Cheetah and $SCI_{HE}$, called \textit{run-client.sh} and \textit{run-server.sh}. Both programs, client and server, do have the same name, 'Cheetah' or 'SCI_HE' (dependent of the SNNI), in the output file of Scaphandre. This is a problem in case of the single device tests, since we need to seperate the measurements. This wont be the situation in the case of two different devices, since these experiments output 2 seperate files, one for the client and one for the server. This can be solved by altering the \textit{run-client.sh} and \textit{run-server.sh} files.
 
-Now the \textit{run-client.sh} and \textit{run-server.sh} both launch the executable in the folder \verb|build/bin|. This executable is the SNNI protocol, and we are interested in the power consumption of this program. Somehow I need to pass the PID of this program, launched from the \textit{run-client.sh} and \textit{run-server.sh}, back to the main script. It is quite trivial on how to pass parameters to children, i.e. with positional parameters\footnote{https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html, (accessed on 22-12-22)}, but passing parameters back to the main script is harder. I solved this by adapting the \textit{run-client.sh} and \textit{run-server.sh} by adding \verb|& PID=$!| after the line that executes the SNNI. I then write this PID to a file that is read by the main script. Then the PID can be used to match the measurements of Scaphandre and further process the data (fig \ref{fig:scripts}). 
+Now the \textit{run-client.sh} and \textit{run-server.sh} both launch the executable in the folder \verb|build/bin|. This executable is the SNNI protocol, and we are interested in the power consumption of this program. Somehow I need to pass the PID of this program, launched from the \textit{run-client.sh} and \textit{run-server.sh}, back to the main script. It is quite trivial on how to pass parameters to children, i.e. with positional parameters\footnote{https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html, (accessed on 22-12-22)}, but passing parameters back to the main script is harder. I solved this by adapting the \textit{run-client.sh} and \textit{run-server.sh} by adding \verb|& PID=$!| after the line that executes the SNNI. I then write this PID to a file that is read by the main script. Then the PID can be used to match the measurements of Scaphandre and further process the data (fig \ref{fig:scripts}). This only has to be done in the case of one device. In the case of two devices, we can just seperate the server and client process by naming the output accordingly, e.g. run\_x\_client or run\_x\_server. 
+
+\subsection{Data processing}
+The measurements from Scaphandre are in the following format:
+
+\begin{lstlisting}
+[
+    {
+        "host": {
+            "consumption": 26271658.0,
+            "timestamp": 1673018149.4180377
+        },
+        "consumers": [
+            {
+                "exe": "resnet50-SCI_HE",
+                "pid": 28350,
+                "consumption": 13206809.0,
+                "timestamp": 1673018149.9443746
+            },
+            {
+                "exe": "scaphandre",
+                "pid": 28333,
+                "consumption": 12473097.0,
+                "timestamp": 1673018149.9443104
+            },
+
+            ...
+
+            {
+                "exe": "systemd",
+                "pid": 1,
+                "consumption": 0.0,
+                "timestamp": 1673018149.9416852
+            }
+        ]
+        "sockets" : []
+    },
+    {
+        ...
+    },
+    ...
+]
+\end{lstlisting}
+
+To graph the results we first need to filter the SNNI measurements. This can be done by searching for the name (in this example \verb|resnet50-SCI_HE|) and filtering these reseults in the case of two devices, or searching for the PID's of the server and client process and filtering these results in the case of one device. As seen in the example above, the timestamp is in Unix time\footnote{Seconds from the first of Januari 1970 (UTC) \url{}} Now as said before, the data points are not equidistant. We can solve this by interpolating the results. For this I use the Numpy module \verb|numpy.interp|\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.interp.html} (accessed on 26-01-23)}. 
 
 
 
