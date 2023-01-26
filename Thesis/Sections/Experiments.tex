@@ -125,6 +125,27 @@ Remarks on SCI_HE:
 Wew can see that limiting the bandwidth has little effect on the energy consumption. This could be explained because the average data exchanged is 11/12Mbits for Cheetah and 40-60Mbits for CryptFlow2. If we look at the average bandwidth of the cellular broadband connections (table \ref{table:avg_bandwidth}) we can see that this would be a problem for Cheetah on 3G. This would also be a problem on 3G and 4G for $SCI_HE$.
 
 
+\begin{table}
+        \begin{adjustbox}{width=\columnwidth,center}
+                \subfile{../Tables/Power_readings_client2}
+        \end{adjustbox}
+        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the bandwidth of the client.}
+        \label{table:powerreadingsclient2}
+\end{table}
+
+\begin{table}
+        \begin{adjustbox}{width=\columnwidth,center}
+                \subfile{../Tables/Power_readings_server2}
+        \end{adjustbox}
+        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the bandwidth of the server.}
+        \label{table:powerreadingsserver2}
+\end{table}
+    
+
+I have done the tests, measurements can be found in table \ref{table:powerreadingsclient2} and table \ref{table:powerreadingsserver2}.
+
+\color{red}I still need to do the measurements for limiting both server and client at the same time. This would be a more realistic scenario, since the bottleneck of the route between server and client would be the limiting factor, for both server to client traffic and client to server traffic. I also need to check if limiting the traffic flow would only limit outgoing traffic.\color{black}
+
 
 \subsection{graphs}
 % \begin{figure}[hbt!]
