@@ -41,11 +41,11 @@ Remarks on Cheetah:
         \item Idle power consumption with cheetah in the inference phase is around 12 Watts
         \item With Cheetah the power consumption of server often has peaks when the client has throughs. This is probably because the server is calculating more things than client. This would explain the higher mean of the server side. 
 \end{itemize}
-Remarks on SCI_HE:
+Remarks on $SCI_{HE}$:
 \begin{itemize}
-        \item Results $SCI_HE$ also look synchronized. See figure \ref{fig:mean_SCI_HE_sqnet}. This means that either the server or the client is calculating.
+        \item Results $SCI_{HE}$ also look synchronized. See figure \ref{fig:mean_SCI_HE_sqnet}. This means that either the server or the client is calculating.
         \item I cannot find places where both client and server are calculating. 
-        \item While the mean power consumption of the client on $SCI_HE$ is lower then Cheetah, the energy consumption is higher on $SCI_HE$ then Cheetah. This is because the average runtime is higher with $SCI_HE$.
+        \item While the mean power consumption of the client on $SCI_{HE}$ is lower then Cheetah, the energy consumption is higher on $SCI_{HE}$ then Cheetah. This is because the average runtime is higher with $SCI_{HE}$.
 \end{itemize}
 
 % \begin{figure}
@@ -69,9 +69,9 @@ Remarks on SCI_HE:
 %      \begin{subfigure}
 %         \begin{subfigure}[b]{0.5\textwidth}
 %             \centering
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE_sqnet.png}
-%             \caption{Mean of running SCI_HE with sqnet 11 times}
-%             \label{fig:fmean_SCI_HE_sqnet}
+%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
+%             \caption{Mean of running SCI_{HE} with sqnet 11 times}
+%             \label{fig:fmean_SCI_{HE}_sqnet}
 %         \end{subfigure}
 %         \hfill
 %         \begin{subfigure}[b]{0.5\textwidth}
@@ -104,8 +104,8 @@ Remarks on SCI_HE:
 \end{table}
 
 \begin{itemize}
-        \item I did not see any increase in energy consumption in the case of Cheetah while changing the server's bandwidth (avg power consumption calculated as sum(Power_i * Runtime_i)/total_i, or sum(Power_client_i * Runtime_client_i + Power_server_i * Runtime_server_i)/Total_i
-        \item I did not see any increase in energy consumption in the case of Cheetah while changing the client's bandwidth (with an exception in the case of limiting to 50Mbits => 0.400Wh instead of 3.90Wh)
+        \item I did not see any increase in energy consumption in the case of Cheetah while changing the server's bandwidth (avg power consumption calculated as $sum(Power_i * Runtime_i)/total_i, or sum(Power_client_i * Runtime_client_i + Power_server_i * Runtime_server_i)/Total_i$
+        \item I did not see any increase in energy consumption in the case of Cheetah while changing the client's bandwidth (with an exception in the case of limiting to 50Mbits > 0.400Wh instead of 3.90Wh)
         \item In the case of CryptFlow2 it is almost the same. Only in the case of limiting to 50Mbits there is a small increase in power consumption
         \item The runtime of CryptFlow2 increased a lot in the case of 50Mbits, but the average power consumption was lower compared to the runs when limiting the bandwidth to higher.
         \item I checked the average data exchanged for both SNNIs without limiting the bandwidth. For cheetah this was around 11/12 Mbits and for CryptFlow this was between 40-60Mbits (high end was on resnet50). This would explain why limiting the bandwidth does not have impact on the power/energy consumption. But if you look at the data exchange between server and client it is sometimes very high and sometimes very low. I thought that because of these data exchange peaks the power/energy consumption would be impacted. One explanation could be that if the data exchange is high, it indeed would take more time, but this also results in a lower power consumption resulting in an energy consumption that is the same. 
@@ -122,7 +122,7 @@ Remarks on SCI_HE:
         \caption{Average bandwidth of Cellular Broadband Connections}
         \label{table:avg_bandwidth}
 \end{table}
-Wew can see that limiting the bandwidth has little effect on the energy consumption. This could be explained because the average data exchanged is 11/12Mbits for Cheetah and 40-60Mbits for CryptFlow2. If we look at the average bandwidth of the cellular broadband connections (table \ref{table:avg_bandwidth}) we can see that this would be a problem for Cheetah on 3G. This would also be a problem on 3G and 4G for $SCI_HE$.
+Wew can see that limiting the bandwidth has little effect on the energy consumption. This could be explained because the average data exchanged is 11/12Mbits for Cheetah and 40-60Mbits for CryptFlow2. If we look at the average bandwidth of the cellular broadband connections (table \ref{table:avg_bandwidth}) we can see that this would be a problem for Cheetah on 3G. This would also be a problem on 3G and 4G for $SCI_{HE}$.
 
 
 
@@ -142,14 +142,14 @@ Wew can see that limiting the bandwidth has little effect on the energy consumpt
 %     \medskip % create some *vertical* separation between the graphs
     
 %     \begin{subfigure}{.475\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE_sqnet.png}
+%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
 %             \caption{Mean of running SCI\_HE with sqnet 11 times}
-%             \label{fig:mean_SCI_HE_sqnet}
+%             \label{fig:mean_SCI_{HE}_sqnet}
 %     \end{subfigure}\hfill % <-- "\hfill"
 %     \begin{subfigure}{.475\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE_sqnet.png}
+%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
 %             \caption{Mean of running SCI\_HE with sqnet 11 times}
-%             \label{fig:fmean_SCI_HE_sqnet}
+%             \label{fig:fmean_SCI_{HE}_sqnet}
 %     \end{subfigure}
 
 %     \caption{Four measurements doneA figure with four subfigures}
@@ -168,14 +168,14 @@ Wew can see that limiting the bandwidth has little effect on the energy consumpt
 %             \label{fig:bmean_cheetah_sqnet}
 %     \end{subfigure}    
 %     \begin{subfigure}{\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE_sqnet.png}
+%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
 %             \caption{Mean of running SCI\_HE with sqnet 11 times}
-%             \label{fig:bmean_SCI_HE_sqnet}
+%             \label{fig:bmean_SCI_{HE}_sqnet}
 %     \end{subfigure}
 %     \begin{subfigure}{\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE_sqnet.png}
+%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
 %             \caption{Mean of running SCI\_HE with sqnet 11 times}
-%             \label{fig:bfmean_SCI_HE_sqnet}
+%             \label{fig:bfmean_SCI_{HE}_sqnet}
 %     \end{subfigure}
 
 %     \caption{Four measurements doneA figure with four subfigures}
@@ -183,7 +183,7 @@ Wew can see that limiting the bandwidth has little effect on the energy consumpt
 % \end{figure}
 
 \noindent
-% Cross-references to subfigures \ref{fig:mean_cheetah_resnet50}, \ref{fig:mean_cheetah_sqnet} and \ref{fig:mean_SCI_HE_sqnet} and of figure \ref{fig:4results}.
+% Cross-references to subfigures \ref{fig:mean_cheetah_resnet50}, \ref{fig:mean_cheetah_sqnet} and \ref{fig:mean_SCI_{HE}_sqnet} and of figure \ref{fig:4results}.
 
 % \begin{figure}[h!]
 %     \centering
@@ -194,7 +194,7 @@ Wew can see that limiting the bandwidth has little effect on the energy consumpt
 % \newpage
 % \begin{figure}[h!]
 %     \centering
-%     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{SCI_HE-sqnet.png}
+%     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{SCI_{HE}-sqnet.png}
 %     \caption{Running the SNNI CryptFlow2 on sqnet}
 %     \label{fig:my_label}
 % \end{figure}
