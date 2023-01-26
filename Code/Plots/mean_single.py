@@ -12,7 +12,6 @@ from functions import filter_results
 def read_files(dir: str, name: str, exe: str):
     json_string = open('{}/{}.json'.format(dir, name),'r').read().replace('\n', '')
     arr = np.array(json.loads(json_string))
-
     # Loop over results to find pid
     pid = 0
     for measurement in arr:
@@ -37,6 +36,8 @@ def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
 
     # Loop over runs
     for i in range(1, runs+1):
+        if dir=='Code/Plots/Results/laptop-desktop/server-3-SCI_HE-sqnet' and i==4:
+            continue
         arr_client, pid_client, end_c, start_c = read_files(
             dir, 'client_{}'.format(i), exe)
         arr_server, pid_server, end_s, start_s = read_files(
@@ -55,6 +56,7 @@ def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
         data.append((end_c - start_c, np.average(x_y_client[-1][1], weights=np.diff(np.insert(x_y_client[-1][0], 0, 0))), 
                      end_s - start_s, np.average(x_y_server[-1][1], weights=np.diff(np.insert(x_y_server[-1][0], 0, 0))),
                      end - start))
+        print("Prepared", dir, i)
 
     x_ = np.arange(0, longest_run, 0.1)
 
@@ -82,44 +84,6 @@ def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
         plt.savefig("Code/Plots/Means/{}_{}.png".format(
             os.path.basename(__file__).partition(".py")[0], dir.split('/')[-1]))
     return (x_, np.mean(interp_client, 0), np.mean(interp_server, 0), data)
-
-
-# naming = [x|c|s] [c|s] [int] [c|s][s|r]
-# x = x of client and server, c = y values client, s = y values server
-# c = changing max bandwith of client, s = changing max bandwith of server
-# int = integer of max bandwith
-# c = cheetah, s = sci_he
-# r = resnet, s = sqnet50
-plot = False
-xs50cs, cs50cs, ss50cs, ds50cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-50-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-xs100cs, cs100cs, ss100cs, ds100cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-100-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-xs150cs, cs150cs, ss150cs, ds150cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-150-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-xs200cs, cs200cs, ss200cs, ds200cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-200-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-xs300cs, cs300cs, ss300cs, ds300cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-300-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-xs400cs, cs400cs, ss400cs, ds400cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-400-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-xs500cs, cs500cs, ss500cs, ds500cs = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-500-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
-
-xs50ss, cs50ss, ss50ss, ds50ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-50-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
-xs100ss, cs100ss, ss100ss, ds100ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-100-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
-xs150ss, cs150ss, ss150ss, ds150ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-150-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
-xs200ss, cs200ss, ss200ss, ds200ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-200-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
-xs300ss, cs300ss, ss300ss, ds300ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-300-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
-xs400ss, cs400ss, ss400ss, ds400ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-400-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
-xs500ss, cs500ss, ss500ss, ds500ss = prepare_data(
-    dir='Code/Plots/Results/laptop-desktop/server-500-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
 
 
 def fastest(bw, snni, arr):
@@ -151,28 +115,197 @@ def pwr(bw, snni, arr):
         round(min(pwr_c), 4), round(sum(pwr_c)/len(pwr_c), 4), round(max(pwr_c), 4), 
         round(min(pwr_s), 4), round(sum(pwr_s)/len(pwr_s), 4), round(max(pwr_s), 4)]
 
-    lowest_total  = min(arr, key = lambda x: (x[1]*(x[0]/3600)) + (x[3]*(x[1]/3600)))
-    lowest_total  = round((lowest_total[1]*(lowest_total[0]/3600)) + (lowest_total[3]*(lowest_total[1]/3600)), 3)
-    lowest_client = min(arr, key = lambda x: x[1]*(x[0]/3600))
-    lowest_client = round(lowest_client[1]*(lowest_client[0]/3600), 3)
-    lowest_server = min(arr, key = lambda x: x[3]*(x[1]/3600))
-    lowest_server = round(lowest_server[1]*(lowest_server[0]/3600), 3)
 
-    highest_total  = max(arr, key = lambda x: (x[1]*(x[0]/3600)) + (x[3]*(x[1]/3600)))
-    highest_total  = round((highest_total[1]*(highest_total[0]/3600)) + (highest_total[3]*(highest_total[1]/3600)), 3)
-    highest_client = max(arr, key = lambda x: x[1]*(x[0]/3600))
-    highest_client = round(highest_client[1]*(highest_client[0]/3600), 3)
-    highest_server = max(arr, key = lambda x: x[3]*(x[1]/3600))
-    highest_server = round(highest_server[1]*(highest_server[0]/3600), 3)
-    
-    avg_client = round(sum( [ pwr * (time / 3600) for (time, pwr, _, _, _) in arr] )/len(arr) , 3)
-    avg_server = round(sum( [ pwr * (time / 3600) for (_, _, time, pwr, _) in arr] )/len(arr) , 3)
-    avg_total  = round(sum( [ (pwrc * (timec / 3600)) + (pwrs * (times / 3600)) for (timec, pwrc, times, pwrs, _) in arr] )/len(arr) , 3)
-    print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(
-        bw, snni,
-        lowest_total, avg_total, highest_total,
-        lowest_client, avg_client, highest_client,
-        lowest_server, avg_server, highest_server))
+# naming = [x|c|s] [c|s] [int] [c|s][s|r]
+# x = x of client and server, c = y values client, s = y values server
+# c = changing max bandwith of client, s = changing max bandwith of server
+# int = integer of max bandwith
+# c = cheetah, s = sci_he
+# r = resnet, s = sqnet50
+plot = False
+print("====== Changing server's bandwidth ========")
+xs3cs, cs3cs, ss3cs, ds3cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-3-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
+xs14cs, cs14cs, ss14cs, ds14cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-14-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
+xs30cs, cs30cs, ss30cs, ds30cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-30-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
+xs50cs, cs50cs, ss50cs, ds50cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-50-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+
+xs3ss, cs3ss, ss3ss, ds3ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-3-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs14ss, cs14ss, ss14ss, ds14ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-14-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs30ss, cs30ss, ss30ss, ds30ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-30-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs50ss, cs50ss, ss50ss, ds50ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-50-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+
+
+xc3cs, cc3cs, sc3cs, dc3cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-3-cheetah-sqnet', runs=5, exe='sqnet-cheetah', end=0, plot=plot)
+xc14cs, cc14cs, sc14cs, dc14cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-14-cheetah-sqnet', runs=5, exe='sqnet-cheetah', end=0, plot=plot)
+xc30cs, cc30cs, sc30cs, dc30cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-30-cheetah-sqnet', runs=5, exe='sqnet-cheetah', end=0, plot=plot)
+xc50cs, cc50cs, sc50cs, dc50cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-50-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
+
+xc3ss, cc3ss, sc3ss, dc3ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-3-SCI_HE-sqnet', runs=1, exe='sqnet-SCI_HE', end=0, plot=plot)
+xc14ss, cc14ss, sc14ss, dc14ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-14-SCI_HE-sqnet', runs=5, exe='sqnet-SCI_HE', end=0, plot=plot)
+xc30ss, cc30ss, sc30ss, dc30ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-30-SCI_HE-sqnet', runs=5, exe='sqnet-SCI_HE', end=0, plot=plot)
+xc50ss, cc50ss, sc50ss, dc50ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/client-50-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
+
+
+print("Information about fastest runs with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
+    "Bandwith", "SNNI", "Fastest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)"))
+fastest(3,  "Cheetah", ds3cs )
+fastest(14, "Cheetah", ds14cs)
+fastest(30, "Cheetah", ds30cs)
+fastest(50, "Cheetah", ds50cs)
+fastest(3,  "SCI_HE",  ds3ss )
+fastest(14, "SCI_HE",  ds14ss)
+fastest(30, "SCI_HE",  ds30ss)
+fastest(50, "SCI_HE",  ds50ss)
+
+
+print("More information about time with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
+    "Bandwith", "SNNI", "Avg runtime (s)", "Min runtime (s)", "Max runtime (s)"))
+avg_time(3,  "Cheetah", ds3cs )
+avg_time(14, "Cheetah", ds14cs)
+avg_time(30, "Cheetah", ds30cs)
+avg_time(50, "Cheetah", ds50cs)
+avg_time(3,  "SCI_HE",  ds3ss )
+avg_time(14, "SCI_HE",  ds14ss)
+avg_time(30, "SCI_HE",  ds30ss)
+avg_time(50, "SCI_HE",  ds50ss)
+
+
+# tmp = [["BW", "SNNI", 
+    # "Low total (Wh)",  "Avg total (Wh)",  "High total (Wh)",
+    # "Low client (Wh)",  "Avg client (Wh)",  "High client (Wh)",
+    # "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"]]
+tmp = []
+print("Information about power with neural network sqnet")
+print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(
+    "BW", "SNNI", 
+    "Low total (Wh)",  "Avg total (Wh)",  "High total (Wh)",
+    "Low client (Wh)",  "Avg client (Wh)",  "High client (Wh)",
+    "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
+tmp.append(pwr(3,  "Cheetah", ds3cs ))
+tmp.append(pwr(3,  "SCI_HE",  ds3ss ))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append(pwr(14, "Cheetah", ds14cs))
+tmp.append(pwr(14, "SCI_HE",  ds14ss))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append(pwr(30, "Cheetah", ds30cs))
+tmp.append(pwr(30, "SCI_HE",  ds30ss))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append(pwr(50, "Cheetah", ds50cs))
+tmp.append(pwr(50, "SCI_HE",  ds50ss))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+print(tmp)
+
+print("====== Changing clients's bandwidth ========")
+print("Information about fastest runs with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
+    "Bandwith", "SNNI", "Fastest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)"))
+fastest(3,  "Cheetah", dc3cs )
+fastest(14, "Cheetah", dc14cs)
+fastest(30, "Cheetah", dc30cs)
+fastest(50, "Cheetah", dc50cs)
+fastest(3,  "SCI_HE",  dc3ss )
+fastest(14, "SCI_HE",  dc14ss)
+fastest(30, "SCI_HE",  dc30ss)
+fastest(50, "SCI_HE",  dc50ss)
+
+
+print("More information about time with neural network sqnet")
+print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
+    "Bandwith", "SNNI", "Avg runtime (s)", "Min runtime (s)", "Max runtime (s)"))
+avg_time(3,  "Cheetah", dc3cs )
+avg_time(14, "Cheetah", dc14cs)
+avg_time(30, "Cheetah", dc30cs)
+avg_time(50, "Cheetah", dc50cs)
+avg_time(3,  "SCI_HE",  dc3ss )
+avg_time(14, "SCI_HE",  dc14ss)
+avg_time(30, "SCI_HE",  dc30ss)
+avg_time(50, "SCI_HE",  dc50ss)
+
+
+# tmp = [["BW", "SNNI", 
+    # "Low total (Wh)",  "Avg total (Wh)",  "High total (Wh)",
+    # "Low client (Wh)",  "Avg client (Wh)",  "High client (Wh)",
+    # "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"]]
+tmp = []
+print("Information about power with neural network sqnet")
+print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(
+    "BW", "SNNI", 
+    "Low total (Wh)",  "Avg total (Wh)",  "High total (Wh)",
+    "Low client (Wh)",  "Avg client (Wh)",  "High client (Wh)",
+    "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
+tmp.append(pwr(3,  "Cheetah", dc3cs ))
+tmp.append(pwr(3,  "SCI_HE",  dc3ss ))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append(pwr(14, "Cheetah", dc14cs))
+tmp.append(pwr(14, "SCI_HE",  dc14ss))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append(pwr(30, "Cheetah", dc30cs))
+tmp.append(pwr(30, "SCI_HE",  dc30ss))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append(pwr(50, "Cheetah", dc50cs))
+tmp.append(pwr(50, "SCI_HE",  dc50ss))
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+print(tmp)
+
+
+
+
+
+
+
+
+
+
+
+
+exit()
+xs50cs, cs50cs, ss50cs, ds50cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-50-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs100cs, cs100cs, ss100cs, ds100cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-100-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs150cs, cs150cs, ss150cs, ds150cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-150-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs200cs, cs200cs, ss200cs, ds200cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-200-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs300cs, cs300cs, ss300cs, ds300cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-300-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs400cs, cs400cs, ss400cs, ds400cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-400-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+xs500cs, cs500cs, ss500cs, ds500cs = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-500-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
+
+xs50ss, cs50ss, ss50ss, ds50ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-50-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs100ss, cs100ss, ss100ss, ds100ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-100-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs150ss, cs150ss, ss150ss, ds150ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-150-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs200ss, cs200ss, ss200ss, ds200ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-200-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs300ss, cs300ss, ss300ss, ds300ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-300-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs400ss, cs400ss, ss400ss, ds400ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-400-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
+xs500ss, cs500ss, ss500ss, ds500ss = prepare_data(
+    dir='Code/Plots/Results/laptop-desktop/server-500-SCI_HE-sqnet', runs=15, exe='sqnet-SCI_HE', end=0, plot=plot)
 
 print("Information about fastest runs with neural network sqnet")
 print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
