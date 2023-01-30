@@ -7,36 +7,47 @@ import matplotlib.pyplot as plt
 import json
 import os
 
-# Load power measurements and convert to array
-json_string = open('Code/Plots/_log.json', 'r').read().replace('\n', '')
-arr = np.array(json.loads(json_string))
 
-# Find scaphandre PID
-scaphandre_pid = 0
-for measurement in arr:
-    for consumer in measurement['consumers']:
-        if consumer['exe'] == "scaphandre":
-            scaphandre_pid = consumer['pid']
-            break
-if scaphandre_pid == 0:
-    print("No scaphandre process found, exiting")
-    exit()
+x_ = np.arange(0, 100, 0.1)
+x_y_interp = []
+for i in range(1,50):
+    json_string = open('Code/Plots/Results/same-device/cheetah-sqnet-50/cheetah-sqnet-{}.json'.format(i), 'r').read().replace('\n', '')
 
-start = arr[0]['host']['timestamp']
+    # Load power measurements and convert to array
+    arr = np.array(json.loads(json_string))
 
-# Filter scaphandre data
-from functions import filter_results
-filtered = filter_results(arr, scaphandre_pid, start)
+    # Find first and last timestamp
+    start = arr[0]['host']['timestamp']
+    end  = arr[-1]['host']['timestamp']-start
 
-x_y = np.array(list(zip(*filtered)))
-
-plt.figure(figsize=(10,5))
-plt.plot(x_y[0], x_y[1], label="Scaphandre")
+    # Calculate percentage of power usage
+    filtered = []
+    for measurement in arr:
+        tmp = 0 
+        sc = 0
+        for consumer in measurement['consumers']:  
+            if consumer['exe'] == 'scaphandre':
+                sc = consumer['consumption']
+                tmp += consumer['consumption']
+            else:
+                tmp += consumer['consumption']
+        frac = sc*100/tmp
+        perc = (measurement['host']['timestamp']-start)*100/end
+        filtered.append((perc, frac))
+    
+    x_y = np.array(list(zip(*filtered)))
+    
+    x_y_interp.append(np.interp(x_, x_y[0], x_y[1], left=0, right=0))
+    
+plt.figure(figsize=(10, 5))
+plt.title('Average power consumption of Scaphandre in terms of total power consumption')
+plt.xlabel("Percentage of total runtime SNNI (%)")
+plt.ylabel("Percentage of total power consumption\n(% of all consumers)")
+plt.xlim(0, 100)
 plt.ylim(0, 100)
-plt.xlim(0, np.max(x_y[0]))
-plt.xlabel("Time (s)")
-plt.ylabel("Percentage of CPU (%)")
-plt.title("CPU usage of Scaphandre")
+plt.plot(x_, np.mean(x_y_interp, 0), color='b', label='Average power consumption')
+plt.plot(x_, np.mean(x_y_interp, 0), color='b', label='Measurements of all runs', alpha=0.3)
+plt.plot([x_]*49, x_y_interp, alpha=0.3, color='b')
 plt.legend()
 plt.savefig("Code/Plots/{}.png".format(os.path.basename(__file__).partition(".py")[0]))
 plt.show()

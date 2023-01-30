@@ -8,7 +8,7 @@ results = []
 
 plt.figure(figsize=(10,5))
 
-for i in range(0,4):
+for i in range(1,4):
     json_string = open('Code/Plots/Cheetah_sqnet_10/cheetah_sqnet_{}.json'.format(i), 'r').read().replace('\n', '')
     arr = np.array(json.loads(json_string))
 
@@ -18,6 +18,9 @@ for i in range(0,4):
             if consumer['exe'] == "scaphandre":
                 scaphandre_pid = consumer['pid']
                 break
+        else:
+            continue
+        break
     if scaphandre_pid == 0:
         print("No scaphandre process found, exiting")
         exit()
