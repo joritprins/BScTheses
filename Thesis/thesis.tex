@@ -57,7 +57,8 @@
 \usepackage{subfiles}
 
 % Title Page
-\title{Energy efficient SNNI, a comparison between Cheetah and CryptFlow2 | Moving to energy efficient SNNI, a comparison between Cheetah and CryptFlow2 | Progressing to energy efficient SNNI, a comparison between Cheetah and Cryptflow2}
+% \title{Energy efficient SNNI, a comparison between Cheetah and CryptFlow2 [or] Moving to energy efficient SNNI, a comparison between Cheetah and CryptFlow2 [or] Progressing to energy efficient SNNI, a comparison between Cheetah and Cryptflow2}
+\title{Progressing to energy efficient SNNI, a comparison between Cheetah and CryptFlow2}
 \author{Jorit Prins}
 \supervisors{Zoltan Mann}
 \signedby{Signees}
@@ -66,15 +67,16 @@
 \maketitle
 
 \begin{abstract}
-\color{red}Draft\color{red}
-\begin{itemize}
-    \item MLaaS can offer privacy threats for both client and server
-    \item SNNI is a solution
-    \item No widely accepted approach found
-    \item Proof-of-concepts only tested on efficiency and accuracy and not on power/energy consumption, while this is still important
-    \item \textit{write about findings of research}
-\end{itemize}
-\color{red}End of draft\color{red}
+MLaaS can offer privacy threats for both client and server. SNNI entails the problem of a client learning the output of a neural network, held by a server, without the server learning the input and the client learning nothing about the neural network. There is no widely accepted approach, but some proof of concept approaches have been suggested. These approaches are only tested on accuracy and efficiency. Other metrics, like energy consumption are not tested, while this is still of importance. In this research I test how the bandwidth influences the power and energy consumption of the inference process of both Cheetah and CryptFlow2, two of the most recent approaches. Measurements show that limiting the bandwidth till 50Mbits does not have effect on the energy consumption of both Cheetah and CryptFlow2.
+% \color{red}Draft\color{red}
+% \begin{itemize}
+%     \item MLaaS can offer privacy threats for both client and server
+%     \item SNNI is a solution
+%     \item No widely accepted approach found
+%     \item Proof-of-concepts only tested on efficiency and accuracy and not on power/energy consumption, while this is still important
+%     \item \textit{write about findings of research}
+% \end{itemize}
+% \color{red}End of draft\color{red}
 
 \end{abstract}
 
@@ -88,9 +90,8 @@
 
 \chapter{My work}\label{chap:mywork}
 \subfile{Sections/Code}
-\section{testing code}
 
-\chapter{Experiments}\label{chap:experiments}
+\chapter{Experimental results}\label{chap:experiments}
 \subfile{Sections/Experiments}
 % \subfile{Sections/Results}
 

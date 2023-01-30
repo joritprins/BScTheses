@@ -124,12 +124,5 @@ The measurements from Scaphandre are in the following format:
 
 To graph the results we first need to filter the SNNI measurements. This can be done by searching for the name (in this example \verb|resnet50-SCI_HE|) and filtering these reseults in the case of two devices, or searching for the PID's of the server and client process and filtering these results in the case of one device. As seen in the example above, the timestamp is in Unix time\footnote{Seconds from the first of Januari 1970 (UTC) \url{}}. To get the relative time, i.e. where zero is the time Scaphandre has started, we just subtract the timestamp with the time of the first element in the measurements. In the case of the example above it is the time of the host of the first measurement. When there are two Scaphandre files with measurements, in the case of two devices for example, I just take the lowest of both and compare which one is lowest. At the edges (left and right) the value will be 0, since the power consumption is not defined before the script has been started and after it finishes. Now as said before, the data points are not equidistant. We can solve this by interpolating the results. For this I use the Numpy module \verb|numpy.interp|\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.interp.html} (accessed on 26-01-23)}. When I calculate the average of one run, I calculate the weighted average with numpy.average\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.average.html} (accessed 26-01-23)}. The weights are then the differences between the measurements. 
 
-
-
-\subsection{Parsing the results}
-
-\textbf{Hello world!}
-I will use the commit  for this research.
-
-Bandwith between machines in the CryptFlow2 environment is 377MBps and 40MBps in the lan and wan respectively. 
+\color{red}Bandwith between machines in the CryptFlow2 environment is 377MBps and 40MBps in the lan and wan respectively. \color{black}
 \end{document}
