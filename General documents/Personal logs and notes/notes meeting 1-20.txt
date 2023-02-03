@@ -1,0 +1,30 @@
+Writing in parralel to testing
+Title page + abstract
+Introduction looks good
+Section 2 improved -> 2.4 not finished
+2.5 already contains partly my work
+Section 3 (-> title, change it? Check it in canvas?)
+- 2.5 is my work and answering research question so to my work
+- 4.1 here in section 3
+Section 4 -> experimental results
+___ or
+Sections according to research question
+
+
+
+----------------
+First do some hypoteshis
+check de results are they counter intuitive
+
+4g or 5g -> motivate the bandwidths chosen -> under 50mbits
+
+4g up to 100mbits
+4g bandwidth
+https://bipartisanpolicy.org/blog/cellular-data-and-digital-divide/ -> wireless technologies
+Goes for both ways because if the client supports 3g it sends and recieves this low
+
+threats to validity
+things that i did not consider 
+generalisation about the topic -> what about other Neural Neworks ->  think about what i should have done but didnt because of time
+What if i picked another neural network -> would the results be totally different. 
+internal validity (did i measure what i wanted to measure, did not measure the routers -> what are the missing elements), external validity (how can i generalise to things that i did not test), emperical research. 

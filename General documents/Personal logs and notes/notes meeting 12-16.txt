@@ -1,0 +1,4 @@
+spikes could be because server and client cannot use cpu same time
+Chech how scaphandre works, check measurements where cheetah = 0 or not there
+Flatten out curve by aggregating results
+Output references

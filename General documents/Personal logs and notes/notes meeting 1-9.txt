@@ -1,0 +1,13 @@
+Tip: do more experiments
+Change data to pretrained neural network
+Continue with 2 devices, not on what causes the peaks
+Is this enough? Depends on the analysis
+Ask questions
+
+Results are in watt and total is energy consumption so multiply with time to get Watt Hours
+
+Change title plots after 50 runs to Mean power usage of 50 runs
+Timeframe => kijk de runtimes and show that thay are all in around 60 seconds
+
+Save time on section 2
+2.3 (cheetah) not to detailed

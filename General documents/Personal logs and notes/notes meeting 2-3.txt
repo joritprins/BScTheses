@@ -1,0 +1,23 @@
+Title: No abbreviations
+More general, investigating effects of bandwidth on secure neural network inferences approaches cheetah and cryptflow 
+CrypTFlow2
+Abstract: no abbreviations
+
+what are you measuring. What experiments will you have. Make explicit, goal measuring question (see lastt part) Between 3.1 and 3.2 and after that the technical details. 
+
+In section 3 give specific names multiple device exmperiments for example
+Now I describe the results of the multiple device experiments
+
+Just improvement => add x
+
+Potential resons why could include
+Future work, from these mesurements the tendency is not clear and future work could investigate that in more detail (the correlation between bandwidth and energy consumption)
+
+RQa and RQb or no title with them
+
+Chapter 5 discussion
+revisit the research questions
+Chapter 6 conclusion
+Threaths for validity
+Future works
+Bibliography
