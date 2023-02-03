@@ -5,7 +5,8 @@
 
 \section{Results}
 \subsection{Single device}
-\begin{figure}[hbt!]
+\label{ssec:singledevice}
+\begin{figure}[htb]
     \begin{subfigure}{.475\linewidth}
             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_cheetah-resnet50.png}
             \caption{Mean of running Cheetah with resnet50 50 times}
@@ -85,13 +86,13 @@ Remarks on $SCI_{HE}$:
 %      \caption{Three simple graphs}
 %      \label{fig:three graphs}
 % \end{figure}
-
+\newpage
 \subsection{Different devices}
 \begin{table}
     \begin{adjustbox}{width=\columnwidth,center}
         \subfile{../Tables/Power_readings_client}
     \end{adjustbox}
-    \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the bandwidth of the client.}
+    \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the outgoing bandwidth of the client.}
     \label{table:powerreadingsclient}
 \end{table}
 
@@ -99,19 +100,19 @@ Remarks on $SCI_{HE}$:
     \begin{adjustbox}{width=\columnwidth,center}
         \subfile{../Tables/Power_readings_server}
     \end{adjustbox}
-    \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the bandwidth of the server.}
+    \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the outgoing bandwidth of the server.}
     \label{table:powerreadingsserver}
 \end{table}
 
 \begin{itemize}
-        \item I did not see any increase in energy consumption in the case of Cheetah while changing the server's bandwidth (avg power consumption calculated as $sum(Power_i * Runtime_i)/total_i, or sum(Power_client_i * Runtime_client_i + Power_server_i * Runtime_server_i)/Total_i$
-        \item I did not see any increase in energy consumption in the case of Cheetah while changing the client's bandwidth (with an exception in the case of limiting to 50Mbits > 0.400Wh instead of 3.90Wh)
+        \item I did not see any increase in energy consumption in the case of Cheetah while changing the server's outgoing bandwidth (avg power consumption calculated as $sum(Power_i * Runtime_i)/total_i, or sum(Power_client_i * Runtime_client_i + Power_server_i * Runtime_server_i)/Total_i$
+        \item I did not see any increase in energy consumption in the case of Cheetah while changing the client's outgoing bandwidth (with an exception in the case of limiting to 50Mbits > 0.400Wh instead of 3.90Wh)
         \item In the case of CryptFlow2 it is almost the same. Only in the case of limiting to 50Mbits there is a small increase in power consumption
         \item The runtime of CryptFlow2 increased a lot in the case of 50Mbits, but the average power consumption was lower compared to the runs when limiting the bandwidth to higher.
-        \item I checked the average data exchanged for both SNNIs without limiting the bandwidth. For cheetah this was around 11/12 Mbits and for CryptFlow this was between 40-60Mbits (high end was on resnet50). This would explain why limiting the bandwidth does not have impact on the power/energy consumption. But if you look at the data exchange between server and client it is sometimes very high and sometimes very low. I thought that because of these data exchange peaks the power/energy consumption would be impacted. One explanation could be that if the data exchange is high, it indeed would take more time, but this also results in a lower power consumption resulting in an energy consumption that is the same. 
+        \item I checked the average data exchanged for both SNNIs without limiting the outgoing bandwidth. For cheetah this was around 11/12 Mbits and for CryptFlow this was between 40-60Mbits (high end was on resnet50). This would explain why limiting the outgoing bandwidth does not have impact on the power/energy consumption. But if you look at the data exchange between server and client it is sometimes very high and sometimes very low. I thought that because of these data exchange peaks the power/energy consumption would be impacted. One explanation could be that if the data exchange is high, it indeed would take more time, but this also results in a lower power consumption resulting in an energy consumption that is the same. 
 \end{itemize}
 
-\begin{table}[]
+\begin{table}
         \begin{tabular}{ll}
                 Generation & Bandwidth \\ \hline
                 5G         & 100Mbits  \\ \hline
@@ -122,30 +123,51 @@ Remarks on $SCI_{HE}$:
         \caption{Average bandwidth of Cellular Broadband Connections}
         \label{table:avg_bandwidth}
 \end{table}
-Wew can see that limiting the bandwidth has little effect on the energy consumption. This could be explained because the average data exchanged is 11/12Mbits for Cheetah and 40-60Mbits for CryptFlow2. If we look at the average bandwidth of the cellular broadband connections (table \ref{table:avg_bandwidth}) we can see that this would be a problem for Cheetah on 3G. This would also be a problem on 3G and 4G for $SCI_{HE}$.
+We can see that limiting the outgoing bandwidth has little effect on the energy consumption. This could be explained because the average data exchanged is 11/12Mbits for Cheetah and 40-60Mbits for CryptFlow2. If we look at the average bandwidth of the cellular broadband connections (table \ref{table:avg_bandwidth}) we can see that this would be a problem for Cheetah on 3G. This would also be a problem on 3G and 4G for $SCI_{HE}$.
 
-
-\begin{table}
+\newpage
+\subsubsection{Lower outgoing bandwidths}
+\begin{table}[ht]
         \begin{adjustbox}{width=\columnwidth,center}
                 \subfile{../Tables/Power_readings_client2}
         \end{adjustbox}
-        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the bandwidth of the client.}
+        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the outgoing bandwidth of the client.}
         \label{table:powerreadingsclient2}
 \end{table}
 
-\begin{table}
+\begin{table}[ht]
         \begin{adjustbox}{width=\columnwidth,center}
                 \subfile{../Tables/Power_readings_server2}
         \end{adjustbox}
-        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the bandwidth of the server.}
+        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the outgoing bandwidth of the server.}
         \label{table:powerreadingsserver2}
 \end{table}
-    
+The results of the tests of the lower bandwidths can be found in \autoref{table:powerreadingsclient2} for when the clients outgoing bandwidth is changed, and in \autoref{table:powerreadingsserver2} for when the server's outgoing bandwidth is changed. A few remarks:
 
-I have done the tests, measurements can be found in table \ref{table:powerreadingsclient2} and table \ref{table:powerreadingsserver2}.
+\begin{itemize}
+    \item The energy consumption increases when lowering the outgoing bandwidth under 50Mbit/s for both Cheetah and $SCI_{HE}$ (as expected, since now the communication gets limited)
+    \item The increase fo energy consumption for Cheetah compared to $SCI_{HE}$ also increased when lowering the outgoing bandwidth, although it does increase more when the limit is on the upload speed of the client side (the most realistic scenario)
+    \item When limiting the outgoing bandwidth of the client, there is a high speedup the energy consumption of the server (\color{red} the speedup in the table in the third column is not correct, i have to update these values but they are 4.05 for 3mbits, 3.75 for 14 mbits, 3.7 for 40mbits and 2.7 for 50mbits\color{black}
+    \item When limiting the outgoing bandwidth of the server, the speedup is increases for 30mbits, but then lowers again.
+    \item 
+\end{itemize}
 
-\color{red}I still need to do the measurements for limiting both server and client at the same time. This would be a more realistic scenario, since the bottleneck of the route between server and client would be the limiting factor, for both server to client traffic and client to server traffic. I also need to check if limiting the traffic flow would only limit outgoing traffic.\color{black}
+\newpage
+\subsubsection{Lowering bandwidth of both}
 
+\begin{table}[ht]
+        \begin{adjustbox}{width=\columnwidth,center}
+                \subfile{../Tables/Power_readings_both}
+        \end{adjustbox}
+        \caption{Power readings of running the Cheetah and $SCI_{HE}$ and limiting the outgoing bandwidth of both client and server at the same time}
+        \label{table:powerreadingsboth}
+\end{table}
+Remarks:
+\begin{itemize}
+    \item Increase of speedup for cheetah. Lower energy consumption. 
+    \item Increase can be seen mainly on server side, on client side it decreases
+    \item Highest energy consumption on server side on 3Mbits
+\end{itemize}
 
 \subsection{graphs}
 % \begin{figure}[hbt!]
@@ -177,31 +199,31 @@ I have done the tests, measurements can be found in table \ref{table:powerreadin
 %     \label{fig:4results}
 % \end{figure}
 
-% \begin{figure}[hbt!]
-%     \begin{subfigure}{\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_cheetah_resnet50.png}
-%             \caption{Mean of running Cheetah with resnet50 51 times}
-%             \label{fig:bmean_cheetah_resnet50}
-%     \end{subfigure}
-%     \begin{subfigure}{\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_cheetah_sqnet.png}
-%             \caption{Mean of running Cheetah with sqnet 51 times}
-%             \label{fig:bmean_cheetah_sqnet}
-%     \end{subfigure}    
-%     \begin{subfigure}{\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
-%             \caption{Mean of running SCI\_HE with sqnet 11 times}
-%             \label{fig:bmean_SCI_{HE}_sqnet}
-%     \end{subfigure}
-%     \begin{subfigure}{\linewidth}
-%             \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_{HE}_sqnet.png}
-%             \caption{Mean of running SCI\_HE with sqnet 11 times}
-%             \label{fig:bfmean_SCI_{HE}_sqnet}
-%     \end{subfigure}
+\begin{figure}[hbt!]
+    \begin{subfigure}{\linewidth}
+            \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_cheetah-resnet50.png}
+            \caption{Mean of running Cheetah with resnet50 51 times}
+            \label{fig:bmean_cheetah_resnet50}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+            \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_cheetah-sqnet.png}
+            \caption{Mean of running Cheetah with sqnet 51 times}
+            \label{fig:bmean_cheetah_sqnet}
+    \end{subfigure}    
+    \begin{subfigure}{\linewidth}
+            \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE-resnet50.png}
+            \caption{Mean of running SCI\_HE with sqnet 11 times}
+            \label{fig:bmean_SCI_{HE}_sqnet}
+    \end{subfigure}
+    \begin{subfigure}{\linewidth}
+            \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE-sqnet.png}
+            \caption{Mean of running SCI\_HE with sqnet 11 times}
+            \label{fig:bfmean_SCI_{HE}_sqnet}
+    \end{subfigure}
 
-%     \caption{Four measurements doneA figure with four subfigures}
-%     \label{fig:4results2}
-% \end{figure}
+    \caption{Four measurements doneA figure with four subfigures}
+    \label{fig:4results2}
+\end{figure}
 
 \noindent
 % Cross-references to subfigures \ref{fig:mean_cheetah_resnet50}, \ref{fig:mean_cheetah_sqnet} and \ref{fig:mean_SCI_{HE}_sqnet} and of figure \ref{fig:4results}.
@@ -219,5 +241,5 @@ I have done the tests, measurements can be found in table \ref{table:powerreadin
 %     \caption{Running the SNNI CryptFlow2 on sqnet}
 %     \label{fig:my_label}
 % \end{figure}
-\section{RQb, what are the differences on server and client side and what are the implications}
+% \section{RQb, what are the differences on server and client side and what are the implications}
 \end{document}

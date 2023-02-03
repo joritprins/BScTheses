@@ -4,42 +4,67 @@
 
 % Documents that contain labels for references in this chapter
 \myexternaldocument{Sections/Introduction}
+\myexternaldocument{Sections/Experiments}
 
 \begin{document}
 
 \section{RQa, how do we measure the energy consumption}
-Measuring the power consumption of a program is not as easy as it seems. Measuring the power consumption of the processor as a whole can be done with tools provide by the manufacturer. Measuring the power consumption of one single program is harder. Programs often spawn multiple processes. Besides, measuring the power consumption of the processor as a whole can be done, but a processor is often working on multiple subprocesses of different programs by quickly switching between them. On top of that, modern processors have multiple cores that also alternate between subprocesses. Keeping track on which process is using the processor is proven to be quite challenging. To find a program suitable for this case I did a literature search. Rieger et al. have done a survey on approaches for assessing software energy consumption. While their literature was not performed in a systematic way, they nevertheless are confident that they gained a representative overview of the field and their conclusion was significant:
+To measure the energy consumption of a program or process one needs a tool that measures power consumption over a given time period. With these measurements the energy consumption can be calculated as $E=P*t$. While measuring the power consumption of a processor can be done with tools provided by the manufacturer, measuring the power consumption of a single program or process is less trivial. Programs often spawn multiple processes and one needs to measure the power consumption of each single one.  Besides, measuring the power consumption of the processor as a whole can be done, but a processor is often working on multiple subprocesses of different programs by quickly switching between them. Measuring which process or program is responsible for the power usage of the processor is therefore hard. On top of that, modern processors have multiple cores that also alternate between subprocesses. To find a program suitable for this case I did a literature search. Rieger et al. have done a survey on approaches for assessing software energy consumption. While their literature was not performed in a systematic way, they nevertheless are confident that they gained a representative overview of the field and their conclusion was significant:
 
 \begin{quote}
     \emph{"The sobering result of this survey was that there are hardly any actual ready-to-use development tools; those that we found are all platform-specific."} \parencite[p. 24]{rieger2017}
 \end{quote}
 
-To still find a way to measure the energy consumption of Cheetah I did a small literature search on how other authors measure energy or power consumption. Some approaches described are from the survey of Rieger et al., some are from a thesis from a master student \parencite{strempel2021}. Other approaches are found seperately. \paragraph{}
+To still find a way to measure the energy consumption of Cheetah I also did a small literature search on how other authors measure energy or power consumption. Some approaches described are from the survey of Rieger et al., some are from a thesis from a master student \parencite{strempel2021}. Other approaches are found seperately. \paragraph{}
 
-Liu et al. \parencite*{liu2022} proposed Leia, a lightweight cryptographic NN inference system at the edge. They implemented their solution on a Raspberry Pi and tested it with a COOWOO power meter. Tian et al. \parencite*{tian2021} proposed an edge computing-assisted framework to boost efficiency of DNN inference tasks on IoT devices that also protect the privacy of IoT data. They implemented it on a Raspberry Pi (client) and MacBook Pro (server) and measured the power consumption of the client with a Powerjive USB multimeter. Wang et al. \parencite*{wang2019} proposed an DNN accelerator against a model inversion attack, implemented their architecture on micro-architectural units and used a SMIC standard-cell library to obtain the energy consumption of the hardware logical units. Other solutions like the Linux tool PowerTOP\footnote{\url{https://github.com/fenrus75/powertop} (accessed on 22-12-22)} can only measure the power on battery powered devices. These approaches use hardware specific solutions, that I unfortunately do not have access to.
+Liu et al. \parencite*{liu2022} proposed Leia, a lightweight cryptographic NN inference system at the edge. They implemented their solution on a Raspberry Pi and tested it with a COOWOO power meter. Tian et al. \parencite*{tian2021} proposed an edge computing-assisted framework to boost efficiency of DNN inference tasks on IoT devices that also protect the privacy of IoT data. They implemented it on a Raspberry Pi (client) and MacBook Pro (server) and measured the power consumption of the client with a Powerjive USB multimeter. Wang et al. \parencite*{wang2019} proposed an DNN accelerator against a model inversion attack, implemented their architecture on micro-architectural units and used a SMIC standard-cell library to obtain the energy consumption of the hardware logical units. Other solutions like the Linux tool PowerTOP\footnote{\url{https://github.com/fenrus75/powertop} (accessed on 22-12-22)} can only measure the power on battery powered devices. These approaches use hardware specific solutions, that I unfortunately do not have access to. Besides, most approaches only measure the power consumption of the system as a whole, and not the program or process specific. While this is also of importance, and can also share some insights when the process or program is running without other processes, I am only interested in the power consumption of a single process or program.
 
-Seo et al. \parencite*{seo2008} created a framework for Java-based software systems. Couto et al. \parencite*{couto2015} provide Green Droid: a tool that measures energy consumption of Android programs at run-time. Liu provided a framework, jRAPL\footnote{\url{https://github.com/kliu20/jRAPL} (accessed on 22-12-22)} based on RAPL that can measure energy consumption on Java programs. The Spirals research group provided a framework, PyRAPL\footnote{\url{https://github.com/powerapi-ng/pyRAPL} (accessed on 22-12-22)}, that can measure the energy consumption of Python programs. These approaches are language specific. Cheetah is mostly written in C++ and these approaches do therefore not satisfy as a solution to measure energy consumption.
+Seo et al. \parencite*{seo2008} created a framework for Java-based software systems. Couto et al. \parencite*{couto2015} provide Green Droid: a tool that measures energy consumption of Android programs at run-time. Liu provided a framework, jRAPL\footnote{\url{https://github.com/kliu20/jRAPL} (accessed on 22-12-22)} based on RAPL that can measure energy consumption on Java programs. The Spirals research group provided a framework, PyRAPL\footnote{\url{https://github.com/powerapi-ng/pyRAPL} (accessed on 22-12-22)}, that can measure the energy consumption of Python programs. These approaches are all language specific. Cheetah is mostly written in C++ and these approaches do therefore not satisfy as a solution to measure energy consumption.
 
-Chen et al. have proposed Eyeriss \parencite{chen2016, chen20162}, a program that can estimate the power usage based on the structure of the NN and its data flow. Yang et al. \parencite*{yang2016} improved this concept and provided a website\footnote{\url{https://energyestimation.mit.edu/} (accessed on 22-12-22)} but this tool estimates power consumption based on the architecture of a NN. Because this solution is based on the structure of the NN and not on code or programs will this solution not be usefull as a solution.
+Chen et al. have proposed Eyeriss \parencite{chen2016, chen20162}, a program that can estimate the power usage based on the structure of the NN and its data flow. Yang et al. \parencite*{yang2016} improved this concept and provided website\footnote{\url{https://energyestimation.mit.edu/} (accessed on 22-12-22)} but this tool estimates power consumption based on the architecture of a NN. These theoretical measurements are based on the structure of a NN, and not on code or programs. Therefore, these approaches do not suffice.
 
-Santos et al. \parencite*{santos2017} suggest a method to measure the energy consumption using Low Level Virtual Machine and Clang tooling. They tested their methods on two open source systems but their implementation is not open source. One other user created a program\footnote{\url{https://gitlab.com/MarcoCouto/c-lem} (accessed on 22-12-22)} that can measure energy of C programs but did not provide installation instructions. Lastly I found PCM-Monitor\footnote{\url{https://github.com/intel/pcm} (accessed on 22-12-22)} for Intel devices but unfortunately I could not get it working on my own setup. 
-
-\subsection{Scaphandre}
-\begin{figure}
+Santos et al. \parencite*{santos2017} suggest a method to measure the energy consumption using Low Level Virtual Machine and Clang tooling. They tested their methods on two open source systems and found that their program was causing hughe overhead but still gained valuable insights. The problem is that their implementation is not open source. One other user created a program\footnote{\url{https://gitlab.com/MarcoCouto/c-lem} (accessed on 22-12-22)} that can measure energy of C programs, but did not provide installation instructions. Lastly I found PCM-Monitor\footnote{\url{https://github.com/intel/pcm} (accessed on 22-12-22)} for Intel devices but unfortunately I could not get it working on my own setup. 
+\begin{figure}[t]
     \centering
     \includegraphics[width=\linewidth]{Thesis/Images/overhead_scaphandre.png}
-    \caption{The CPU usage of the process Scaphandre on a test run (while also running the Cheetah process for client an server.}
+    \caption{The power usage of the Scaphandre process. Measurements are done while running the server and client process of Cheetah with Sqnet. Interpolated the results of 50 individual runs and calculated the average. One important remark is that in the first few seconds no other programs than Scaphandre run. Scaphandre is then responsible for all the power consumption, while the total power consumption might be low.  Same counts for the first 20 seconds, where the SNNI protocol is not using much power because of the synchronising between server and client in the silent OT process (see figure \ref{fig:mean_cheetah_sqnet} and section \ref{ssec:singledevice}), resulting in a relatively high percentage for Scaphandre.}
     \label{fig:overhead_scaphandre}
 \end{figure}
-I then found Scaphandre, an metrology agent to measure power consumption. I will use Scaphandre for several reasons. Firstly, it is open source\footnote{\url{https://github.com/hubblo-org/scaphandre} (accessed on 22-12-22). For this project I will use commit of the main branch 50fea42 (\url{https://github.com/hubblo-org/scaphandre/commit/50fea42})}, accessible and has a lot of documentation plus an installation guide\footnote{\url{https://hubblo-org.github.io/scaphandre-documentation/} (accessed 23-12-22)}. Although it is an early stage project and is still being maintained it does provide a stable version to work with. Second, Scaphandre measures the energy consumption of specific programs and aims to be as light and clean as possible. Their goal is to reach an overhead as close as possible to 0. Early measurements show that the power consumption is indeed low (Figure \ref{fig:overhead_scaphandre}). Third, Scaphandre outputs the data in convenient forms. It provides support for open source output programs like Prometheus\footnote{\url{https://prometheus.io/} (accessed 23-12-22)}, Riemann\footnote{\url{https://github.com/riemann/riemann} (accessed 23-12-22)} and Warp10\footnote{\url{https://github.com/senx/warp10-platform} (accessed 23-12-22)}. The power consumption metrics can also be stored in a JSON file and basic metrics can be shown to the terminal. \paragraph{}
+\subsection{Scaphandre}
 
-% begin writing about scaphandre
+I then found Scaphandre, an metrology agent to measure power consumption. I will use Scaphandre for several reasons. Firstly, it is open source\footnote{\url{https://github.com/hubblo-org/scaphandre} (accessed on 22-12-22). For this project I will use commit of the main branch 50fea42 (\url{https://github.com/hubblo-org/scaphandre/commit/50fea42})}, accessible and has a lot of documentation plus an installation guide\footnote{\url{https://hubblo-org.github.io/scaphandre-documentation/} (accessed 23-12-22)}. Although it is an early stage project and is still being maintained it does provide a stable version to work with. Second, Scaphandre measures the energy consumption of specific programs and aims to be as light and clean as possible. Their goal is to reach an overhead as close as possible to 0. Early measurements show that the power consumption is indeed low (Figure \ref{fig:overhead_scaphandre}). Third, Scaphandre outputs the data in convenient forms. It provides support for open source output programs like Prometheus\footnote{\url{https://prometheus.io/} (accessed 23-12-22)}, Riemann\footnote{\url{https://github.com/riemann/riemann} (accessed 23-12-22)} and Warp10\footnote{\url{https://github.com/senx/warp10-platform} (accessed 23-12-22)}. The power consumption metrics can also be stored in a JSON file and basic metrics can be shown on the terminal. \paragraph{}
 
-The process time (total time a process uses the CPU) in Linux is measured in Jiffies. Jiffies are measured in Hz and on most devices 1 second equals 100 Jiffies. Each program keeps track on how many Jiffies it has used. Scaphandre collects this data.
+The process time (total time a process uses the CPU) in Linux is measured in Jiffies. Jiffies are measured in Hz and on most devices 1 second equals 100 Jiffies. Each program keeps track on how many Jiffies it has used. Scaphandre collects this data (figure \ref{fig:scaphandre1}).
 
-\color{red} Add graph Jiffies => add graph power consumption => add graph total power consumption proces\color{black}
+\begin{figure}[!hb]
+    \begin{subfigure}{.475\linewidth}
+            \includegraphics[width=\textwidth]{Thesis/Images/Scaphandre1/scaphandre1.png}
+            \caption{Scaphandre counts Jiffies per process.\newline}
+            \label{fig:scaphandre1}
+    \end{subfigure}\hfill % <-- "\hfill"
+    \begin{subfigure}{.475\linewidth}
+            \includegraphics[width=\textwidth]{Thesis/Images/Scaphandre1/scaphandre2.png}
+            \caption{Scaphandre per jiffy how much power is being drawn at those moments in time.}
+            \label{fig:scaphandre2}
+    \end{subfigure}
+    % \medskip % create some *vertical* separation between the graphs
+    
+    % \begin{subfigure}{.475\linewidth}
+    %         \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE-resnet50.png}
+    %         \caption{Mean of running SCI\_HE with resnet50 50 times}
+    %         \label{fig:mean_SCI_HE_resnet50}
+    % \end{subfigure}\hfill % <-- "\hfill"
+    % \begin{subfigure}{.475\linewidth}
+    %         \includegraphics[width=\textwidth]{Thesis/Images/Means/mean_SCI_HE-sqnet.png}
+    %         \caption{Mean of running SCI\_HE with sqnet 50 times}
+    %         \label{fig:mean_SCI_HE_sqnet}
+    % \end{subfigure}
 
-It then combines this data with data collected about the total power used for the machine (for example with Intel's RAPL sensors). The power usage of a program is then calculated as the total power usage multiplied with the ratio between the total Jiffies and the Jiffies used for our program: $ P_{prog} = P_{machine} * \frac{Jiffies_{prog}}{Jiffies_{total}}$. For example: if the total amount of jiffies in a given time period (user and system) is 450 jiffies (sampled per second), and the CPU time of this program (user, system and children) is 50 jiffies, the power usage is then calculated as $P_{prog} = P_{machine} * \frac{50}{450}$. So the power usage of this program will then be $11.11\%$ of the total power usage of the device in that given time period.
+    \caption{Scaphandre process}
+    \label{fig:scaphandre_process}
+\end{figure}
+
+It then combines this data with data collected about the total power used for the machine (for example with Intel's RAPL sensors), see figure \ref{fig:scaphandre2}. Finally, when all power readings for all the jiffies over a given time period are grouped, Scaphandre can show how much power has been used. This idea is also applied to multiple cores. Now, the power consumption is measured for each individual core and then, at the end, the measurements are summed to get the power consumption of a program or process.
 
 % - documentation https://hubblo-org.github.io/scaphandre-documentation/index.html
 
@@ -47,9 +72,9 @@ It then combines this data with data collected about the total power used for th
 
 
 \section{Experimental setup}
-The experiments done are twofold. First, the SNNI's are started on one device. We can then see how the power and energy usage are distributed over time. The tests on one device will show the bare power and energy consumption without limitations on communication protocols. Both devices communicate over the loopback network on 127.0.0.1 and port 12345. Second, to test the effect of bandwidth on SNNI's I will make a different setup with two devices. Because of the limitations of this project and practical reasons, I will only focus on local experiments. This means the experiments are done over LAN, and not WAN. With this setup I will limit the bandwidth to certain predetermined bandwidths to simulate a WAN. I will elaborate the chosen bandwidths later. I chose to leave the ping out of these experiments, also because of practical reasons. The specifications of the devices that are used for the experiments can be found in table \ref{table:specs}.
+The experiments done are twofold. First, the client protocol and the server protocol for the inference process are started on one single device. The experiments performed on this device will then show the energy consumption without limitations of lower bandwidths, and thus without the communication overhead. Both protocols communicate over the loopback network on IP-address 127.0.0.1 and port 12345. Second, to test the effect of bandwidth on SNNI's I will make a different setup with two devices. Because of the limitations of this project and practical reasons, I will only focus on experiments done in the local area network (LAN) and not the wide area network (WAN)\footnote{For experiments in the WAN setting I need acces to two different networks (or some sort of VPN), and then connect the devices to the separate networks. In this setting, I would not have influence over the links in between. Besides, these experiments would take extra time, which shifts the focus on a more broader field.}. The specifications of the devices that are used for the experiments can be found in table \ref{table:specs}. I will then limit the outgoing traffic of the client, the outgoing traffic of the server and the outgoing traffic of both. Lowering the client's outgoing bandwidth is a plausible scenario, since the upload speed on most commercial providers is lower than the download speed. It is very well possible that the infrastructure on the server side is way better, resulting in higher limits for the upload speed on server side. It could still be possible that the upload speed of the server is limited, but this is less likely. The last scenario is more realistic on more amateurish setups, where both client and server have upload limitations. 
 
-\begin{table}[]
+\begin{table}
     \begin{adjustbox}{width=\columnwidth,center}
         \input{Thesis/Tables/Device_specs.tex}
     \end{adjustbox}
@@ -57,33 +82,10 @@ The experiments done are twofold. First, the SNNI's are started on one device. W
     \label{table:specs}
 \end{table}
 
-For this project I forked the project of Cheetah on GitHub. The commit that has been used is 09fe195\footnote{https://github.com/Alibaba-Gemini-Lab/OpenCheetah/commit/09fe195,  (accessed 24-01-23)}. I made some minor changes to the scripts that start the SNNI process that I will elaborate later, but apart from that no changes have been made to the original project. For Scaphandre I use commit 50fea42\footnote{https://github.com/hubblo-org/scaphandre/commit/50fea42, (accessed 24-01-23)}. There have been no changes made to Scaphandre. For Scaphandre I used the JSON exporter. The reason is twofold. First, it does not rely on secondary programs to display the results, and some of the exporters of Scaphandre do (e.g. the Riemann or Promotheus exporter). Second, it outputs the results in convenient form. The STDOUT exporter for example only outputs the top consumers and only displays the name and the power consumption in Watts, while the JSON exporter also gives extra data like the process id and a timestamp. Collecting the process id is important in the two device scenario, because the client- and server side programs are both called "cheetah" or "sci\_he", so separating this data can be quite challenging without.     
+For this project I forked the GitHub project of Cheetah (that also contains the version of CryptFlow2 that I will be using). The commit that has been used is 09fe195\footnote{https://github.com/Alibaba-Gemini-Lab/OpenCheetah/commit/09fe195,  (accessed 24-01-23)}. I made some minor changes to the scripts that launch the inference protocol, which will be elaborated later. Apart from this, no other changes have been made to the GitHub project. For Scaphandre I use commit 50fea42\footnote{https://github.com/hubblo-org/scaphandre/commit/50fea42, (accessed 24-01-23)}. There have been no changes made to Scaphandre in my project. For Scaphandre I used the JSON exporter to output the data. The reason is twofold. First, it does not rely on secondary programs to display the results, while some of the other exporters of Scaphandre do (e.g. the Riemann or Promotheus exporter). Second, it outputs the results in convenient form. The STDOUT exporter for example only outputs the top consumers and only displays the name and the power consumption in Watts, while the JSON exporter also gives extra data like the process id and a timestamp and shows all data.  Example output is shown in \autoref{lst:json_output}.
 
-\section{Scripts}
-To automate the process of running the tests, I have written some scripts in Bash. The reason for this is that bash provides support for all the terminal commands, like creating, removing and moving files/folders, and with a bash script another script can be launched. The latter is important, because the Cheetah framerwork provides scripts to change the parameters of the SNNI.
-%  The scripts from single device differ a bit from the scripts written for the experiments for two devices. This has to do with seperating the client measurements and the server measurements in the case of single device.
-
-\subsection{Both devices}
-Scaphandre requires the Linux module \verb|intel_rapl_common|. This module can be loaded with \verb|modprobe intel_rapl_common|. This command requires super user rights, so the script has to be run in sudo mode. I then start Scaphandre. For this I need to specify which exporter I want, which is JSON, as described earlier. After this I need to choose the step duration on which Scaphandre collects and outputs the data. This is possible with the \verb|-n| flag and the \verb|-s| flag. The \verb|-n| flag is the step duration in nano seconds, while the \verb|-s| flag is the step duration in seconds. I chose to set the \verb|-n| flag with 1 which causes Scaphandre to output the data as quickly as possible\footnote{For this to work the step duration in seconds needs to be set to 0.}. A consequence of this is that the time between the measurements is not constant, but we can easily solve this later. Lastly we need to specify the name of the output file, which is different each run. By not setting the \verb|-t| flag the script will run till it is terminated. The commands are then:\\
-
-\noindent\verb|modprobe intel_rapl_common|\\
-\verb|./Scaphandre -n 1 -s 0 -f [output_name]|\\
-
-\begin{figure}
-    \centering
-    \subfile{../Graphs/script}   
-    \caption{High-level overview of the scripts used for getting measurements}
-    \label{fig:scripts}
-\end{figure}
-
-Once Scaphandre has been started, we can launch the (slightly altered) scripts from the Cheetah project to start Cheetah and $SCI_{HE}$, called \textit{run-client.sh} and \textit{run-server.sh}. Both programs, client and server, do have the same name, 'Cheetah' or '$SCI_HE$' (dependent of the SNNI), in the output file of Scaphandre. This is a problem in case of the single device tests, since we need to separate the measurements. This wont be the situation in the case of two different devices, since these experiments output 2 separate files, one for the client and one for the server. This can be solved by altering the \textit{run-client.sh} and \textit{run-server.sh} files.
-
-Now the \textit{run-client.sh} and \textit{run-server.sh} both launch the executable in the folder \verb|build/bin|. This executable is the SNNI protocol, and we are interested in the power consumption of this program. Somehow I need to pass the PID of this program, launched from the \textit{run-client.sh} and \textit{run-server.sh}, back to the main script. It is quite trivial on how to pass parameters to children, i.e. with positional parameters\footnote{\url{https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html} (accessed on 22-12-22)}, but passing parameters back to the main script is harder. I solved this by adapting the \textit{run-client.sh} and \textit{run-server.sh} by adding \verb|& PID=$!| after the line that executes the SNNI. I then write this PID to a file that is read by the main script. Then the PID can be used to match the measurements of Scaphandre and further process the data (fig \ref{fig:scripts}). This only has to be done in the case of one device. In the case of two devices, we can just seperate the server and client process by naming the output accordingly, e.g. run\_x\_client or run\_x\_server. 
-
-\subsection{Data processing}
-The measurements from Scaphandre are in the following format:
-
-\begin{lstlisting}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={Example output of Scaphandre.}, language=JSON, label={lst:json_output}]
 [
     {
         "host": {
@@ -96,6 +98,12 @@ The measurements from Scaphandre are in the following format:
                 "pid": 28350,
                 "consumption": 13206809.0,
                 "timestamp": 1673018149.9443746
+            },
+            {
+                "exe": "resnet50-SCI_HE",
+                "pid": 28353,
+                "consumption": 13430203.0,
+                "timestamp": 1673018149.9443801
             },
             {
                 "exe": "scaphandre",
@@ -121,8 +129,36 @@ The measurements from Scaphandre are in the following format:
     ...
 ]
 \end{lstlisting}
+\end{minipage}
+
+Collecting the process id is important in the two device scenario, because the client- and server side programs are both called "cheetah" or "sci\_he", so separating this data can be quite challenging without.     
+
+\section{Scripts}
+To automate the process of running the tests, I have written some scripts in Bash. The reason for this is that bash provides support for all the terminal commands, like creating, removing and moving files/folders, and with a bash script another script can be launched. The latter is important, because the Cheetah framerwork provides scripts to change the parameters of the SNNI.
+%  The scripts from single device differ a bit from the scripts written for the experiments for two devices. This has to do with seperating the client measurements and the server measurements in the case of single device.
+
+\subsection{Both devices}
+Scaphandre requires the Linux module \verb|intel_rapl_common|. This module can be loaded with \verb|modprobe intel_rapl_common|. This command requires super user rights, so the script has to be run in sudo mode. I then start Scaphandre. For this I need to specify which exporter I want, which is JSON, as described earlier. After this I need to choose the step duration on which Scaphandre collects and outputs the data. This is possible with the \verb|-n| flag and the \verb|-s| flag. The \verb|-n| flag is the step duration in nano seconds, while the \verb|-s| flag is the step duration in seconds. I chose to set the \verb|-n| flag with 1 which causes Scaphandre to output the data as quickly as possible\footnote{For this to work the step duration in seconds needs to be set to 0.}. A consequence of this is that the time between the measurements is not constant, but we can easily solve this later. Lastly we need to specify the name of the output file, which is different each run. By not setting the \verb|-t| flag the script will run till it is terminated. The commands are then:\\
+
+\noindent\verb|modprobe intel_rapl_common|\\
+\verb|./Scaphandre -n 1 -s 0 -f [output_name]|\\
+
+\begin{figure}[t]
+    \centering
+    \subfile{../Graphs/script}   
+    \caption{High-level overview of the scripts used for getting measurements}
+    \label{fig:scripts}
+\end{figure}
+
+Once Scaphandre has been started, we can launch the (slightly altered) scripts from the Cheetah project to start Cheetah and $SCI_{HE}$, called \textit{run-client.sh} and \textit{run-server.sh}. Both programs, client and server, do have the same name, 'Cheetah' or '$SCI_HE$' (dependent of the SNNI), in the output file of Scaphandre. This is a problem in case of the single device tests, since we need to separate the measurements. This wont be the situation in the case of two different devices, since these experiments output 2 separate files, one for the client and one for the server. This can be solved by altering the \textit{run-client.sh} and \textit{run-server.sh} files.
+
+Now the \textit{run-client.sh} and \textit{run-server.sh} both launch the executable in the folder \verb|build/bin|. This executable is the SNNI protocol, and we are interested in the power consumption of this program. Somehow I need to pass the PID of this program, launched from the \textit{run-client.sh} and \textit{run-server.sh}, back to the main script. It is quite trivial on how to pass parameters to children, i.e. with positional parameters\footnote{\url{https://www.gnu.org/software/bash/manual/html_node/Positional-Parameters.html} (accessed on 22-12-22)}, but passing parameters back to the main script is harder. I solved this by adapting the \textit{run-client.sh} and \textit{run-server.sh} by adding \verb|& PID=$!| after the line that executes the SNNI. I then write this PID to a file that is read by the main script. Then the PID can be used to match the measurements of Scaphandre and further process the data (fig \ref{fig:scripts}). This only has to be done in the case of one device. In the case of two devices, we can just seperate the server and client process by naming the output accordingly, e.g. run\_x\_client or run\_x\_server. 
+
+\subsection{Data processing}
+The measurements from Scaphandre are in the following format:
 
 To graph the results we first need to filter the SNNI measurements. This can be done by searching for the name (in this example \verb|resnet50-SCI_HE|) and filtering these reseults in the case of two devices, or searching for the PID's of the server and client process and filtering these results in the case of one device. As seen in the example above, the timestamp is in Unix time\footnote{Seconds from the first of Januari 1970 (UTC) \url{}}. To get the relative time, i.e. where zero is the time Scaphandre has started, we just subtract the timestamp with the time of the first element in the measurements. In the case of the example above it is the time of the host of the first measurement. When there are two Scaphandre files with measurements, in the case of two devices for example, I just take the lowest of both and compare which one is lowest. At the edges (left and right) the value will be 0, since the power consumption is not defined before the script has been started and after it finishes. Now as said before, the data points are not equidistant. We can solve this by interpolating the results. For this I use the Numpy module \verb|numpy.interp|\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.interp.html} (accessed on 26-01-23)}. When I calculate the average of one run, I calculate the weighted average with numpy.average\footnote{\url{https://numpy.org/doc/stable/reference/generated/numpy.average.html} (accessed 26-01-23)}. The weights are then the differences between the measurements. 
 
-\color{red}Bandwith between machines in the CryptFlow2 environment is 377MBps and 40MBps in the lan and wan respectively. \color{black}
+\subsection{Choice of parameters}
+I tested the average bandwidth between the two devices with no other processes running. The bandwidth was then \color{red} approx 400Mbit/s\color{black}. In the Cheetah paper they experimented with a bandwidth of 377MBps and 40MBps in the lan and wan respectively. Therefore I will start the limit on 500Mbit/s (same as no limit, since the max bandwidth is \color{red} approx 400Mbit/s\color{black}) and will lower the outgoing bandwidth in steps. The bandwidths chosen are 500, 400, 200, 150, 100 and 50. As much distributed while leaving a few numbers out. 
 \end{document}
