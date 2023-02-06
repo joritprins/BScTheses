@@ -88,9 +88,11 @@ def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
 
 def fastest(bw, snni, arr):
     f = min(arr, key = lambda x: x[4])
-    wh = f[1] * (f[0] / 3600) + f[3] * (f[2] / 3600)
-    print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
-        bw, snni, f[4], f[1], f[3], wh))
+    whf = f[1] * (f[0] / 3600) + f[3] * (f[2] / 3600)
+    s = max(arr, key = lambda x: x[4])
+    whs = s[1] * (s[0] / 3600) + s[3] * (s[2] / 3600)
+    print("{:<8} {:<10} {:<22} {:<22} {:<22} {:<22} {:<22} {:<22} {:<22} {:<22}".format(
+        bw, snni, f[4], f[1], f[3], whf, s[4], s[1], s[3], whs))
 
 def avg_time(bw, snni, arr):
     f = min(arr, key = lambda x: x[4])[4]
@@ -126,7 +128,7 @@ def pwr(bw, snni, arr):
 ##################################################################################################################
 ##################################################################################################################
 ##########                                                                                              ##########
-##########                          CHANGING BOTH BANDWIDTH                                             ##########
+##########                          CHANGING BOTH BANDWIDTH 3-30                                        ##########
 ##########                                                                                              ##########
 ##################################################################################################################
 ##################################################################################################################
@@ -136,24 +138,20 @@ print("====== Changing both bandwidth ========")
 xb3cs,  cb3cs,  sb3cs,  db3cs  = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-3-cheetah-sqnet',  runs=10, exe='sqnet-cheetah', end=0, plot=plot)
 xb14cs, cb14cs, sb14cs, db14cs = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-14-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
 xb30cs, cb30cs, sb30cs, db30cs = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-30-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
-xb50cs, cb50cs, sb50cs, db50cs = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-50-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
 
-xb3ss,  cb3ss,  sb3ss,  db3ss  = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-3-SCI_HE-sqnet',  runs=8,  exe='sqnet-SCI_HE', end=0, plot=plot)
+xb3ss,  cb3ss,  sb3ss,  db3ss  = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-3-SCI_HE-sqnet',  runs=6,  exe='sqnet-SCI_HE', end=0, plot=plot)
 xb14ss, cb14ss, sb14ss, db14ss = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-14-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
 xb30ss, cb30ss, sb30ss, db30ss = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-30-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
-xb50ss, cb50ss, sb50ss, db50ss = prepare_data(dir='Code/Plots/Results/laptop-desktop/both-50-SCI_HE-sqnet', runs=10, exe='sqnet-SCI_HE', end=0, plot=plot)
 
 print("Information about fastest runs with neural network sqnet")
-print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
-    "Bandwith", "SNNI", "Fastest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)"))
+print("{:<8} {:<10} {:<22} {:<22} {:<22} {:<22} {:<22} {:<22} {:<22} {:<22}".format(
+    "Bandwith", "SNNI", "Fastest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)", "Slowest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)"))
 fastest(3,  "Cheetah", db3cs )
 fastest(14, "Cheetah", db14cs)
 fastest(30, "Cheetah", db30cs)
-fastest(50, "Cheetah", db50cs)
 fastest(3,  "SCI_HE",  db3ss )
 fastest(14, "SCI_HE",  db14ss)
 fastest(30, "SCI_HE",  db30ss)
-fastest(50, "SCI_HE",  db50ss)
 
 print("More information about time with neural network sqnet")
 print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
@@ -161,11 +159,9 @@ print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
 avg_time(3,  "Cheetah", db3cs )
 avg_time(14, "Cheetah", db14cs)
 avg_time(30, "Cheetah", db30cs)
-avg_time(50, "Cheetah", db50cs)
 avg_time(3,  "SCI_HE",  db3ss )
 avg_time(14, "SCI_HE",  db14ss)
 avg_time(30, "SCI_HE",  db30ss)
-avg_time(50, "SCI_HE",  db50ss)
 
 tmp = []
 print("Information about power with neural network sqnet")
@@ -176,70 +172,26 @@ print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<1
     "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
 tmp.append(pwr(3,  "Cheetah", db3cs ))
 tmp.append(pwr(3,  "SCI_HE",  db3ss ))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(14, "Cheetah", db14cs))
 tmp.append(pwr(14, "SCI_HE",  db14ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(30, "Cheetah", db30cs))
 tmp.append(pwr(30, "SCI_HE",  db30ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
-tmp.append(pwr(50, "Cheetah", db50cs))
-tmp.append(pwr(50, "SCI_HE",  db50ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 print(tmp)
 
-# np.asarray(tmp).tofile('Code/Plots/Means/both.csv', sep=', ')
-# np.savetxt('Code/Plots/Means/both.csv', tmp, fmt='%.3f')
-exit()
+np.savetxt('Code/Plots/Means/both.csv', tmp, fmt='%.3f')
+# exit()
 
-print("====== Changing clients's bandwidth ========")
-print("Information about fastest runs with neural network sqnet")
-print("{:<12} {:<10} {:<22} {:<22} {:<22} {:<18}".format(
-    "Bandwith", "SNNI", "Fastest runtime (s)", "Avg power client (W)", "Avg power server (W)", "Consumed energy (Wh)"))
-fastest(3,  "Cheetah", dc3cs )
-fastest(14, "Cheetah", dc14cs)
-fastest(30, "Cheetah", dc30cs)
-fastest(50, "Cheetah", dc50cs)
-fastest(3,  "SCI_HE",  dc3ss )
-fastest(14, "SCI_HE",  dc14ss)
-fastest(30, "SCI_HE",  dc30ss)
-fastest(50, "SCI_HE",  dc50ss)
 
-print("More information about time with neural network sqnet")
-print("{:<12} {:<10} {:<22} {:<22} {:<22}".format(
-    "Bandwith", "SNNI", "Avg runtime (s)", "Min runtime (s)", "Max runtime (s)"))
-avg_time(3,  "Cheetah", dc3cs )
-avg_time(14, "Cheetah", dc14cs)
-avg_time(30, "Cheetah", dc30cs)
-avg_time(50, "Cheetah", dc50cs)
-avg_time(3,  "SCI_HE",  dc3ss )
-avg_time(14, "SCI_HE",  dc14ss)
-avg_time(30, "SCI_HE",  dc30ss)
-avg_time(50, "SCI_HE",  dc50ss)
-
-tmp = []
-print("Information about power with neural network sqnet")
-print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15}".format(
-    "BW", "SNNI", 
-    "Low total (Wh)",  "Avg total (Wh)",  "High total (Wh)",
-    "Low client (Wh)",  "Avg client (Wh)",  "High client (Wh)",
-    "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
-tmp.append(pwr(3,  "Cheetah", dc3cs ))
-tmp.append(pwr(3,  "SCI_HE",  dc3ss ))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
-tmp.append(pwr(14, "Cheetah", dc14cs))
-tmp.append(pwr(14, "SCI_HE",  dc14ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
-tmp.append(pwr(30, "Cheetah", dc30cs))
-tmp.append(pwr(30, "SCI_HE",  dc30ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
-tmp.append(pwr(50, "Cheetah", dc50cs))
-tmp.append(pwr(50, "SCI_HE",  dc50ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
-print(tmp)
-
-# np.asarray(tmp).tofile('Code/Plots/Means/server.csv', sep=', ')
-# np.savetxt('Code/Plots/Means/client2.csv', tmp, fmt='%.3f')
+##################################################################################################################
+##################################################################################################################
+##########                                                                                              ##########
+##########                          CHANGING SERVERS AND CLIENTS BANDWIDTH 3-50                         ##########
+##########                                                                                              ##########
+##################################################################################################################
+##################################################################################################################
 
 print("====== Changing server's bandwidth ========")
 xs3cs,  cs3cs,  ss3cs,  ds3cs  = prepare_data(dir='Code/Plots/Results/laptop-desktop/server-3-cheetah-sqnet',  runs=10, exe='sqnet-cheetah', end=0, plot=plot)
@@ -297,20 +249,19 @@ print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<1
     "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
 tmp.append(pwr(3,  "Cheetah", ds3cs ))
 tmp.append(pwr(3,  "SCI_HE",  ds3ss ))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(14, "Cheetah", ds14cs))
 tmp.append(pwr(14, "SCI_HE",  ds14ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(30, "Cheetah", ds30cs))
 tmp.append(pwr(30, "SCI_HE",  ds30ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(50, "Cheetah", ds50cs))
 tmp.append(pwr(50, "SCI_HE",  ds50ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 print(tmp)
 
-# np.asarray(tmp).tofile('Code/Plots/Means/server.csv', sep=', ')
-# np.savetxt('Code/Plots/Means/server2.csv', tmp, fmt='%.3f')
+np.savetxt('Code/Plots/Means/server2.csv', tmp, fmt='%.3f')
 
 print("====== Changing clients's bandwidth ========")
 print("Information about fastest runs with neural network sqnet")
@@ -346,22 +297,29 @@ print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<1
     "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
 tmp.append(pwr(3,  "Cheetah", dc3cs ))
 tmp.append(pwr(3,  "SCI_HE",  dc3ss ))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(14, "Cheetah", dc14cs))
 tmp.append(pwr(14, "SCI_HE",  dc14ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(30, "Cheetah", dc30cs))
 tmp.append(pwr(30, "SCI_HE",  dc30ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(50, "Cheetah", dc50cs))
 tmp.append(pwr(50, "SCI_HE",  dc50ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 print(tmp)
 
-# np.asarray(tmp).tofile('Code/Plots/Means/server.csv', sep=', ')
-# np.savetxt('Code/Plots/Means/client2.csv', tmp, fmt='%.3f')
 
-exit()
+np.savetxt('Code/Plots/Means/client2.csv', tmp, fmt='%.3f')
+
+
+##################################################################################################################
+##################################################################################################################
+##########                                                                                              ##########
+##########                              CHANGING SERVERS BANDWIDTH 50-500                               ##########
+##########                                                                                              ##########
+##################################################################################################################
+##################################################################################################################
 xs50cs, cs50cs, ss50cs, ds50cs = prepare_data(
     dir='Code/Plots/Results/laptop-desktop/server-50-cheetah-sqnet', runs=15, exe='sqnet-cheetah', end=0, plot=plot)
 xs100cs, cs100cs, ss100cs, ds100cs = prepare_data(
@@ -443,30 +401,36 @@ print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<1
     "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
 tmp.append(pwr(50,  "Cheetah", ds50cs ))
 tmp.append(pwr(50,  "SCI_HE",  ds50ss ))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(100, "Cheetah", ds100cs))
 tmp.append(pwr(100, "SCI_HE",  ds100ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(150, "Cheetah", ds150cs))
 tmp.append(pwr(150, "SCI_HE",  ds150ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(200, "Cheetah", ds200cs))
 tmp.append(pwr(200, "SCI_HE",  ds200ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(300, "Cheetah", ds300cs))
 tmp.append(pwr(300, "SCI_HE",  ds300ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(400, "Cheetah", ds400cs))
 tmp.append(pwr(400, "SCI_HE",  ds400ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(500, "Cheetah", ds500cs))
 tmp.append(pwr(500, "SCI_HE",  ds500ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 print(tmp)
 
-# np.asarray(tmp).tofile('Code/Plots/Means/server.csv', sep=', ')
 np.savetxt('Code/Plots/Means/server.csv', tmp, fmt='%.3f')
 
+##################################################################################################################
+##################################################################################################################
+##########                                                                                              ##########
+##########                              CHANGING CLIENTS BANDWIDTH 50-500                               ##########
+##########                                                                                              ##########
+##################################################################################################################
+##################################################################################################################
 
 xc50cs, cc50cs, sc50cs, dc50cs = prepare_data(
     dir='Code/Plots/Results/laptop-desktop/client-50-cheetah-sqnet', runs=10, exe='sqnet-cheetah', end=0, plot=plot)
@@ -548,23 +512,23 @@ print("{:<5} {:<10} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<1
     "Low server (Wh)",  "Avg server (Wh)",  "High server (Wh)"))
 tmp.append(pwr(50,  "Cheetah", dc50cs ))
 tmp.append(pwr(50,  "SCI_HE",  dc50ss ))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(100, "Cheetah", dc100cs))
 tmp.append(pwr(100, "SCI_HE",  dc100ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(150, "Cheetah", dc150cs))
 tmp.append(pwr(150, "SCI_HE",  dc150ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(200, "Cheetah", dc200cs))
 tmp.append(pwr(200, "SCI_HE",  dc200ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 # tmp.append(# pwr(300, "Cheetah", dc300cs)
 # tmp.append(# pwr(300, "SCI_HE",  dc300ss)
 tmp.append(pwr(400, "Cheetah", dc400cs))
 tmp.append(pwr(400, "SCI_HE",  dc400ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 tmp.append(pwr(500, "Cheetah", dc500cs))
 tmp.append(pwr(500, "SCI_HE",  dc500ss))
-tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][5]/tmp[-2][5],2),0,0,round(tmp[-1][7]/tmp[-2][7],2),0])
+tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6],2),0,0,round(tmp[-1][9]/tmp[-2][9],2),0])
 
 np.savetxt('Code/Plots/Means/client.csv', tmp, fmt='%.3f')

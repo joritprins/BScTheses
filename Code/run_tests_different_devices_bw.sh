@@ -45,7 +45,7 @@ sudo mkdir Code/Logs
 
 #         for i in $(seq 1 $END); do 
 #             printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#             bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
+#             bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
 #             wait $PID
 #         done
 #     done
@@ -67,7 +67,7 @@ sudo mkdir Code/Logs
 
 # for i in $(seq 3 10); do 
 #     printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#     bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
+#     bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
 #     wait $PID
 # done
 # sudo bash Cheetah/scripts/throttle.sh del
@@ -92,7 +92,7 @@ sudo mkdir Code/Logs
 
 #         for i in $(seq 1 5); do 
 #             printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#             bash Code/run_test_single.sh $SNNI $NN $i $TYPE client_${BW} & PID=$!
+#             bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE client_${BW} & PID=$!
 #             wait $PID
 #         done
 #     done
@@ -117,7 +117,7 @@ for SNNI in "cheetah" "SCI_HE"; do
 
         for i in $(seq 1 5); do 
             printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-            bash Code/run_test_single.sh $SNNI $NN $i $TYPE both_${BW} & PID=$!
+            bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE both_${BW} & PID=$!
             wait $PID
         done
     done
@@ -143,7 +143,7 @@ for SNNI in "cheetah" "SCI_HE"; do
 
         for i in $(seq 6 10); do 
             printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-            bash Code/run_test_single.sh $SNNI $NN $i $TYPE both_${BW} & PID=$!
+            bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE both_${BW} & PID=$!
             wait $PID
         done
     done
@@ -173,7 +173,7 @@ sudo bash Cheetah/scripts/throttle.sh del
 
 #         for i in $(seq 6 10); do 
 #             printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#             bash Code/run_test_single.sh $SNNI $NN $i $TYPE client_${BW} & PID=$!
+#             bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE client_${BW} & PID=$!
 #             wait $PID
 #         done
 #     done
@@ -198,7 +198,7 @@ sudo bash Cheetah/scripts/throttle.sh del
 
 #         for i in $(seq 6 10); do 
 #             printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#             bash Code/run_test_single.sh $SNNI $NN $i $TYPE both_${BW} & PID=$!
+#             bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE both_${BW} & PID=$!
 #             wait $PID
 #         done
 #     done
@@ -251,7 +251,7 @@ sudo bash Cheetah/scripts/throttle.sh del
 
 #             for i in $(seq 1 $END); do 
 #                 printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#                 bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
+#                 bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
 #                 wait $PID
 #             done
 #         done
@@ -272,7 +272,7 @@ sudo bash Cheetah/scripts/throttle.sh del
 
 #     for i in $(seq 1 $END); do 
 #         printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#         bash Code/run_test_single.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
+#         bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE server_${BW} & PID=$!
 #         wait $PID
 #     done
 # done
@@ -295,7 +295,7 @@ sudo bash Cheetah/scripts/throttle.sh del
 
 #             for i in $(seq 1 $END); do 
 #                 printf "${Y}\rRun $i ($SNNI, $NN)\n${ENDCOLOR}"
-#                 bash Code/run_test_single.sh $SNNI $NN $i $TYPE client_${BW} & PID=$!
+#                 bash Code/run_test_bandwith.sh $SNNI $NN $i $TYPE client_${BW} & PID=$!
 #                 wait $PID
 #             done
 #         done

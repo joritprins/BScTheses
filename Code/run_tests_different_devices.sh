@@ -32,7 +32,7 @@ for SNNI in "cheetah" "SCI_HE"; do
         printf "${Y}\rStarting tests with $Data\n${ENDCOLOR}"
         for i in $(seq 1 $END); do 
             printf "${Y}\rRun $i ($SNNI, $Data)\n${ENDCOLOR}"
-            bash Code/run_test_single.sh $SNNI $Data $i $TYPE & PID=$!
+            bash Code/run_test_bandwith.sh $SNNI $Data $i $TYPE & PID=$!
             wait $PID
         done
         printf "${G}\rFinished tests for $Data\n${ENDCOLOR}"

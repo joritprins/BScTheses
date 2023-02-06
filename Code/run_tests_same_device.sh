@@ -30,7 +30,7 @@ for SNNI in "SCI_HE" "cheetah"; do
         printf "${Y}\rStarting tests with $Data\n${ENDCOLOR}"
         for i in $(seq 1 $END); do 
             printf "${Y}\rRun $i ($SNNI, $Data)\n${ENDCOLOR}"
-            bash Code/run_test.sh $SNNI $Data $i & PID=$!
+            bash Code/run_test_power.sh $SNNI $Data $i & PID=$!
             wait $PID
         done
         printf "${G}\rFinished tests for $Data\n${ENDCOLOR}"
