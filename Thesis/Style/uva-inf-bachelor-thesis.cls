@@ -24,7 +24,7 @@
 \RequirePackage[scale={0.7,0.8}]{geometry}
 
 \def\supervisors#1{\gdef\@supervisors{#1}}
-\def\signedby#1{\gdef\@signedby{#1}}
+% \def\signedby#1{\gdef\@signedby{#1}}
 
 \titleformat{\chapter}[display]
 {\sffamily\raggedleft
@@ -58,7 +58,7 @@
 		\noindent\sffamily
 		\begin{description}
 		\item[\sffamily Supervisor(s):] \@supervisors
-		\item[\sffamily Signed:] \@signedby
+		% \item[\sffamily Signed:] \@signedby
 		\end{description}
 	\end{textblock*}
 

@@ -14,6 +14,18 @@
     urldate=comp
 ]{biblatex}
 \addbibresource{references.bib}
+% For hyperref cite
+\DeclareCiteCommand{\citeyear}
+    {}
+    {\bibhyperref{\printfield{year}}}
+    {\multicitedelim}
+    {}
+
+\DeclareCiteCommand{\citeyearpar}
+    {}
+    {\mkbibparens{\bibhyperref{\printfield{year}}}}
+    {\multicitedelim}
+    {}
 
 % Used for different math equations
 \usepackage{amssymb}
@@ -29,11 +41,14 @@
 % For multiple images
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{wrapfig}
+
+% For placing footnotes at the bottom
+\usepackage[bottom]{footmisc}
 
 % For code listings
 \usepackage{listings}
 % listing for JSON, from https://tex.stackexchange.com/questions/83085/how-to-improve-listings-display-of-json-files
-
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
 \definecolor{delim}{RGB}{20,105,176}
@@ -68,7 +83,21 @@
       {]}{{{\color{delim}{]}}}}{1},
     morestring=[b]"
 }
-
+\lstdefinelanguage{Cplusplus}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    keepspaces=true,
+    keywordstyle=\color{blue},
+    frame=lines,
+    backgroundcolor=\color{background},
+    morestring=[b]"
+}
 % Change references to subsection level
 \setcounter{secnumdepth}{3} % default value for 'report' class is "2"
 
@@ -98,16 +127,19 @@
 % Title Page
 % \title{Energy efficient SNNI, a comparison between Cheetah and CryptFlow2 [or] Moving to energy efficient SNNI, a comparison between Cheetah and CryptFlow2 [or] Progressing to energy efficient SNNI, a comparison between Cheetah and Cryptflow2}
 % \title{Progressing to energy efficient SNNI, a comparison between Cheetah and CryptFlow2}
-\title{Progressing to energy efficient SNNI, the impact of bandwidth on Cheetah and CryptFlow2}
+% \title{Progressing to energy efficient SNNI, the impact of bandwidth on Cheetah and CryptFlow2}
+% \title{Energy efficient Secure Neural Network Inference: investigating effects of bandwidth on approaches Cheetah and CrypTFlow2}
+\title{Energy efficient Secure \\Neural Network Inference
+\\\large The effects of Bandwidth on the Energy Consumption}
 \author{Jorit Prins}
 \supervisors{Zoltan Mann}
-\signedby{Signees}
+% \signedby{Signees}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-MLaaS can offer privacy threats for both client and server. SNNI entails the problem of a client learning the output of a neural network, held by a server, without the server learning the input and the client learning nothing about the neural network. There is no widely accepted approach, but some proof of concept approaches have been suggested. These approaches are only tested on accuracy and efficiency. Other metrics, like energy consumption are not tested, while this is still of importance. In this research I test how the bandwidth influences the power and energy consumption of the inference process of both Cheetah and CryptFlow2, two of the most recent approaches. Measurements show that limiting the bandwidth till 50Mbits does not have effect on the energy consumption of both Cheetah and CryptFlow2.
+Machine Learning as a Service can offer privacy threats for both the client and the server. Secure Neural Network Inference entails the problem of a client learning the output of a Neural Network (NN) held by a server, without the server learning the input and the client about the NN. There is no widely accepted approach, but some proof of concept approaches have been suggested. These approaches are only tested on accuracy and efficiency. Other metrics, like energy consumption are not tested, while this is still of importance. In this research I test how the bandwidth influences the power and energy consumption of the inference process of both Cheetah and CrypTFlow2, two of the most recent approaches. My measurements show that limiting the bandwidth till 50Mbit/s does not have effect on the energy consumption of both Cheetah and CryptFlow2.
 % \color{red}Draft\color{red}
 % \begin{itemize}
 %     \item MLaaS can offer privacy threats for both client and server
@@ -123,24 +155,22 @@ MLaaS can offer privacy threats for both client and server. SNNI entails the pro
 \tableofcontents
 
 \chapter{Introduction}\label{chap:introduction}
-\subfile{Sections/Introduction}
+\subfile{Sections/1_Introduction}
 
 \chapter{Theoretical background}\label{chap:theoreticalbackground}
-\subfile{Sections/TheoreticalBackground}
+\subfile{Sections/2_TheoreticalBackground}
 
 \chapter{My work}\label{chap:mywork}
-\subfile{Sections/Code}
+\subfile{Sections/3_Code}
 
 \chapter{Experimental results}\label{chap:experiments}
-\subfile{Sections/Experiments}
-% \subfile{Sections/Results}
+\subfile{Sections/4_ExperimentalResults}
 
+\chapter{Discussion}\label{chap:discussion}
+\subfile{Sections/5_Discussion}
 
 \chapter{Conclusion}\label{chap:conclusion}
-\section{Conclusion}
-\section{Discussion}
-\section{Ethics}
-
+\subfile{Sections/6_Conclusion}
 
 \printbibliography
 \end{document}

@@ -1,0 +1,63 @@
+\documentclass[../thesis.tex]{subfiles}
+\graphicspath{{\subfix{../Images/}}}
+
+\begin{document}
+To revisit the research questions stated at the beginning:
+
+\begin{quote} \emph{RQa: How do we best measure the energy consumption of a SNNI?} \end{quote}
+
+In this thesis, I found that Scaphandre is a good way to measure the energy consumption of a program or process in general, without the need of hardware. Therefore, Scaphandre is also an effective tool to measure the energy consumption of SNNI. Scaphandre has many possibilities and provides many options for the user. One could use Scaphandre to measure the energy and power usage of other processes, in the research on SNNI, but also in other fields. Unfortunately, remarkably few other options have been found to measure the power/energy consumption of a program or process. Besides, most solutions are language based, and not all languages do have options. For the c programming language, for example, no approaches have been found. It is important to lower the energy usage, for the environment and the fight against climate change, but also for increasing energy prices and the usefulness of mobile devices. A future direction of work is therefore to create means to measure energy or power consumption, for both language specific programs and programs in general.
+
+\begin{quote}
+    \emph{RQb: How does the bandwidth influence the energy consumption of a SNNI?}
+\end{quote}
+In \autoref{section:rqb}, I described how I measured the energy consumption of both Cheetah, and CrypTFlow's HE class: $SCI_{HE}$. First, I measured the energy consumption of the SNNIs without any communication overhead. With these measurements, I found that the server for Cheetah consumes less power and energy than the server for $SCI_{HE}$. Although the client consumes more power for Cheetah than $SCI_{HE}$, the energy consumption is lower. Total energy consumption is lower for Cheetah than for $SCI_{HE}$. Additionally, I found that different phases can be identified in the graph of power consumption, e.g. the communication phase. These different phases consume various amounts of power. Future research can focus on what layers of the NN are calculated, and then connecting these measurements to the power readings. Layers that consume a great amount of power can then be identified and improved. Additionally, the ratio between power usage between the client and the server is shown in this thesis, but the cause can be investigated in future research. 
+
+Second, the energy consumption was measured while limiting the available bandwidth. At a certain point, the energy consumption increased considerably for both Cheetah and $SCI_{HE}$. This turning-point was lower for Cheetah compared to $SCI_{HE}$, meaning that Cheetah consumes less power at with less available bandwidths compared to $SCI_{HE}$. Additionally, run-time increased before this turning-point, while energy consumption remained (almost) constant. This work shows the importance for the programmer to investigate the available bandwidth, and keep this in mind while creating better approaches of SNNI. Future work, therefore, could measure the bandwidth used at certain time intervals to determine why the turning-point in energy consumption is caused at certain bandwidth limits. This work can then be used to create more energy efficient SNNI protocols. With my scripts, one only has to change the \verb|run-server.sh| and \verb|run-client.sh| with its own approach to measure the energy consumption of its own approach. This simplifies the research to energy efficient SNNI protocols. I hope that, since no prior works have been found in this area, my work will help programmers to make energy efficient work.
+
+\begin{quote}
+    \emph{RQ: how much energy does Cheetah consume compared to its counterpart CrypT-
+Flow2?}
+\end{quote}
+Not only is Cheetah faster than $SCI_{HE}$, it also consumes less energy. The improvement increases more when the client has less egress bandwidth compared to when the server has less bandwidth available for egress communication.
+
+\section{Threats to internal validity}
+Although I tried to limit traffic through the router and tried to get it as close as 0, it is not certain that no other traffic might have passed through. This could have influenced the bandwidth limit. I.e. when more traffic has passed the router, the available bandwidth would have been lower, and thus influenced the limit. More tests need to be done to validate the results, but unfortunately I do not have access to a router with no other traffic. But since the other traffic is close to zero, the results wont be influenced to a great extent.
+
+One other remark to keep in mind is that when lowering the available bandwidth, run-time increases (see \autoref{fig:graph_times_mean}). Scaphandre writes the measurements to a file, but also saves data in higher hierarchical memory like RAM. Running Scaphandre for a long time will cause more reads and writes to lower and higher hierarchical memory. This results in reduced available memory for the SNNI protocol, which in turn will cause the protocol to read and write more to this memory. 
+
+\begin{itemize}    \item Other traffic might have passed the router, this depends on the time of the day. This might have influenced the energy consumption/run-time/power consumption
+    \item When lowering the limit of bandwidth, run-time increases. Scaphandre writes to a file, but also saves data in ram or closer memory to the cpu/gpu. When the run-time increase, more data is being written and read from lower hierarchical memory (like ssd/hdd) to higher memory (like ram). More writing and reading would cause the SNNI to also write and read more from ssd/hdd, which also increases run-time (downward spiral). This might also increase the energy consumption of the SNNI
+    \item Power consumption is determined by the hardware, other CPU's/GPU's/Motherboards might have used less power or shown other results. But since this is not a \color{red}dependend\color{black} variable, this probably did not have influence on the bandwidtb
+\end{itemize}
+
+\subsection{threats to external validity}
+\begin{itemize}
+    \item Tests only done with sqnet and resnet50 (in the case of power experiments) or only sqnet (in the case of bandwidth experiments)
+    \item Tests only done a few times (not for the power experiments)
+    \item Tests are only done with 3 devices (server, client and router). Other devices might influence the energy consumption. On the other hand, one can say that the energy increases when the limit goes lower than a certain point (in this case 50 Mbps). One could use other NN's and check the average data exchanged to test wether this has a correlation. 
+    \item Only tested in LAN, Ping certainly does have influence on the run-time and thus on the energy consumption. There could be more links in between. 
+    \item A lot of optimal conditions, e.g. good router, one client and one server (more clients and one server would be a more realistic scenario). 
+\end{itemize}
+\subsection{Other}
+\begin{itemize}
+    \item One could test with more bandwidths to see a smoother line and see how the energy consumption changes
+    \item See if the ratio between data exchanged of client and server (i.e. 70/30 for Cheetah and 50/50 for $SCI_{HE}$ influences the improvement in energy consumption
+\end{itemize}
+
+% \color{red} revisit the research questions\color{black}
+\section{Ethics}
+ 10.1109/TIFS.2021.3138611 :
+ 
+The advances in machine learning have revealed its
+great potential for emerging mobile applications such as face
+recognition and voice assistant. Models trained via a Neural
+Network (NN) can offer accurate and efficient inference services for mobile users. 
+
+For example, Delphi [4] and MiniONN [5] proceed the inference
+tasks between the mobile device and the model owner, while
+continuous interaction is involved between them during secure
+computation. Namely, both parties have to be online and
+connected throughout the entire inference process. It is noteworthy that the above rigid operational confinement might not
+be always feasible in cellular networks. 
+\end{document}
