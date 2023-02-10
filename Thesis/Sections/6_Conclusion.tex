@@ -4,12 +4,25 @@
 \myexternaldocument{Sections/Introduction}
 
 \begin{document}
+In this research I tried to answer the following question:
 
-    Restate your hypothesis or research question
-    Restate your major findings
-    Tell the reader what contribution your study has made to the existing literature
-    Highlight any limitations of your study
-    State future directions for research/recommendations
+\begin{quote} \emph{RQ: How much energy does Cheetah consume compared to its counterpart CrypTFlow2?} \end{quote} 
 
+To help answer this research question, two more questions arose:
 
+\begin{quote} \emph{RQa: How do we best measure the energy consumption of a SNNI?} \end{quote}
+
+To my knowledge, no other approaches to test SNNI exist. Other approaches to test the power or energy consumption of a program did not suffice for this research. I then found Scaphandre, that could be used to measure the power consumption of SNNI protocols over a period. With these measurements, one can measure the energy consumption of SNNI. Scaphandre does not only satisfy measuring SNNI protocols, but can be used for a broader field since it can measure the power consumption of any program or process. Unfortunately, no other approaches have been found, and the measurements of Scaphandre could not be validated. Future research in this area is advised.
+
+\begin{quote} \emph{RQb: How does the bandwidth influence the energy consumption of Cheetah and CrypTFlow2?} \end{quote}
+
+I measured the power consumption without communication overhead to see the bare power consumption of Cheetah and $SCI_{HE}$. With the measurements of the \textbf{Power Consumption experiment}, I found that Cheetah is not only faster, but also consumes less energy compared to $SCI_{HE}$. The results also showed that both Cheetah and $SCI_{HE}$ have offline phases, which can be improved to reduce the 'base' energy consumption of SNNI protocols. Additionally, the results showed that there is an imbalance between the power/energy consumption of the client and the server. Further research is needed to determine the implications of this imbalance. Further research can also be done in what layers cause the peaks in power consumption. These layers can then be improved to reduce the overall energy consumption. 
+
+Results of the \textbf{Bandwidth experiment} showed that the bandwidth does have effect on the energy consumption. There is a certain point on which the energy consumption increases significantly, and future research is needed to determine this point. Besides, the improvement in terms of energy consumption increases when the client's available bandwidth is limited increasingly. 
+
+To conclude and answer the RQ: Cheetah does consume less energy compared to CrypTFlow2s HE class, $SCI_{HE}$. Alhtough this research is not done extensively, and can therefore not be generalised to other NNs, SNNI protocols or a realistic MLaaS, it does provide a stable basis for future work to progress upon. And as the writers of Cheetah conclude: "We believe the day
+is not that far off when some applications such as privacy-preserving medical diagnosis could be done in seconds" \parencite[p. 821]{cheetah}, I hope that the day when energy efficient Secure Neural Network Inference becomes normal has come closer because of this work. 
+
+\section{Acknowledgements}
+I would like to thank my supervisor, Zolt\'an Mann, for his advice and kind helping words. I could have not finished this work without the developers of Cheetah, CryTFlow2 and Scaphandre. I am also grateful to my dad and Josien for reviewing this work. 
 \end{document}
