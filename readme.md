@@ -10,3 +10,4 @@ The use of Machine Learning (ML) typically consists of two phases: training and 
 - `Scaphandre/` Contains the Scaphandre source files
 - `Thesis` Contains the latex files for the thesis documents
 
+(Check the develop branch for the code)
