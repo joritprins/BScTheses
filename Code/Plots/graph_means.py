@@ -1,13 +1,14 @@
+"""
+Graphs the means of the energy consumptions. Data from mean.py.
+"""
+__author__ = "Jorit Prins"
+
 # Insert path for functions.py file
 import sys
 sys.path.insert(0, '{}/..'.format(sys.path[0]))
 
-import numpy as np
 import matplotlib.pyplot as plt
-import json
-import os
-from functions import filter_results
-# Clients_3
+# Clients
 c_3   = list(zip(*[[0.605, 0.129, 0.476],[2.044, 0.114, 1.930]]))
 c_14  = list(zip(*[[0.457, 0.114, 0.342],[1.415, 0.133, 1.283]]))
 c_30  = list(zip(*[[0.450, 0.111, 0.339],[1.416, 0.153, 1.262]]))
@@ -48,25 +49,3 @@ plt.legend()
 plt.tight_layout()
 # plt.savefig("Code/Plots/{}.png".format(os.path.basename(__file__).partition(".py")[0]))
 plt.show()
-
-exit()
-
-b_3  = [[0.899, 0.162, 0.738],[3.013, 0.259, 2.754]]
-b_14 = [[0.520, 0.119, 0.401],[1.314, 0.245, 1.070]]
-b_30 = [[0.440, 0.109, 0.331],[1.132, 0.215, 0.917]]
-
-
-plt.figure(figsize=(10,5))
-# plt.ylim(0, max(np.max(interp_client), np.max(interp_server)))
-plt.xlabel("Bandwidth limit client (Mbps)")
-plt.ylabel("Energy consumption (Wh)")
-plt.title("Energy consumption sqnet")
-plt.plot([500, 400, 200, 150, 100, 50, 30, 14, 3], [s_500[0][0],s_400[0][0],s_200[0][0],s_150[0][0],s_100[0][0],s_50[0][0],s_30[0][0],s_14[0][0],s_3[0][0]], label="Cheetah", c='red')
-plt.plot([500, 400, 200, 150, 100, 50, 30, 14, 3], [s_500[1][0],s_400[1][0],s_200[1][0],s_150[1][0],s_100[1][0],s_50[1][0],s_30[1][0],s_14[1][0],s_3[1][0]], label="Cheetah (client)", c="#A2142F")
-plt.plot([500, 400, 200, 150, 100, 50, 30, 14, 3], [s_500[2][0],s_400[2][0],s_200[2][0],s_150[2][0],s_100[2][0],s_50[2][0],s_30[2][0],s_14[2][0],s_3[2][0]], label="Cheetah (server)", c="#A2142F", alpha=.6)
-plt.plot([500, 400, 200, 150, 100, 50, 30, 14, 3], [s_500[0][1],s_400[0][1],s_200[0][1],s_150[0][1],s_100[0][1],s_50[0][1],s_30[0][1],s_14[0][1],s_3[0][1]], label="SCI_HE", c='green')
-plt.plot([500, 400, 200, 150, 100, 50, 30, 14, 3], [s_500[1][1],s_400[1][1],s_200[1][1],s_150[1][1],s_100[1][1],s_50[1][1],s_30[1][1],s_14[1][1],s_3[1][1]], label="SCI_HE (client)", c="#77AC30")
-plt.plot([500, 400, 200, 150, 100, 50, 30, 14, 3], [s_500[2][1],s_400[2][1],s_200[2][1],s_150[2][1],s_100[2][1],s_50[2][1],s_30[2][1],s_14[2][1],s_3[2][1]], label="SCI_HE (server)", c="#77AC30", alpha=.6)
-plt.legend()
-plt.show()
-

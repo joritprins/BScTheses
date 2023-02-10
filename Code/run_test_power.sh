@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# Runs a single test of the power experiment.
+# Usage without arguments or with arguments.
+# usage bash run_test_power.sh
+# Usage bash run_test_power.sh [{output_name}] [{any_nr}]
+
 DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 RED="\e[31m"

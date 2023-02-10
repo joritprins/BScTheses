@@ -1,3 +1,8 @@
+"""
+Prints the overhead caused by scaphandre of one run
+"""
+__author__ = "Jorit Prins"
+
 # Insert path for functions.py file
 import sys
 sys.path.insert(0, '{}/..'.format(sys.path[0]))
@@ -17,6 +22,16 @@ test = True
 
 total_nr = 0
 def read_files(dir: str, name: str, exe: str):
+    """
+    Read files
+
+    dir         : name of the dir that the files are in
+    name        : base of the file names
+    exe         : name of process to filter
+
+    returns array containing data, pid of process, end of measurements 
+    and start of measurements
+    """
     json_string = open('{}/{}.json'.format(dir, name),'r').read().replace('\n', '')
     arr = np.array(json.loads(json_string))
     # Loop over results to find pid
@@ -35,7 +50,18 @@ def read_files(dir: str, name: str, exe: str):
     return (arr, pid, end, start)
 
 
-def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
+def prepare_data(dir: str, runs: int, exe: str, end: int):
+    """
+    Read files and prepare data
+
+    dir         : name of the dir that the files are in
+    exe         : base of the file names
+    runs        : determines how many files there are -> files go from 1 till runs+1
+    end         : this script will interpolate the results from 0 till end
+    plot        : if true, plot the results
+
+    returns the interpolated client and server results
+    """
     global total_nr
     # if not total:
         # print(dir)

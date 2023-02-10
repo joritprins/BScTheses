@@ -1,3 +1,8 @@
+"""
+Prints the overhead caused by scaphandre of one run
+"""
+__author__ = "Jorit Prins"
+
 # Insert path for functions.py file
 import sys
 sys.path.insert(0, '{}/..'.format(sys.path[0]))

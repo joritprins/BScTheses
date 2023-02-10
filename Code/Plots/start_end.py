@@ -1,3 +1,8 @@
+"""
+Prints the begin and end time of the results. Also shows run-time.
+"""
+__author__ = "Jorit Prins"
+
 # Insert path for functions.py file
 import sys
 sys.path.insert(0, '{}/..'.format(sys.path[0]))

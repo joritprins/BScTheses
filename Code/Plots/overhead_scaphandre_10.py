@@ -1,3 +1,8 @@
+"""
+Same as overhead_scaphandre.py but now the average of 10 runs
+"""
+__author__ = "Jorit Prins"
+
 import numpy as np
 import matplotlib.pyplot as plt
 import json

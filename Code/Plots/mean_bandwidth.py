@@ -1,3 +1,8 @@
+"""
+Reads and calculates data from the measurements. 
+"""
+__author__ = "Jorit Prins"
+
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,6 +15,16 @@ from functions import filter_results
 
 
 def read_files(dir: str, name: str, exe: str):
+    """
+    Read files
+
+    dir         : name of the dir that the files are in
+    name        : base of the file names
+    exe         : name of process to filter
+
+    returns array containing data, pid of process, end of measurements 
+    and start of measurements
+    """
     json_string = open('{}/{}.json'.format(dir, name),'r').read().replace('\n', '')
     arr = np.array(json.loads(json_string))
     # Loop over results to find pid
@@ -29,6 +44,17 @@ def read_files(dir: str, name: str, exe: str):
 
 
 def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
+    """
+    Read files and prepare data
+
+    dir         : name of the dir that the files are in
+    exe         : base of the file names
+    runs        : determines how many files there are -> files go from 1 till runs+1
+    end         : this script will interpolate the results from 0 till end
+    plot        : if true, plot the results
+
+    returns the interpolated client and server results
+    """
     x_y_client = []
     x_y_server = []
     data = []
@@ -36,29 +62,13 @@ def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
 
     # Loop over runs
     for i in range(1, runs+1):
-        if dir=='Code/Plots/Results/laptop-desktop/server-3-SCI_HE-sqnet' and i==4:
-            continue
-
-        if dir=='Code/Plots/Results/laptop-desktop/both-30-cheetah-sqnet' and i==6:
-            continue
-
-        if dir=='Code/Plots/Results/laptop-desktop/both-3-cheetah-sqnet' and i==8:
-            continue
-        if dir=='Code/Plots/Results/laptop-desktop/both-3-cheetah-sqnet' and i==9:
-            continue
-        if dir=='Code/Plots/Results/laptop-desktop/both-3-SCI_HE-sqnet' and i==2:
-            continue
-        if dir=='Code/Plots/Results/laptop-desktop/both-3-SCI_HE-sqnet' and i==5:
-            continue
-        if dir=='Code/Plots/Results/laptop-desktop/both-3-SCI_HE-sqnet' and i==6:
-            continue
-        if dir=='Code/Plots/Results/laptop-desktop/both-14-SCI_HE-sqnet' and i==4:
-            continue
+        # Retrieve results
         arr_client, pid_client, end_c, start_c = read_files(
             dir, 'client_{}'.format(i), exe)
         arr_server, pid_server, end_s, start_s = read_files(
             dir, 'server_{}'.format(i), exe)
 
+        # Filter results
         start = start_c if start_c < start_s else start_s
         end = end_c if end_c > end_s else end_s
         filtered_client = filter_results(arr_client, pid_client, start=start)
@@ -69,6 +79,7 @@ def prepare_data(dir: str, runs: int, exe: str, end: int, plot: bool = False):
         runtime = end-start
         if runtime > longest_run: longest_run = runtime
 
+        # Append data
         data.append((end_c - start_c, np.average(x_y_client[-1][1], weights=np.diff(np.insert(x_y_client[-1][0], 0, 0))), 
                      end_s - start_s, np.average(x_y_server[-1][1], weights=np.diff(np.insert(x_y_server[-1][0], 0, 0))),
                      end - start))
@@ -198,7 +209,6 @@ tmp.append([0,0,0,round(tmp[-1][3]/tmp[-2][3],2),0,0,round(tmp[-1][6]/tmp[-2][6]
 print(tmp)
 
 np.savetxt('Code/Plots/Means/both.csv', tmp, fmt='%.3f')
-exit()
 
 
 ##################################################################################################################

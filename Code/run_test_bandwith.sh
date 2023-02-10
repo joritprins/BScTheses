@@ -1,4 +1,10 @@
 #!/bin/bash
+
+# Runs a single test of the bandwidth experiment.
+# Usage without arguments or with arguments.
+# usage bash run_test_bandwidth.sh
+# Usage bash run_test_bandwidth.sh [cheetah/SCI_HE] [sqnet/resnet50/densenet121] [{0,...,9}] [server/client] [{any number}]
+
 DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 RED="\e[31m"

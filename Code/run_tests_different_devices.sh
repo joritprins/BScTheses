@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Runs SNNI witouth any variables.
+# Usage without arguments or with arguments.
+# usage bash run_test_different_devices.sh
+# Usage bash run_test_different_devices.sh [{output_name}] [{any_nr}]
+
 trap cleanup SIGINT
 
 R="\e[31m"

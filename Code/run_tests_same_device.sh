@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Runs all the power consumption tests.
+# Usage without arguments or with arguments.
+# usage bash run_test_same_device.sh
+# Usage bash run_test_same_device.sh [{any_nr}]
 trap cleanup SIGINT
 
 R="\e[31m"
