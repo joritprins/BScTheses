@@ -1,0 +1,89 @@
+\documentclass[../thesis.tex]{subfiles}
+\graphicspath{{\subfix{../Images/}}}
+
+% Documents that contain labels for references in this chapter
+\myexternaldocument{thesis.tex}
+
+\begin{document}
+\section{Relevance}
+\label{section:relevance}
+\begin{figure}
+    \centering
+    \subfile{../Graphs/MLaaS}   
+    \caption{Inference process in Machine Learning as a Service (MLaaS). The NN is already trained by the server and the client wants to know the output of the NN: $f(x)$}
+    \label{fig:mlaas}
+\end{figure}
+The recent rise in Big Data has increased the data exchange on the internet. With increasing computer resources available, researchers quickly started to utilise the possibilities of machine learning (ML) to analyse the data.  Techniques like neural networks (NN) are promising ways to scientific breakthroughs. Machine learning has a wide variety of applications of classification tasks such as traffic analysis, image recognition, intrusion detection,  spam detection, medical or genomics predictions,  financial predictions and face recognition \parencite{dowlin2017,islam2011, bachrach16, kaiming215}
+
+The use of ML typically consists of two phases: training and inference. In the first phase a NN is trained by feeding an extensive dataset to find the best parameters for a model. In the inference phase an input is applied to the trained NN. The training phase is often a tedious and time exhausting process. Because of the time consuming process of creating a NN, Machine Learning as a Service (MLaaS) became popular \parencite{ribeiro2015mlaasml}. In MLaaS, a company or other party offers a pre-trained NN to the clients. Now, clients only need to worry about the inference phase.
+
+A typical MLaaS situation (figure \ref{fig:mlaas}) consist of two parties: the client holding an input \textit{x} and a company holding a pre-trained neural network \textit{f}. This research focuses on the inference part: the client wants to know the neural network (held by the server) applied to input \textit{x} (held by the client): \textit{f(x)}. This can be done by sending \textit{x} to the server. The server then calculates \textit{f(x)} and sends back this result to the client.
+
+% However, MLaaS offers great threats to privacy, , while keeping the (sensitive) contents of \textit{x} and the result \textit{f(x)} private from the company. The company wants to hold the intellectual property \textit{f} private while still giving the opportunity to the client to use \textit{f} to obtain \textit{f(x)}. 
+
+However, MLaaS offers great threats to privacy. For the server to train the model as accurately as possible a NN needs access to a large amount of precise data, which may consist of (privacy) sensitive information. This data, or properties of this data, can be stolen in the inference phase \parencite{qayyum2020}. Data providers may be reluctant to provide this to the server because of the sensitive properties of this data. Besides, other features, irrelevant to the prediction task, could also be derived from this data \parencite{nasr2019}. Moreover, input from the client can also be confidential and the client can therefore be reluctant to send $x$ to the server. On the other hand, owners of a NN could be worried that an adversary could steal (parameters of) their NN \parencite{qayyum2020}. Furthermore, the output of the NN, $f(x)$, could also be confidential resulting in the need to retain this information from unauthorized parties. The secure neural network inference (SNNI) problem entails calculating the applied input \textit{f(x)} while the server does not learn \textit{x} and the output of \textit{f} while the client does not learn any extra information about \textit{f}. 
+
+% Thus, clients may be reluctant to provide the NNs with their data. Other features, irrelevant to the prediction task, could also be derived from this data \parencite{Nasr2019}. On the inference phase, input from the client to the NN can also be confidential. On the other hand, owners of a NN could be worried that an adversary could steal (parameters of) their (often costly) NN. Furthermore, the result of the NN could also be confidential resulting in the need to retain this information from unauthorized parties. The secure neural network inference (SNNI) problem entails calculating the applied input \textit{f(x)} while still holding all the above security requirements. 
+
+No general implementation of SNNI has been widely accepted. Rapid progress in this area has made it hard to get a good overview of technological advances. Mann et al. (\citeyear{mann22}) have summarized several proposed approaches for SNNI. However, these approaches are often proof-of-concept and are not thoroughly tested. Moreover, the performance is often only tested on basic measures like efficiency or accuracy. Other metrics like energy consumption, that could be of relevance, are not researched. This could be of importance because of possible limitations on the client side. Client devices are often mobile devices, where the usefulness is heavily influenced by the battery life. Companies, on the other hand, also want to keep energy consumption as low as possible because of budget limitations and should therefore try to avoid big energy overhead. Another reason to limit the energy consumption is the desire to reduce carbon emission in the fight against climate change. For example, an estimation made in the SMARTer 2030 report is that all ICT systems worldwide will make up for 2\% of the global carbon emission in 2030 \parencite{smarter2015}. Researchers also state that ICT programmers will have the potential to avoid 20\% of the global greenhouse gas emissions with smart programming. 
+
+The energy consumption depends on many factors. One of these factors is the network that is in between the two protocols. The communication speed is dependent of the weakest link in this network and therefore the execution time can be influenced when the bandwidth is changed. Since energy can be calculated as $E=P\times t$, energy is also influenced by changing the bandwidth. Besides that, many providers have different upload and download speeds\footnote{KPN, a Dutch provider, has a service where the download speed is 100 Mbps and an upload speed of 10 Mbps (\url{https://www.kpn.com/shop/internet-tv/internet-tv} (accessed on 01-02-23)\label{fnote:providers}}. 
+
+\section{Research question(s)}
+To contribute to the prior research in this area, I will discuss the energy implications of a suggested, open source implementation of an approach to SNNI. A few of these implementations are for example ABY2.0 \parencite{aby20}, Chameleon \parencite{chameleon}, Cheetah \parencite{cheetah}, CrypTFlow2 \parencite{cryptflow2} and Delphi \parencite{delphi}. 
+
+\begin{table}
+    \begin{adjustbox}{width=\columnwidth,center}
+        \subfile{../Tables/Cheetah_table_7}
+        \quad
+        \subfile{../Tables/Cheetah_table_8}
+    \end{adjustbox}
+    \caption{Table 7 (left) and 8 (right) from \parencite[p. 821]{cheetah}: running time and communication costs of Cheetah compared to Delphi and CrypTFlow2 (\textit{${SCI}_{HE}$})}
+    \label{table:cheetah_table78}
+\end{table}
+
+For this research I will test the approach called Cheetah \parencite{cheetah}. There are several reasons. Firstly it is one of the most recent papers in this area (research also included in the 2022 Proceedings of the 31st USENIX Security Symposium). Second, they provided a working proof-of-concept on Github\footnote{Their implementation is available from https://github.com/
+Alibaba-Gemini-Lab/OpenCheetah}, and the last commit on GitHub was in July 2022. Third, the proof-of-concept implementation provides support for Wide Area Networks (WAN) and Local Area Networks (LAN) network and on two different devices. This support is good, because WAN represents the most realistic MLaaS scenario \parencite{ribeiro2015mlaasml} and it is not necessary to adapt the code anymore. Fourth, Cheetah claims to achieve better speedup than the other recent approaches (e.g. Delphi and CrypTFlow2, see \autoref{table:cheetah_table78}). Besides, it also provides support to execute the CrypTFlow2's counterpart, which can be used to compare. Last, one author \parencite{dong2022} has already used aforementioned approaches as building blocks and also saw significant performance improvements when using Cheetah over others. \paragraph{}
+
+
+% For example: Mann and d
+% \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9194237}{Tanuwidjaja} gives an chronological overview of works published
+% \section{Chosen implementation(s)}
+% \subsection{Cheetah}
+% Cheetah. Why cheetah?:
+% + last commit made on juli 2 and paper from 2022
+% + also implementation of cryptflow2
+% + wan and lan tested
+% + implementation for server and client
+% + better than delphi and CrypTFlow2	 
+% + some others https://arxiv.org/pdf/2205.03040.pdf have used cheetah as a building block and noticed better performance then aby or delphi ( a semi-honest inference protocol (e.g., Cheetah, DELPHI) into a maliciously ) secure
+% dive deeper in the paper and give a general overview of the implementation
+
+% Because of large computation and communication overhead, those systems have been limited to small datasets (such as MNIST and CIFAR) or simple models (e.g. with a few hundreds of parameters). Recently the system CrypTFlow2 [46] has made considerable improvements, and demonstrate, for the first time, the ability to perform 2PC-NN inference at the scale of ImageNet. Despite their advances, there remains considerable overhead: For instance, using CrypTFlow2, the server and the client might need more than 15 minutes to run and exchange more than 30 gigabytes of messages to perform
+% one secure inference on ResNet50.
+% \subsection{Chosen implementation2}
+% if two implementations are compared, ditto.
+
+Measuring power consumption of SNNI is also important, considering that energy consumption can be calculated from the power consumption over a specific time period\footnote{Energy is measured as time multiplied with the power usage, i.e. $E=P*t$ with energy in Watt per hour (Wh), power in Watts (W) and time in hours (h)}. I will sometimes use power consumption and energy consumption interchangeably, because the energy consumption can be calculated once I have measured the power consumption over a given time period. Despite of this fact, energy consumption tells us more than power consumption. Power consumption only gives information about the rate power being used. If one approach has a high power consumption but is finished quickly, it may consume less energy than an approach that uses considerably less power but is very time-consuming. The main research question (RQ) of this thesis is:
+
+\begin{quote} \emph{RQ: How much energy does Cheetah consume compared to its counterpart CrypTFlow2?} \end{quote} 
+
+\noindent From this research question, another question arises:
+
+\begin{quote} \emph{RQa: How do we best measure the energy consumption of a SNNI?} \end{quote}
+
+\noindent Since networks are quite important in the MLaaS scenario, I will test what the implications of the bandwidth of a network are on the energy consumption. Hence the last research question:
+
+\begin{quote}
+    \emph{RQb: How does the bandwidth influence the energy consumption of a SNNI?}
+\end{quote}
+
+% \noindent Once I have established a way to measure energy consumption of SNNIs, I can start measuring. I will be focusing on the whole energy consumption of Cheetah compared to CrypTFlow2 and not on the overhead that the two SNNI's have in a MLaaS situation. These measurements will take part on both client side and servers side. To answer the first research question I will compare measurements of both the energy consumption of Cheetah on client and server side to the consumption of CrypTFlow2 on client and server side.
+
+\section{Method}
+To get an answer to these research questions, I first will have to set up the implementations and get them working on the two devices (client and server). Once the implementation has been set up I have to answer RQa. I will do this with a small literature search. First I will look if and how other proposed SNNI's are tested on energy consumption. There is a possibility that other authors have already researched energy consumption of SNNI. Subsequently, I will determine how programs in similar research fields are measured.
+
+After the implementation is set up and I have answered \textit{RQa}, I can start measuring the power consumption to answer \textit{RQb}. I will do this in \autoref{chap:mywork}. The experimental results of the measurements are described in \autoref{chap:experiments}. I will discuss the findings in \autoref{chap:discussion} and conclude this research in \autoref{chap:conclusion}.
+
+% After the implementation is set up and \textit{RQa} and has been answered in I will explain how I will perform the experiments  start testing the energy consumption. I will describe in \autoref{chap:experiments} on how I will test this. The results of the experiments are also described in \autoref{chap:experiments}.
+\end{document}
