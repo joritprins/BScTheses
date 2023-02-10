@@ -1,0 +1,435 @@
+Using Eigen for Matmul
+Doing BaseOT ...
+using silent ot pack
+using silent ot pack
+using silent ot pack
+using silent ot pack
+After one-time setup, communication
+Thread i = 0, total data sent till now = 581287
+Thread i = 1, total data sent till now = 1726247
+Thread i = 2, total data sent till now = 1726247
+Thread i = 3, total data sent till now = 1726247
+-----------Syncronizing-----------
+secret_share_mod: 137438953472 bitlength: 37
+backend: Ring-SilentOT-Cheetah
+-----------Syncronized - now starting execution-----------
+HomConv #1 called N=1, H=230, W=230, CI=3, FH=7, FW=7, CO=64, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [1.246] sent [49.6946] MB
+~ 1.246 conv
+Maxpool 1 called N=1, H=56, W=56, C=64, ksizeH=3, ksizeW=3
+Time in sec for current maxpool = 6.738
+~ 6.738 maxpool
+Truncate #1 on 200704 points by 12 bits
+HomBN #1 on shape [64, 56, 56]
+Time in sec for current BN = [0.096] sent [3.09808] MB
+~ 0.096 BN
+Relu #1 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.463
+~ 0.463 relu
+HomConv #2 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.704] sent [12.3935] MB
+~ 0.704 conv
+HomConv #3 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.291] sent [3.0981] MB
+~ 0.291 conv
+Relu #3 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.504
+~ 0.504 relu
+HomConv #4 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.906] sent [3.10395] MB
+~ 0.906 conv
+Relu #5 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.59
+~ 0.59 relu
+HomConv #5 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.645] sent [12.3931] MB
+~ 0.645 conv
+Truncate #2 on 802816 points by 12 bits
+HomBN #2 on shape [256, 56, 56]
+Time in sec for current BN = [0.342] sent [12.3926] MB
+~ 0.342 BN
+Relu #7 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 5.121
+~ 5.121 relu
+HomConv #6 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.652] sent [3.09829] MB
+~ 0.652 conv
+Relu #9 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.493
+~ 0.493 relu
+HomConv #7 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.753] sent [3.10366] MB
+~ 0.753 conv
+Relu #11 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.547
+~ 0.547 relu
+HomConv #8 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.637] sent [12.3935] MB
+~ 0.637 conv
+Truncate #3 on 802816 points by 12 bits
+HomBN #3 on shape [256, 56, 56]
+Time in sec for current BN = [0.351] sent [12.3945] MB
+~ 0.351 BN
+Relu #13 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 8.445
+~ 8.445 relu
+HomConv #9 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=64, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.597] sent [3.09824] MB
+~ 0.597 conv
+Relu #15 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.832
+~ 3.832 relu
+HomConv #10 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.757] sent [3.10334] MB
+~ 0.757 conv
+Relu #17 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.568
+~ 0.568 relu
+HomConv #11 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [0.62] sent [12.393] MB
+~ 0.62 conv
+Truncate #4 on 802816 points by 12 bits
+HomBN #4 on shape [256, 56, 56]
+Time in sec for current BN = [0.375] sent [12.3933] MB
+~ 0.375 BN
+Relu #19 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 5.357
+~ 5.357 relu
+HomConv #12 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=512, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.158] sent [17.3596] MB
+~ 4.158 conv
+HomConv #13 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [1.263] sent [6.19651] MB
+~ 1.263 conv
+Relu #21 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.988
+~ 0.988 relu
+HomConv #14 called N=1, H=58, W=58, CI=128, FH=3, FW=3, CO=128, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.823] sent [6.20748] MB
+~ 2.823 conv
+Relu #23 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.675
+~ 3.675 relu
+HomConv #15 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.246] sent [17.3602] MB
+~ 2.246 conv
+Truncate #5 on 401408 points by 12 bits
+HomBN #1 via element-wise mult on 401408 points
+Relu #25 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 7.765
+~ 7.765 relu
+HomConv #16 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.235] sent [4.33968] MB
+~ 2.235 conv
+Relu #27 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.291
+~ 0.291 relu
+HomConv #17 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.74] sent [4.34688] MB
+~ 0.74 conv
+Truncate #6 on 100352 points by 12 bits
+HomBN #2 via element-wise mult on 100352 points
+Relu #29 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.236
+~ 0.236 relu
+HomConv #18 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.485] sent [17.3594] MB
+~ 2.485 conv
+Truncate #7 on 401408 points by 12 bits
+HomBN #3 via element-wise mult on 401408 points
+Relu #31 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.944
+~ 0.944 relu
+HomConv #19 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.234] sent [4.33993] MB
+~ 2.234 conv
+Relu #33 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.298
+~ 0.298 relu
+HomConv #20 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.746] sent [4.347] MB
+~ 0.746 conv
+Relu #35 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.355
+~ 0.355 relu
+HomConv #21 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.33] sent [17.3599] MB
+~ 2.33 conv
+Truncate #8 on 401408 points by 12 bits
+HomBN #4 via element-wise mult on 401408 points
+Relu #37 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 1.061
+~ 1.061 relu
+HomConv #22 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [1.996] sent [4.34005] MB
+~ 1.996 conv
+Relu #39 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.916
+~ 3.916 relu
+HomConv #23 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.814] sent [4.34692] MB
+~ 0.814 conv
+Relu #41 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.428
+~ 0.428 relu
+HomConv #24 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.289] sent [17.3601] MB
+~ 2.289 conv
+Truncate #9 on 401408 points by 12 bits
+HomBN #5 via element-wise mult on 401408 points
+Relu #43 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 4.597
+~ 4.597 relu
+HomConv #25 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=1024, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.619] sent [30.9107] MB
+~ 4.619 conv
+HomConv #26 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.11] sent [8.68002] MB
+~ 4.11 conv
+Relu #45 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.537
+~ 0.537 relu
+HomConv #27 called N=1, H=30, W=30, CI=256, FH=3, FW=3, CO=256, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.812] sent [8.6935] MB
+~ 2.812 conv
+Relu #47 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.395
+~ 0.395 relu
+HomConv #28 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.498] sent [30.9114] MB
+~ 2.498 conv
+Truncate #10 on 200704 points by 12 bits
+HomBN #6 via element-wise mult on 200704 points
+Relu #49 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.779
+~ 3.779 relu
+HomConv #29 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.157] sent [7.72805] MB
+~ 2.157 conv
+Relu #51 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.258
+~ 0.258 relu
+HomConv #30 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.77] sent [7.7328] MB
+~ 0.77 conv
+Relu #53 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.357
+~ 0.357 relu
+HomConv #31 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.507] sent [30.9108] MB
+~ 2.507 conv
+Truncate #11 on 200704 points by 12 bits
+HomBN #7 via element-wise mult on 200704 points
+Relu #55 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.461
+~ 0.461 relu
+HomConv #32 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.169] sent [7.7275] MB
+~ 2.169 conv
+Relu #57 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.249
+~ 0.249 relu
+HomConv #33 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.77] sent [7.73271] MB
+~ 0.77 conv
+Relu #59 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.363
+~ 0.363 relu
+HomConv #34 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.518] sent [30.9101] MB
+~ 2.518 conv
+Truncate #12 on 200704 points by 12 bits
+HomBN #8 via element-wise mult on 200704 points
+Relu #61 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.462
+~ 0.462 relu
+HomConv #35 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.16] sent [7.72763] MB
+~ 2.16 conv
+Relu #63 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.283
+~ 0.283 relu
+HomConv #36 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.775] sent [7.73278] MB
+~ 0.775 conv
+Relu #65 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.242
+~ 0.242 relu
+HomConv #37 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.465] sent [30.9112] MB
+~ 2.465 conv
+Truncate #13 on 200704 points by 12 bits
+HomBN #9 via element-wise mult on 200704 points
+Relu #67 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.78
+~ 3.78 relu
+HomConv #38 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.253] sent [7.72782] MB
+~ 2.253 conv
+Relu #69 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.269
+~ 0.269 relu
+HomConv #39 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.77] sent [7.73347] MB
+~ 0.77 conv
+Relu #71 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.366
+~ 0.366 relu
+HomConv #40 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.543] sent [30.9108] MB
+~ 2.543 conv
+Truncate #14 on 200704 points by 12 bits
+HomBN #10 via element-wise mult on 200704 points
+Relu #73 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.786
+~ 3.786 relu
+HomConv #41 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.266] sent [7.72794] MB
+~ 2.266 conv
+Relu #75 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.245
+~ 0.245 relu
+HomConv #42 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [0.787] sent [7.73308] MB
+~ 0.787 conv
+Relu #77 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.374
+~ 0.374 relu
+HomConv #43 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.5] sent [30.9109] MB
+~ 2.5 conv
+Truncate #15 on 200704 points by 12 bits
+HomBN #11 via element-wise mult on 200704 points
+Relu #79 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.433
+~ 0.433 relu
+HomConv #44 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=2048, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [5.024] sent [59.9111] MB
+~ 5.024 conv
+HomConv #45 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [4.825] sent [15.4555] MB
+~ 4.825 conv
+Relu #81 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.31
+~ 0.31 relu
+HomConv #46 called N=1, H=16, W=16, CI=512, FH=3, FW=3, CO=512, S=2, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.92] sent [15.466] MB
+~ 2.92 conv
+Relu #83 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.492
+~ 0.492 relu
+HomConv #47 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.98] sent [59.9106] MB
+~ 2.98 conv
+Truncate #16 on 100352 points by 12 bits
+HomBN #12 via element-wise mult on 100352 points
+Relu #85 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.232
+~ 0.232 relu
+HomConv #48 called N=1, H=7, W=7, CI=2048, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.26] sent [14.9777] MB
+~ 2.26 conv
+Relu #87 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.17
+~ 0.17 relu
+HomConv #49 called N=1, H=7, W=7, CI=512, FH=3, FW=3, CO=512, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [1.177] sent [14.9845] MB
+~ 1.177 conv
+Relu #89 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.387
+~ 0.387 relu
+HomConv #50 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.994] sent [59.9111] MB
+~ 2.994 conv
+Truncate #17 on 100352 points by 12 bits
+HomBN #13 via element-wise mult on 100352 points
+Relu #91 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.561
+~ 3.561 relu
+HomConv #51 called N=1, H=7, W=7, CI=2048, FH=1, FW=1, CO=512, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.332] sent [14.9769] MB
+~ 2.332 conv
+Relu #93 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.281
+~ 0.281 relu
+HomConv #52 called N=1, H=7, W=7, CI=512, FH=3, FW=3, CO=512, S=1, Padding SAME (1 1 1 1)
+Time in sec for current conv = [1.109] sent [14.985] MB
+~ 1.109 conv
+Relu #95 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.317
+~ 0.317 relu
+HomConv #53 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1, Padding VALID (0 0 0 0)
+Time in sec for current conv = [2.976] sent [59.9116] MB
+~ 2.976 conv
+Truncate #18 on 100352 points by 12 bits
+HomBN #14 via element-wise mult on 100352 points
+Relu #97 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.237
+~ 0.237 relu
+AvgPool 1 called N=1, H=1, W=1, C=2048, ksizeH=7, ksizeW=7
+Time in sec for current avgpool = 0.029
+~ 0.029 avgpool
+Time in sec for current matmul = 0.155
+~ 0.155 matmul
+ArgMax 1 called, s1=1, s2=1001
+Thread i = 0, total data sent till now = 1763407230
+Thread i = 1, total data sent till now = 51414076
+Thread i = 2, total data sent till now = 201876823
+Thread i = 3, total data sent till now = 51414076
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+Total time taken = 245387 milliseconds.
+Total data sent = 1966.81 MiB.
+Number of rounds = 1388
+Total comm (sent+received) = 2802.24 MiB.
+------------------------------------------------------
+Total time in Conv = 104.213 seconds.
+Total time in MatMul = 0.155 seconds.
+Total time in BatchNorm = 3.981 seconds.
+Total time in Truncation = 54.448 seconds.
+Total time in Relu = 73.1 seconds.
+Total time in MaxPool = 6.738 seconds.
+Total time in AvgPool = 0.029 seconds.
+Total time in ArgMax = 0.197 seconds.
+Total time in MatAdd = 0 seconds.
+Total time in MatAddBroadCast = 0 seconds.
+Total time in MulCir = 0 seconds.
+Total time in ScalarMul = 0 seconds.
+Total time in Sigmoid = 0 seconds.
+Total time in Tanh = 0 seconds.
+Total time in Sqrt = 0 seconds.
+Total time in NormaliseL2 = 0 seconds.
+------------------------------------------------------
+Conv data sent = 884.68 MiB.
+MatMul data sent = 0.760744 MiB.
+BatchNorm data sent = 169.775 MiB.
+Truncation data sent = 172.698 MiB.
+Relu data sent = 258.67 MiB.
+Maxpool data sent = 44.5175 MiB.
+Avgpool data sent = 0.644144 MiB.
+ArgMax data sent = 0.0704584 MiB.
+MatAdd data sent = 0 MiB.
+MatAddBroadCast data sent = 0 MiB.
+MulCir data sent = 0 MiB.
+Sigmoid data sent = 0 MiB.
+Tanh data sent = 0 MiB.
+Sqrt data sent = 0 MiB.
+NormaliseL2 data sent = 0 MiB.
+------------------------------------------------------
+Conv data (sent+received) = 1052.44 MiB.
+MatMul data (sent+received) = 1.95127 MiB.
+BatchNorm data (sent+received) = 359.682 MiB.
+Truncation data (sent+received) = 345.396 MiB.
+Relu data (sent+received) = 517.339 MiB.
+Maxpool data (sent+received) = 89.035 MiB.
+Avgpool data (sent+received) = 1.28829 MiB.
+ArgMax data (sent+received) = 0.109762 MiB.
+MatAdd data (sent+received) = 0 MiB.
+MatAddBroadCast data (sent+received) = 0 MiB.
+MulCir data (sent+received) = 0 MiB.
+ScalarMul data (sent+received) = 0 MiB.
+Sigmoid data (sent+received) = 0 MiB.
+Tanh data (sent+received) = 0 MiB.
+Sqrt data (sent+received) = 0 MiB.
+NormaliseL2 data (sent+received) = 0 MiB.

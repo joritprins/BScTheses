@@ -7,15 +7,15 @@ ENDCOLOR="\e[0m"
 
 SNNI="cheetah"
 # SNNI = SCI_HE
-Data="sqnet"
-# Data = resnet50
+NN="sqnet"
+# NN = resnet50
 
 #TODO: error checking
 if [ $# -eq 3 ]; then
     OUTPUT_NAME="$1-$2-$3"
     NR=3
 else
-    OUTPUT_NAME="${SNNI}-${Data}-output"
+    OUTPUT_NAME="${SNNI}-${NN}-output"
     NR=0
 fi
 

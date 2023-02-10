@@ -1,0 +1,588 @@
+Using Eigen for Matmul
+Doing BaseOT ...
+using kkot pack
+using kkot pack
+using kkot pack
+using kkot pack
+After one-time setup, communication
+Thread i = 0, total data sent till now = 184970
+Thread i = 1, total data sent till now = 294765
+Thread i = 2, total data sent till now = 163141
+Thread i = 3, total data sent till now = 294765
+-----------Syncronizing-----------
+secret_share_mod: 137352314881 bitlength: 37
+backend: PrimeField-OT-SCI_HE
+-----------Syncronized - now starting execution-----------
+Conv2DCSF 1 called N=1, H=230, W=230, CI=3, FH=7, FW=7, CO=64, S=2
+Time in sec for current conv = 26.567
+~ 26.567 conv
+Maxpool 1 called N=1, H=56, W=56, C=64, ksizeH=3, ksizeW=3
+Time in sec for current maxpool = 5.694
+~ 5.694 maxpool
+Truncate #1 on 200704 points by 12 bits
+Starting fused batchNorm #1
+Time in sec for current BN = [0.155] sent [3.12806] MB
+~ 0.155 BN
+Relu #1 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.743
+~ 0.743 relu
+Conv2DCSF 2 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 5.248
+~ 5.248 conv
+Conv2DCSF 3 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=64, S=1
+Time in sec for current conv = 1.399
+~ 1.399 conv
+Truncate #2 on 200704 points by 12 bits
+Starting fused batchNorm #2
+Time in sec for current BN = [0.15] sent [3.12806] MB
+~ 0.15 BN
+Relu #3 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.734
+~ 0.734 relu
+Conv2DCSF 4 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1
+Time in sec for current conv = 10.103
+~ 10.103 conv
+Truncate #3 on 200704 points by 12 bits
+Starting fused batchNorm #3
+Time in sec for current BN = [0.172] sent [3.12806] MB
+~ 0.172 BN
+Relu #5 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.757
+~ 0.757 relu
+Conv2DCSF 5 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 4.844
+~ 4.844 conv
+Truncate #4 on 802816 points by 12 bits
+Starting fused batchNorm #4
+Time in sec for current BN = [0.623] sent [12.262] MB
+~ 0.623 BN
+Relu #7 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 2.963
+~ 2.963 relu
+Conv2DCSF 6 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=64, S=1
+Time in sec for current conv = 4.798
+~ 4.798 conv
+Truncate #5 on 200704 points by 12 bits
+Starting fused batchNorm #5
+Time in sec for current BN = [0.159] sent [3.12806] MB
+~ 0.159 BN
+Relu #9 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.752
+~ 0.752 relu
+Conv2DCSF 7 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1
+Time in sec for current conv = 11.051
+~ 11.051 conv
+Truncate #6 on 200704 points by 12 bits
+Starting fused batchNorm #6
+Time in sec for current BN = [0.15] sent [3.12806] MB
+~ 0.15 BN
+Relu #11 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.722
+~ 0.722 relu
+Conv2DCSF 8 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 5.05
+~ 5.05 conv
+Truncate #7 on 802816 points by 12 bits
+Starting fused batchNorm #7
+Time in sec for current BN = [0.634] sent [12.262] MB
+~ 0.634 BN
+Relu #13 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.162
+~ 3.162 relu
+Conv2DCSF 9 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=64, S=1
+Time in sec for current conv = 4.88
+~ 4.88 conv
+Truncate #8 on 200704 points by 12 bits
+Starting fused batchNorm #8
+Time in sec for current BN = [0.151] sent [3.12806] MB
+~ 0.151 BN
+Relu #15 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.742
+~ 0.742 relu
+Conv2DCSF 10 called N=1, H=56, W=56, CI=64, FH=3, FW=3, CO=64, S=1
+Time in sec for current conv = 11.362
+~ 11.362 conv
+Truncate #9 on 200704 points by 12 bits
+Starting fused batchNorm #9
+Time in sec for current BN = [0.184] sent [3.12806] MB
+~ 0.184 BN
+Relu #17 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.734
+~ 0.734 relu
+Conv2DCSF 11 called N=1, H=56, W=56, CI=64, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 5.18
+~ 5.18 conv
+Truncate #10 on 802816 points by 12 bits
+Starting fused batchNorm #10
+Time in sec for current BN = [0.668] sent [12.262] MB
+~ 0.668 BN
+Relu #19 on 802816 points, truncate=1 by 12 bits
+Time in sec for current relu = 3.104
+~ 3.104 relu
+Conv2DCSF 12 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=512, S=2
+Time in sec for current conv = 9.247
+~ 9.247 conv
+Conv2DCSF 13 called N=1, H=56, W=56, CI=256, FH=1, FW=1, CO=128, S=1
+Time in sec for current conv = 9.692
+~ 9.692 conv
+Truncate #11 on 401408 points by 12 bits
+Starting fused batchNorm #11
+Time in sec for current BN = [0.335] sent [6.13099] MB
+~ 0.335 BN
+Relu #21 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 1.509
+~ 1.509 relu
+Conv2DCSF 14 called N=1, H=58, W=58, CI=128, FH=3, FW=3, CO=128, S=2
+Time in sec for current conv = 11.299
+~ 11.299 conv
+Truncate #12 on 100352 points by 12 bits
+Starting fused batchNorm #12
+Time in sec for current BN = [0.079] sent [1.62659] MB
+~ 0.079 BN
+Relu #23 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.396
+~ 0.396 relu
+Conv2DCSF 15 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 5.07
+~ 5.07 conv
+Truncate #13 on 401408 points by 12 bits
+Starting fused batchNorm #13
+Time in sec for current BN = [0.344] sent [6.13099] MB
+~ 0.344 BN
+Relu #25 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 1.5
+~ 1.5 relu
+Conv2DCSF 16 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1
+Time in sec for current conv = 4.836
+~ 4.836 conv
+Truncate #14 on 100352 points by 12 bits
+Starting fused batchNorm #14
+Time in sec for current BN = [0.081] sent [1.62659] MB
+~ 0.081 BN
+Relu #27 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.376
+~ 0.376 relu
+Conv2DCSF 17 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1
+Time in sec for current conv = 10.255
+~ 10.255 conv
+Truncate #15 on 100352 points by 12 bits
+Starting fused batchNorm #15
+Time in sec for current BN = [0.082] sent [1.62659] MB
+~ 0.082 BN
+Relu #29 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.4
+~ 0.4 relu
+Conv2DCSF 18 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 4.702
+~ 4.702 conv
+Truncate #16 on 401408 points by 12 bits
+Starting fused batchNorm #16
+Time in sec for current BN = [0.325] sent [6.13099] MB
+~ 0.325 BN
+Relu #31 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 1.588
+~ 1.588 relu
+Conv2DCSF 19 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1
+Time in sec for current conv = 4.525
+~ 4.525 conv
+Truncate #17 on 100352 points by 12 bits
+Starting fused batchNorm #17
+Time in sec for current BN = [0.101] sent [1.62659] MB
+~ 0.101 BN
+Relu #33 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.396
+~ 0.396 relu
+Conv2DCSF 20 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1
+Time in sec for current conv = 10.664
+~ 10.664 conv
+Truncate #18 on 100352 points by 12 bits
+Starting fused batchNorm #18
+Time in sec for current BN = [0.098] sent [1.62659] MB
+~ 0.098 BN
+Relu #35 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.377
+~ 0.377 relu
+Conv2DCSF 21 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 4.83
+~ 4.83 conv
+Truncate #19 on 401408 points by 12 bits
+Starting fused batchNorm #19
+Time in sec for current BN = [0.361] sent [6.13099] MB
+~ 0.361 BN
+Relu #37 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 1.502
+~ 1.502 relu
+Conv2DCSF 22 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=128, S=1
+Time in sec for current conv = 4.508
+~ 4.508 conv
+Truncate #20 on 100352 points by 12 bits
+Starting fused batchNorm #20
+Time in sec for current BN = [0.081] sent [1.62659] MB
+~ 0.081 BN
+Relu #39 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.375
+~ 0.375 relu
+Conv2DCSF 23 called N=1, H=28, W=28, CI=128, FH=3, FW=3, CO=128, S=1
+Time in sec for current conv = 10.59
+~ 10.59 conv
+Truncate #21 on 100352 points by 12 bits
+Starting fused batchNorm #21
+Time in sec for current BN = [0.079] sent [1.62659] MB
+~ 0.079 BN
+Relu #41 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.369
+~ 0.369 relu
+Conv2DCSF 24 called N=1, H=28, W=28, CI=128, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 4.916
+~ 4.916 conv
+Truncate #22 on 401408 points by 12 bits
+Starting fused batchNorm #22
+Time in sec for current BN = [0.341] sent [6.13099] MB
+~ 0.341 BN
+Relu #43 on 401408 points, truncate=1 by 12 bits
+Time in sec for current relu = 1.522
+~ 1.522 relu
+Conv2DCSF 25 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=1024, S=2
+Time in sec for current conv = 10.246
+~ 10.246 conv
+Conv2DCSF 26 called N=1, H=28, W=28, CI=512, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 9.564
+~ 9.564 conv
+Truncate #23 on 200704 points by 12 bits
+Starting fused batchNorm #23
+Time in sec for current BN = [0.201] sent [3.12806] MB
+~ 0.201 BN
+Relu #45 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.734
+~ 0.734 relu
+Conv2DCSF 27 called N=1, H=30, W=30, CI=256, FH=3, FW=3, CO=256, S=2
+Time in sec for current conv = 11.551
+~ 11.551 conv
+Truncate #24 on 50176 points by 12 bits
+Starting fused batchNorm #24
+Time in sec for current BN = [0.042] sent [0.875858] MB
+~ 0.042 BN
+Relu #47 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.185
+~ 0.185 relu
+Conv2DCSF 28 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1
+Time in sec for current conv = 5.55
+~ 5.55 conv
+Truncate #25 on 200704 points by 12 bits
+Starting fused batchNorm #25
+Time in sec for current BN = [0.161] sent [3.12806] MB
+~ 0.161 BN
+Relu #49 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.75
+~ 0.75 relu
+Conv2DCSF 29 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 4.907
+~ 4.907 conv
+Truncate #26 on 50176 points by 12 bits
+Starting fused batchNorm #26
+Time in sec for current BN = [0.043] sent [0.875858] MB
+~ 0.043 BN
+Relu #51 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.199
+~ 0.199 relu
+Conv2DCSF 30 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1
+Time in sec for current conv = 10.81
+~ 10.81 conv
+Truncate #27 on 50176 points by 12 bits
+Starting fused batchNorm #27
+Time in sec for current BN = [0.043] sent [0.875858] MB
+~ 0.043 BN
+Relu #53 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.183
+~ 0.183 relu
+Conv2DCSF 31 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1
+Time in sec for current conv = 5.553
+~ 5.553 conv
+Truncate #28 on 200704 points by 12 bits
+Starting fused batchNorm #28
+Time in sec for current BN = [0.202] sent [3.12806] MB
+~ 0.202 BN
+Relu #55 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.767
+~ 0.767 relu
+Conv2DCSF 32 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 4.743
+~ 4.743 conv
+Truncate #29 on 50176 points by 12 bits
+Starting fused batchNorm #29
+Time in sec for current BN = [0.043] sent [0.875858] MB
+~ 0.043 BN
+Relu #57 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.214
+~ 0.214 relu
+Conv2DCSF 33 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1
+Time in sec for current conv = 10.678
+~ 10.678 conv
+Truncate #30 on 50176 points by 12 bits
+Starting fused batchNorm #30
+Time in sec for current BN = [0.043] sent [0.875858] MB
+~ 0.043 BN
+Relu #59 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.195
+~ 0.195 relu
+Conv2DCSF 34 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1
+Time in sec for current conv = 5.409
+~ 5.409 conv
+Truncate #31 on 200704 points by 12 bits
+Starting fused batchNorm #31
+Time in sec for current BN = [0.168] sent [3.12806] MB
+~ 0.168 BN
+Relu #61 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.759
+~ 0.759 relu
+Conv2DCSF 35 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 4.857
+~ 4.857 conv
+Truncate #32 on 50176 points by 12 bits
+Starting fused batchNorm #32
+Time in sec for current BN = [0.044] sent [0.875858] MB
+~ 0.044 BN
+Relu #63 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.189
+~ 0.189 relu
+Conv2DCSF 36 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1
+Time in sec for current conv = 10.798
+~ 10.798 conv
+Truncate #33 on 50176 points by 12 bits
+Starting fused batchNorm #33
+Time in sec for current BN = [0.042] sent [0.875858] MB
+~ 0.042 BN
+Relu #65 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.232
+~ 0.232 relu
+Conv2DCSF 37 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1
+Time in sec for current conv = 5.668
+~ 5.668 conv
+Truncate #34 on 200704 points by 12 bits
+Starting fused batchNorm #34
+Time in sec for current BN = [0.158] sent [3.12806] MB
+~ 0.158 BN
+Relu #67 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.752
+~ 0.752 relu
+Conv2DCSF 38 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 4.969
+~ 4.969 conv
+Truncate #35 on 50176 points by 12 bits
+Starting fused batchNorm #35
+Time in sec for current BN = [0.043] sent [0.875858] MB
+~ 0.043 BN
+Relu #69 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.191
+~ 0.191 relu
+Conv2DCSF 39 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1
+Time in sec for current conv = 10.85
+~ 10.85 conv
+Truncate #36 on 50176 points by 12 bits
+Starting fused batchNorm #36
+Time in sec for current BN = [0.044] sent [0.875858] MB
+~ 0.044 BN
+Relu #71 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.187
+~ 0.187 relu
+Conv2DCSF 40 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1
+Time in sec for current conv = 5.635
+~ 5.635 conv
+Truncate #37 on 200704 points by 12 bits
+Starting fused batchNorm #37
+Time in sec for current BN = [0.154] sent [3.12806] MB
+~ 0.154 BN
+Relu #73 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.75
+~ 0.75 relu
+Conv2DCSF 41 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=256, S=1
+Time in sec for current conv = 4.895
+~ 4.895 conv
+Truncate #38 on 50176 points by 12 bits
+Starting fused batchNorm #38
+Time in sec for current BN = [0.054] sent [0.875858] MB
+~ 0.054 BN
+Relu #75 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.196
+~ 0.196 relu
+Conv2DCSF 42 called N=1, H=14, W=14, CI=256, FH=3, FW=3, CO=256, S=1
+Time in sec for current conv = 10.773
+~ 10.773 conv
+Truncate #39 on 50176 points by 12 bits
+Starting fused batchNorm #39
+Time in sec for current BN = [0.045] sent [0.875858] MB
+~ 0.045 BN
+Relu #77 on 50176 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.205
+~ 0.205 relu
+Conv2DCSF 43 called N=1, H=14, W=14, CI=256, FH=1, FW=1, CO=1024, S=1
+Time in sec for current conv = 5.197
+~ 5.197 conv
+Truncate #40 on 200704 points by 12 bits
+Starting fused batchNorm #40
+Time in sec for current BN = [0.154] sent [3.12806] MB
+~ 0.154 BN
+Relu #79 on 200704 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.783
+~ 0.783 relu
+Conv2DCSF 44 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=2048, S=2
+Time in sec for current conv = 12.16
+~ 12.16 conv
+Conv2DCSF 45 called N=1, H=14, W=14, CI=1024, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 9.544
+~ 9.544 conv
+Truncate #41 on 100352 points by 12 bits
+Starting fused batchNorm #41
+Time in sec for current BN = [0.081] sent [1.62659] MB
+~ 0.081 BN
+Relu #81 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.401
+~ 0.401 relu
+Conv2DCSF 46 called N=1, H=16, W=16, CI=512, FH=3, FW=3, CO=512, S=2
+Time in sec for current conv = 13.192
+~ 13.192 conv
+Truncate #42 on 25088 points by 12 bits
+Starting fused batchNorm #42
+Time in sec for current BN = [0.031] sent [0.500492] MB
+~ 0.031 BN
+Relu #83 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.1
+~ 0.1 relu
+Conv2DCSF 47 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1
+Time in sec for current conv = 7.027
+~ 7.027 conv
+Truncate #43 on 100352 points by 12 bits
+Starting fused batchNorm #43
+Time in sec for current BN = [0.109] sent [1.62659] MB
+~ 0.109 BN
+Relu #85 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.411
+~ 0.411 relu
+Conv2DCSF 48 called N=1, H=7, W=7, CI=2048, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 5.45
+~ 5.45 conv
+Truncate #44 on 25088 points by 12 bits
+Starting fused batchNorm #44
+Time in sec for current BN = [0.025] sent [0.500492] MB
+~ 0.025 BN
+Relu #87 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.1
+~ 0.1 relu
+Conv2DCSF 49 called N=1, H=7, W=7, CI=512, FH=3, FW=3, CO=512, S=1
+Time in sec for current conv = 20.195
+~ 20.195 conv
+Truncate #45 on 25088 points by 12 bits
+Starting fused batchNorm #45
+Time in sec for current BN = [0.025] sent [0.500492] MB
+~ 0.025 BN
+Relu #89 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.102
+~ 0.102 relu
+Conv2DCSF 50 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1
+Time in sec for current conv = 7.428
+~ 7.428 conv
+Truncate #46 on 100352 points by 12 bits
+Starting fused batchNorm #46
+Time in sec for current BN = [0.091] sent [1.62659] MB
+~ 0.091 BN
+Relu #91 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.384
+~ 0.384 relu
+Conv2DCSF 51 called N=1, H=7, W=7, CI=2048, FH=1, FW=1, CO=512, S=1
+Time in sec for current conv = 5.543
+~ 5.543 conv
+Truncate #47 on 25088 points by 12 bits
+Starting fused batchNorm #47
+Time in sec for current BN = [0.025] sent [0.500492] MB
+~ 0.025 BN
+Relu #93 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.105
+~ 0.105 relu
+Conv2DCSF 52 called N=1, H=7, W=7, CI=512, FH=3, FW=3, CO=512, S=1
+Time in sec for current conv = 20.187
+~ 20.187 conv
+Truncate #48 on 25088 points by 12 bits
+Starting fused batchNorm #48
+Time in sec for current BN = [0.026] sent [0.500492] MB
+~ 0.026 BN
+Relu #95 on 25088 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.104
+~ 0.104 relu
+Conv2DCSF 53 called N=1, H=7, W=7, CI=512, FH=1, FW=1, CO=2048, S=1
+Time in sec for current conv = 7.14
+~ 7.14 conv
+Truncate #49 on 100352 points by 12 bits
+Starting fused batchNorm #49
+Time in sec for current BN = [0.096] sent [1.62659] MB
+~ 0.096 BN
+Relu #97 on 100352 points, truncate=1 by 12 bits
+Time in sec for current relu = 0.367
+~ 0.367 relu
+AvgPool 1 called N=1, H=1, W=1, C=2048, ksizeH=7, ksizeW=7
+Time in sec for current avgpool = 0.014
+~ 0.014 avgpool
+Matmul called s1,s2,s3 = 1 2048 1001
+Time in sec for current matmul = 2.33
+~ 2.33 matmul
+ArgMax 1 called, s1=1, s2=1001
+Thread i = 0, total data sent till now = 1438326078
+Thread i = 1, total data sent till now = 6469412626
+Thread i = 2, total data sent till now = 994962981
+Thread i = 3, total data sent till now = 6469412626
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+Total time taken = 552763 milliseconds.
+Total data sent = 14659.1 MiB.
+Number of rounds = 4050
+Total comm (sent+received) = 30231.5 MiB.
+------------------------------------------------------
+Total time in Conv = 436.135 seconds.
+Total time in MatMul = 2.33 seconds.
+Total time in BatchNorm = 7.546 seconds.
+Total time in Truncation = 66.28 seconds.
+Total time in Relu = 34.268 seconds.
+Total time in MaxPool = 5.694 seconds.
+Total time in AvgPool = 0.014 seconds.
+Total time in ArgMax = 0.037 seconds.
+Total time in MatAdd = 0 seconds.
+Total time in MatAddBroadCast = 0 seconds.
+Total time in MulCir = 0 seconds.
+Total time in ScalarMul = 0 seconds.
+Total time in Sigmoid = 0 seconds.
+Total time in Tanh = 0 seconds.
+Total time in Sqrt = 0 seconds.
+Total time in NormaliseL2 = 0 seconds.
+------------------------------------------------------
+Conv data sent = 281.229 MiB.
+MatMul data sent = 0.125122 MiB.
+BatchNorm data sent = 141.263 MiB.
+Truncation data sent = 9090.67 MiB.
+Relu data sent = 4357.46 MiB.
+Maxpool data sent = 786.422 MiB.
+Avgpool data sent = 1.73901 MiB.
+ArgMax data sent = 0.186169 MiB.
+MatAdd data sent = 0 MiB.
+MatAddBroadCast data sent = 0 MiB.
+MulCir data sent = 0 MiB.
+Sigmoid data sent = 0 MiB.
+Tanh data sent = 0 MiB.
+Sqrt data sent = 0 MiB.
+NormaliseL2 data sent = 0 MiB.
+------------------------------------------------------
+Conv data (sent+received) = 1192.3 MiB.
+MatMul data (sent+received) = 0.50025 MiB.
+BatchNorm data (sent+received) = 564.782 MiB.
+Truncation data (sent+received) = 18181.3 MiB.
+Relu data (sent+received) = 8714.92 MiB.
+Maxpool data (sent+received) = 1572.84 MiB.
+Avgpool data (sent+received) = 3.47803 MiB.
+ArgMax data (sent+received) = 1.32221 MiB.
+MatAdd data (sent+received) = 0 MiB.
+MatAddBroadCast data (sent+received) = 0 MiB.
+MulCir data (sent+received) = 0 MiB.
+ScalarMul data (sent+received) = 0 MiB.
+Sigmoid data (sent+received) = 0 MiB.
+Tanh data (sent+received) = 0 MiB.
+Sqrt data (sent+received) = 0 MiB.
+NormaliseL2 data (sent+received) = 0 MiB.
