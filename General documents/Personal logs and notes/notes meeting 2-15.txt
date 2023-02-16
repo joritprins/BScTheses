@@ -1,0 +1,10 @@
+A few sentences on why the bandwidth is important
+Chose Scaphandre, And the details  on why are in the thesis
+Not much value in explaining on how scaphandre works
+- Overhead
+- granularity (might reach the limit, cannot calculate power consumption of small layers)
+
+This is the first sets of values that I tested, I later tested more values but more on that later
+
+DIfficulties encountered, explain in more details on what to do
+How long did the experiments take!
